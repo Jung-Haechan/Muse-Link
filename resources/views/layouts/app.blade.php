@@ -102,10 +102,11 @@
 <body style="background: #686868 ">
     <div class="content">
         <div class="jumbotron text-center" style="background-image: url({{asset('storage/edm2.jpg')}}); background-size: cover;">
-
-
             @yield('jumbotron')
+
         </div>
+
+            @yield('content')
 
     </div>
     <script src="{{asset('js/app.js')}}"></script>

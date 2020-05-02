@@ -64,7 +64,7 @@
                                 @endif
                             </div>
                         </div>
-                        <a href="{{ $apiURL }}"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+                        <a class="btn btn-dark" href="{{ route('login.social', 'google') }}">구글 아이디로 로그인</a>
                     </form>
                 </div>
             </div>
