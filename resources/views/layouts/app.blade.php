@@ -87,29 +87,57 @@
                     @auth
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button type="submit" class="">Logout</button>
-                            <a class="text-decoration-none text-light" href="{{ route('register') }}">Mypage</a>
+                            <button type="submit" class="btn btn-outline-light mr-1">Logout</button>
+                            <a class="text-decoration-none  btn btn-outline-light" href="{{ route('register') }}">Mypage</a>
 
                         </form>
                     @else
-                        <a class="text-decoration-none text-light" href="{{ route('login') }}">Login</a>
+                        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModal">Login</a>
                     @endauth
                 </div>
             @endif
         </div>
     </div>
 </nav>
+
+
+
+
+
+
 <body style="background: #686868 ">
     <div class="jumbotron text-center" style="background-image: url({{asset('storage/edm2.jpg')}}); background-size: cover; padding-top: 200px;">
-
         @yield('jumbotron')
-
     </div>
-
     @yield('content')
-
-
     <script src="{{asset('js/app.js')}}"></script>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+
+                            <a class="btn btn-danger" href="{{ route('login.social', 'google') }}">
+                                구글 아이디로 로그인
+                            </a>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <footer class="page-footer font-small blue">
 

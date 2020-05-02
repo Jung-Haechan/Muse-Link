@@ -17,8 +17,8 @@
 
     <div class="container">
         <div class="row" style="background-image: url({{asset('storage/music.jpg')}}); background-size: cover">
-            <div class="col-md-8 p-5 mx-auto text-center"
-                 style="background-color: #4e555b; margin-top: 150px; height: 1000px; opacity: 0.9; color: #d6d8db">
+            <div class="col-md-9 p-5 mx-auto text-center"
+                 style="background-color: #4e555b; margin-top: 100px; height: 1000px; opacity: 0.9; color: #d6d8db">
 
                 <h2>MuseLink에 오신 걸 환영합니다!</h2>
                 <p class="mt-5">
