@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="post" action="/register">
+                    <form method="post" action="{{ route('register') }}">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -30,38 +30,43 @@
 
                         <div class="form-group row">
                             <label for="introduce" class="col-md-4 col-form-label text-md-right">Introduce</label>
-
                             <div class="col-md-6">
-                                <textarea id="introduce" class="form-control @error('introduce') is-invalid @enderror" name="introduce" autocomplete="introduce" rows="8"></textarea>
-                                @error('description')
-                                    <span class="invalid-feedback" role="alert">
+                                <textarea class="form-control" name="introduce" id="introduce" rows="8">{{$user->introduce}}</textarea>
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
+
+                                @error('introduce')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
 
                         <div class="row pb-3">
                             <div class="form-check col-3 text-center">
-                                <input class=form-check-input" type="checkbox" name="is_composer" id="is_composer">
+                                <input class=form-check-input" type="checkbox" name="is_composer" id="is_composer" @if($user->is_composer) checked @endif>
                                 <label class="form-check-label" for="is_composer">
                                     작곡
                                 </label>
                             </div>
                             <div class="form-check col-3 text-center">
-                                <input class="form-check-input" type="checkbox" name="is_editor" id="is_editor">
+                                <input class="form-check-input" type="checkbox" name="is_editor" id="is_editor" @if($user->is_editor) checked @endif>
                                 <label class="form-check-label" for="is_editor">
                                     편곡
                                 </label>
                             </div>
                             <div class="form-check col-3 text-center">
-                                <input class="form-check-input" type="checkbox" name="is_lyricist" id="is_lyricist">
+                                <input class="form-check-input" type="checkbox" name="is_lyricist" id="is_lyricist" @if($user->is_lyricist) checked @endif>
                                 <label class="form-check-label" for="is_lyricist">
                                     작사
                                 </label>
                             </div>
                             <div class="form-check col-3 text-center">
-                                <input class="form-check-input" type="checkbox" name="is_singer" id="is_singer">
+                                <input class="form-check-input" type="checkbox" name="is_singer" id="is_singer" @if($user->is_singer) checked @endif>
                                 <label class="form-check-label" for="is_singer">
                                     보컬
                                 </label>

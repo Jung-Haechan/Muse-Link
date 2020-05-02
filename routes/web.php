@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('index');
+Route::get('/home', 'HomeController@index');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login/{driver}', 'Auth\LoginController@social_login')->name('login.social');
 Route::get('/login/{driver}/callback', 'Auth\LoginController@social_login_callback')->name('login.social.callback');
 

@@ -60,14 +60,17 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        $user = User::find(Auth::id());
         $data = $request->validate([
-            'email' => 'required|email|max:255',
-            'resource_server' => 'required|string',
             'name' => 'required|string|max:255',
             'introduce' => 'nullable',
-            'is_composer' => 'boolean',
         ]);
-
+        $data['is_composer'] = $request->has('is_composer');
+        $data['is_editor'] = $request->has('is_editor');
+        $data['is_lyricist'] = $request->has('is_lyricist');
+        $data['is_singer'] = $request->has('is_singer');
+        $user->update($data);
+        return redirect()->route('index');
     }
 
     /**

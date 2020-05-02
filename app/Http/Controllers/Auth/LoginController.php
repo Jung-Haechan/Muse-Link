@@ -53,7 +53,7 @@ class LoginController extends Controller
         if ($this->isRegisteredUser($user)) {
             $registered_user = User::where('email', $user->getEmail())->first();
             auth()->login($registered_user, true);
-            return redirect()->route('home');
+            return redirect()->route('index');
         } else {
             User::create([
                 'email' => $user->getEmail(),

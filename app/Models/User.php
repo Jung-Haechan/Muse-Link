@@ -20,11 +20,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'resource_server', 'profile_img', 'intoroduce', 'is_composer', 'is_editor', 'is_lyricist', 'is_singer'
+        'name', 'email', 'resource_server', 'profile_img', 'introduce', 'is_composer', 'is_editor', 'is_lyricist', 'is_singer'
     ];
 
     protected $attributes = [
-        'introduce' => null,
         'is_composer' => false,
         'is_editor' => false,
         'is_lyricist' => false,
