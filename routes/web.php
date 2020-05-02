@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login/{driver}', 'Auth\LoginController@social_login')->name('login.social');
 Route::get('/login/{driver}/callback', 'Auth\LoginController@social_login_callback')->name('login.social.callback');
 
+Route::get('/board/collaboration', 'MusicController@index');
