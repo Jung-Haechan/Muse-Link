@@ -19,7 +19,7 @@
     </style>
 
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" style="background:#2b170f;" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4 fixed-top" style="background:#2b170f;" id="mainNav">
     <a class="navbar-brand" style="color: #d2ab39;" href="http://127.0.0.1:8000/">MuseLink</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,16 +100,23 @@
     </div>
 </nav>
 <body style="background: #686868 ">
-    <div class="content">
-        <div class="jumbotron text-center" style="background-image: url({{asset('storage/edm2.jpg')}}); background-size: cover;">
-            @yield('jumbotron')
+    <div class="jumbotron text-center" style="background-image: url({{asset('storage/edm2.jpg')}}); background-size: cover; padding-top: 200px;">
 
-        </div>
-
-            @yield('content')
+        @yield('jumbotron')
 
     </div>
+
+    @yield('content')
+
+
     <script src="{{asset('js/app.js')}}"></script>
 </body>
+<footer class="page-footer font-small blue">
+
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    </div>
+
+</footer>
 
 </html>
