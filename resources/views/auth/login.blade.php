@@ -64,7 +64,9 @@
                                 @endif
                             </div>
                         </div>
-                        <a class="btn btn-dark" href="{{ route('login.social', 'google') }}">구글 아이디로 로그인</a>
+                        <a class="btn btn-dark" href="{{ route('login.social', 'google') }}">
+                            구글 아이디로 로그인
+                        </a>
                     </form>
                 </div>
             </div>

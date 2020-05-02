@@ -8,14 +8,13 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="post" action="/register">
                         @csrf
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -25,13 +24,16 @@
                             </div>
                         </div>
 
+                        <div class="pb-2 text-center">
+                            <img src="{{ $user->profile_img }}" style="width:100px">
+                        </div>
+
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="introduce" class="col-md-4 col-form-label text-md-right">Introduce</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
+                                <textarea id="introduce" class="form-control @error('introduce') is-invalid @enderror" name="introduce" autocomplete="introduce" rows="8"></textarea>
+                                @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -39,25 +41,30 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <div class="row pb-3">
+                            <div class="form-check col-3 text-center">
+                                <input class=form-check-input" type="checkbox" name="is_composer" id="is_composer">
+                                <label class="form-check-label" for="is_composer">
+                                    작곡
+                                </label>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="form-check col-3 text-center">
+                                <input class="form-check-input" type="checkbox" name="is_editor" id="is_editor">
+                                <label class="form-check-label" for="is_editor">
+                                    편곡
+                                </label>
+                            </div>
+                            <div class="form-check col-3 text-center">
+                                <input class="form-check-input" type="checkbox" name="is_lyricist" id="is_lyricist">
+                                <label class="form-check-label" for="is_lyricist">
+                                    작사
+                                </label>
+                            </div>
+                            <div class="form-check col-3 text-center">
+                                <input class="form-check-input" type="checkbox" name="is_singer" id="is_singer">
+                                <label class="form-check-label" for="is_singer">
+                                    보컬
+                                </label>
                             </div>
                         </div>
 
