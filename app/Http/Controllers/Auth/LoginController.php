@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Providers\RouteServiceProvider;
+use App\Traits\AuthTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -20,6 +23,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    use AuthTrait;
 
     /**
      * Where to redirect users after login.
@@ -38,27 +42,28 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function showLoginForm()
+    public function social_login($driver)
     {
-        $client_id = "xs1acNPCxz4rjqkIeI85";
-        $redirectURI = urlencode("http://127.0.0.1:8000/naver_login");
-        $state = md5(microtime().mt_rand());
-        $apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=".$client_id."&redirect_uri=".$redirectURI."&state=".$state;
-
-        return view('auth.login', [
-            'apiURL' => $apiURL,
-        ]);
+        return Socialite::driver($driver)->redirect();
     }
 
-    public function naver_login()
+    public function social_login_callback($driver)
     {
-        $client_id = "xs1acNPCxz4rjqkIeI85";
-        $client_secret = "39Y472PDTQ";
-        $code = $_GET["code"];
-        $state = $_GET["state"];
-        $redirectURI = urlencode("http://127.0.0.1:8000/naver_login");
-        $url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=".$client_id."&client_secret=".$client_secret."&redirect_uri=".$redirectURI."&code=".$code."&state=".$state;
-        $access_token = json_decode(file_get_contents($url));
-        var_dump($access_token);
+        $user = Socialite::driver($driver)->stateless()->user();
+        if ($this->isRegisteredUser($user)) {
+            $registered_user = User::where('email', $user->getEmail())->first();
+            auth()->login($registered_user, true);
+            return redirect()->route('home');
+        } else {
+            User::create([
+                'email' => $user->getEmail(),
+                'name' => $user->getName(),
+                'resource_server' => $driver,
+                'profile_img' => $user->getAvatar(),
+            ]);
+            $newUser = User::where('email', $user->getEmail())->first();
+            auth()->login($newUser, true);
+            return redirect()->route('register');
+        }
     }
 }

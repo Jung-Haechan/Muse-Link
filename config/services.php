@@ -30,4 +30,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'client_id' => '915246888788-1elklnet1mml3l70dhvc5mrcvhccklcn.apps.googleusercontent.com',
+        'client_secret' => 'DMLEMatScInzZRdVCe6VFKGk',
+        'redirect' => 'http://localhost:8000/login/google/callback',
+    ],
+
+    'naver' => [
+        'client_id' => 'xs1acNPCxz4rjqkIeI85',
+        'client_secret' => '39Y472PDTQ',
+        'redirect' => 'http://localhost:8000/login/naver/callback',
+    ],
 ];

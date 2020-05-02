@@ -18,6 +18,6 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/naver_login', 'Auth\LoginController@naver_login')->name('naver_login');
-
+Route::get('/login/{driver}', 'Auth\LoginController@social_login')->name('login.social');
+Route::get('/login/{driver}/callback', 'Auth\LoginController@social_login_callback')->name('login.social.callback');
 
