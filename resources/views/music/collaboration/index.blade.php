@@ -7,6 +7,7 @@
     <h1 class="text-center text-light">
         <div class="display-1">Collaboration</div>
     </h1>
+    <a href="{{ route('music.create') }}">음악 만들기</a>
 @endsection
 
 @section('content')
