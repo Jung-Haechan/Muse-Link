@@ -72,15 +72,4 @@ class RegisterController extends Controller
         $user->update($data);
         return redirect()->route('index');
     }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param array $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-
-    }
 }
