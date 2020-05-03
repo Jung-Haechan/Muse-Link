@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="{{asset('bootstrap/dist/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('bootstrap/dist/css/muselink.css')}}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
     <!-- Styles -->
@@ -19,6 +21,9 @@
     </style>
 
 </head>
+
+
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark py-lg-4 fixed-top" style="background:#2b170f;" id="mainNav">
     <a class="navbar-brand" style="color: #d2ab39;" href="http://127.0.0.1:8000/">MuseLink</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -60,9 +65,9 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle mr-2" href= "#" id="navbarDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                음악 강좌
+                <a class="nav-link dropdown-toggle mr-2" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    음악 강좌
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">프로듀싱 강좌</a>
@@ -84,15 +89,20 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+
                     @auth
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button type="submit" class="btn btn-outline-light mr-1">Logout</button>
-                            <a class="text-decoration-none  btn btn-outline-light" href="{{ route('register') }}">Mypage</a>
-
+                            <div class="row">
+                                <img src="{{$user->profile_img}}" style="width: 40px">
+                                <h5 class="mt-2 mx-2"><a class="text-decoration-none text-light"
+                                                         href="{{ route('register') }}">{{$user->name}}님</a></h5>
+                                <button type="submit" class="btn btn-outline-light mr-3">Logout</button>
+                            </div>
                         </form>
                     @else
-                        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#exampleModal">Login</a>
+                        <button type="button" class="btn btn-outline-light" data-toggle="modal"
+                                data-target="#exampleModal">Login</a>
                     @endauth
                 </div>
             @endif
@@ -100,19 +110,16 @@
     </div>
 </nav>
 
-
-
-
-
-
-<body style="background: #686868 ">
-    <div class="jumbotron text-center" style="background-image: url({{asset('storage/edm2.jpg')}}); background-size: cover; padding-top: 200px;">
+<div class="content" style="background-image: url({{asset('storage/music.jpg')}}); background-size: cover;">
+    <div class="jumbotron text-center"
+         style="background-image: url({{asset('storage/edm2.jpg')}}); background-size: cover; padding-top: 200px;">
         @yield('jumbotron')
     </div>
     @yield('content')
     <script src="{{asset('js/app.js')}}"></script>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,7 +145,7 @@
             </div>
         </div>
     </div>
-</body>
+</div>
 <footer class="page-footer font-small blue">
 
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
@@ -146,5 +153,7 @@
     </div>
 
 </footer>
+</body>
+
 
 </html>
