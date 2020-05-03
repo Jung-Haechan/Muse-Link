@@ -18,7 +18,7 @@
         <div class="col-md-11 p-5 mx-auto"
              style="background-color: #4e555b; margin-top: 100px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-lg-4">
                     <a class="text-decoration-none" href="#">
                         <div class="card container">
                             <div class="row text-dark bg-dark" style="height: 150px;">
@@ -52,7 +52,7 @@
                         </div>
                     </a>
                 </div>
-                
+
             </div>
 
         </div>
