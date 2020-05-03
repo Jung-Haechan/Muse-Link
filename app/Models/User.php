@@ -38,4 +38,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function music() {
+        return $this->hasMany('App\Models\Music');
+    }
 }

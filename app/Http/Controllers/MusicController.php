@@ -15,12 +15,16 @@ class MusicController extends Controller
         } elseif ($board === 'edit') {
             $this->edit();
         } else {
-            return view('music.'.$board.'.index');
+            $musics = Music::listMusic(0, $board)->get();
+            return view('music.'.$board.'.index', [
+                'musics' => $musics,
+            ]);
         }
     }
 
     public function show()
     {
+        return view('music.collaboration.show');
 
     }
 

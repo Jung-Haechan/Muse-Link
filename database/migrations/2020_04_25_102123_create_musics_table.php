@@ -26,6 +26,7 @@ class CreateMusicsTable extends Migration
             $table->string('editor')->nullable();
             $table->string('lyricist')->nullable();
             $table->string('singer')->nullable();
+            $table->boolean('is_completed')->default(false);
             $table->string('genre')->nullable();
             $table->integer('is_opened')->default(0); //0:전체 공개 1:회원 공개 2:팔로워 공개 3:나만 보기
             $table->integer('views')->default(0);
