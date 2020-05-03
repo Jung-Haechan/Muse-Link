@@ -23,8 +23,7 @@
                         <a class="text-decoration-none" href="{{ route('music.show', ['collaboration', $music->id]) }}">
                             <div class="card container">
                                 <div class="row text-dark bg-dark" style="height: 150px;">
-
-                                    <img class="card-img-top mb-3 col-7 mx-auto" src=""
+                                    <img class="card-img-top mb-3 col-7 mx-auto" src="{{ asset(getFile($music->cover_img_file)) }}"
                                          style=" height: 150px; object-fit: cover;" alt="Card image cap">
                                 </div>
                                 <div class="card-body text-dark">

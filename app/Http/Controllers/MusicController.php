@@ -54,10 +54,10 @@ class MusicController extends Controller
                 ->with('msg', '이미지 파일 형식이 잘못되었습니다.');
         } else {
             if ($request->hasFile('audio_file')) {
-                $data['audio_file'] = $request->file('audio_file')->store('public/audio');
+                $data['audio_file'] = $request->file('audio_file')->store('storage/audio');
             }
             if ($request->hasFile('cover_img_file')) {
-                $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
+                $data['cover_img_file'] = $request->file('cover_img_file')->store('storage/cover');
             }
             $data['user_id'] = Auth::id();
             Music::create($data);

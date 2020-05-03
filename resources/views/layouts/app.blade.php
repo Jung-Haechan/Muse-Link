@@ -112,7 +112,7 @@
 
 <div class="content" style="background-image: url({{asset('storage/music.jpg')}}); background-size: cover;">
     <div class="jumbotron text-center"
-         style="background-image: url({{asset('storage/edm2.jpg')}}); background-size: cover; padding-top: 200px;">
+         style="background-image: url({{asset('storage/skin/edm2.jpg')}}); background-size: cover; padding-top: 200px;">
         @yield('jumbotron')
     </div>
     @yield('content')
