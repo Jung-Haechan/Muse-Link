@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="col-md-7 p-5 mx-auto"
-         style="background-color: #4e555b; margin-top: 100px; height: 1000px; opacity: 0.9; color: #d6d8db">
+         style="background-color: #4e555b; margin-top: 100px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
 
         <form action="{{ route('music.store') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group col-8">
                     <label for="youtube_url">유튜브 Url</label>
-                    <input type="text" class="form-control" name="youtube_url" placeholder="유튜브 Url">
+                    <input type="text" class="form-control" name="youtube_url" id="youtube_url"  placeholder="유튜브 Url">
                 </div>
             </div>
             <div class="form-group">
