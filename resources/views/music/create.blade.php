@@ -9,7 +9,8 @@
     <div class="col-md-7 p-5 mx-auto"
          style="background-color: #4e555b; margin-top: 100px; height: 1000px; opacity: 0.9; color: #d6d8db">
 
-        <form action="{{ route('music.store') }}" method="post">
+        <form action="{{ route('music.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="form-row">
                 <div class="form-group col-sm-8">
                     <label for="title">제목</label>

@@ -17,12 +17,10 @@ class CreateLecturesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('title');
-            $table->unsignedBigInteger('video_file_id');
+            $table->string('video_file');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('video_file_id')
-                ->references('id')->on('files');
             $table->foreign('category_id')
                 ->references('id')->on('lecture_categories');
         });

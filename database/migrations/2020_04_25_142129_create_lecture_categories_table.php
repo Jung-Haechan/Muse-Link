@@ -17,13 +17,10 @@ class CreateLectureCategoriesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->unsignedBigInteger('thumbnail_img_id');
+            $table->string('thumbnail_img');
             $table->unsignedBigInteger('price');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('thumbnail_img_id')
-                ->references('id')->on('files');
         });
     }
 

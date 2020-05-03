@@ -94,9 +94,9 @@
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
                             <div class="row">
-                                <img src="{{$user->profile_img}}" style="width: 40px">
+                                <img src="{{Auth::user()->profile_img}}" style="width: 40px">
                                 <h5 class="mt-2 mx-2"><a class="text-decoration-none text-light"
-                                                         href="{{ route('register') }}">{{$user->name}}님</a></h5>
+                                                         href="{{ route('register') }}">{{Auth::user()->name}}님</a></h5>
                                 <button type="submit" class="btn btn-outline-light mr-3">Logout</button>
                             </div>
                         </form>

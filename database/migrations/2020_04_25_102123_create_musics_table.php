@@ -18,30 +18,22 @@ class CreateMusicsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('audio_file_id');
-            $table->string('youtube_url');
-            $table->unsignedBigInteger('cover_img_file_id');
-            $table->text('lyrics');
-            $table->boolean('is_composed');
-            $table->boolean('is_edited');
-            $table->boolean('is_written');
-            $table->boolean('is_sung');
-            $table->string('composer');
-            $table->string('editor');
-            $table->string('lyricist');
-            $table->string('singer');
-            $table->string('genre');
-            $table->integer('is_opened'); //0:전체 공개 1:회원 공개 2:팔로워 공개 3:나만 보기
-            $table->integer('views');
+            $table->string('audio_file')->nullable();
+            $table->string('youtube_url')->nullable();
+            $table->string('cover_img_file')->nullable();
+            $table->text('lyrics')->nullable();
+            $table->string('composer')->nullable();
+            $table->string('editor')->nullable();
+            $table->string('lyricist')->nullable();
+            $table->string('singer')->nullable();
+            $table->string('genre')->nullable();
+            $table->integer('is_opened')->default(0); //0:전체 공개 1:회원 공개 2:팔로워 공개 3:나만 보기
+            $table->integer('views')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')->on('users');
-            $table->foreign('audio_file_id')
-                ->references('id')->on('files');
-            $table->foreign('cover_img_file_id')
-                ->references('id')->on('files');
         });
     }
 
