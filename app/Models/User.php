@@ -40,6 +40,6 @@ class User extends Authenticatable
     ];
 
     public function music() {
-        return $this->hasMany('App\Models\Music');
+        return $this->hasMany('App\Models\Project');
     }
 }

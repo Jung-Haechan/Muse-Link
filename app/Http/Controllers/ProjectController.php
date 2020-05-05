@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Music;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MusicController extends Controller
+class ProjectController extends Controller
 {
     public function index($board)
     {
@@ -15,7 +15,7 @@ class MusicController extends Controller
         } elseif ($board === 'edit') {
             $this->edit();
         } else {
-            $musics = Music::listMusic(0, $board)->get();
+            $musics = Project::listMusic(0, $board)->get();
             return view('music.'.$board.'.index', [
                 'musics' => $musics,
             ]);
@@ -60,7 +60,7 @@ class MusicController extends Controller
                 $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
             }
             $data['user_id'] = Auth::id();
-            Music::create($data);
+            Project::create($data);
             var_dump($data);
             return redirect()->route('index');
         }

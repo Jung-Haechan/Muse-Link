@@ -27,7 +27,7 @@ class CreateRepliesTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users');
             $table->foreign('music_id')
-                ->references('id')->on('musics');
+                ->references('id')->on('projects');
             $table->foreign('post_id')
                 ->references('id')->on('posts');
             $table->foreign('lecture_id')

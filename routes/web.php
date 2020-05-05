@@ -20,9 +20,9 @@ Auth::routes();
 Route::get('/login/{driver}', 'Auth\LoginController@social_login')->name('login.social');
 Route::get('/login/{driver}/callback', 'Auth\LoginController@social_login_callback')->name('login.social.callback');
 
-Route::get('/music/{board}', 'MusicController@index')->name('music.index');
-Route::get('/music/{board}/{id}', 'MusicController@show')->name('music.show');
-Route::resource('/music', 'MusicController')->except(['index', 'show']);
+Route::get('/music/{board}', 'ProjectController@index')->name('music.index');
+Route::get('/music/{board}/{id}', 'ProjectController@show')->name('music.show');
+Route::resource('/music', 'ProjectController')->except(['index', 'show']);
 
 
 
