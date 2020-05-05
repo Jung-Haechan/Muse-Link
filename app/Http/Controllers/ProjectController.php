@@ -21,10 +21,13 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function show()
+    public function show($board, Project $project)
     {
-        return view('project.collaboration.show');
-
+        $versions = $project->versions()->listVersions(0)->get();
+        return view('project.'.$board.'.show', [
+            'project' => $project,
+            'versions' => $versions,
+        ]);
     }
 
     public function create()

@@ -23,7 +23,9 @@ class CreateVersionsTable extends Migration
             $table->string('project_audio_file')->nullable();
             $table->string('voice_audio_file')->nullable();
             $table->text('lyrics')->nullable();
+            $table->unsignedTinyInteger('is_opened')->default(0); //0:전체 공개 1:회원공개 2:팔로워공개 3:협업자공개 4:비공개
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')->on('users');

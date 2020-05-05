@@ -39,7 +39,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function project() {
+    public function projects() {
         return $this->hasMany('App\Models\Project');
     }
 }
