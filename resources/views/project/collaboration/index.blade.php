@@ -34,7 +34,7 @@
                                         <h5 class="card-title text-left text-truncate col-10">
                                             @if($project->genre) [{{ $project->genre }}] @endif {{ $project->title }}
                                         </h5>
-                                        <div style="font-size: 0.7rem">{{ $project->user->name }}</div>
+                                        <div style="font-size: 0.7rem">{{ $project->created_at }}</div>
                                     </div>
                                         <div class="card-text">
                                             by {{ $project->user->name }}
