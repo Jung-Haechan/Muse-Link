@@ -33,7 +33,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-outline-light btn-lg">업로드</button>
+                <button type="submit" class="btn btn-outline-light btn-lg">프로젝트 생성</button>
             </div>
         </form>
     </div>

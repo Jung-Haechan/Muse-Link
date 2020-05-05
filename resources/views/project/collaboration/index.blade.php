@@ -30,12 +30,10 @@
 
                                 </div>
                                 <div class="card-body text-dark">
-                                    <div class="row">
-                                        <h5 class="card-title text-left text-truncate col-10">
+                                    <div class="" style="font-size: 0.7rem">{{ $project->created_at }}</div>
+                                        <h5 class="card-title text-left text-truncate">
                                             @if($project->genre) [{{ $project->genre }}] @endif {{ $project->title }}
                                         </h5>
-                                        <div style="font-size: 0.7rem">{{ $project->created_at }}</div>
-                                    </div>
                                         <div class="card-text">
                                             by {{ $project->user->name }}
                                         </div>

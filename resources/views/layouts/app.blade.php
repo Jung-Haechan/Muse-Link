@@ -93,16 +93,20 @@
                     @auth
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <div class="row">
-                                <img src="{{Auth::user()->profile_img}}" style="width: 40px">
-                                <h5 class="mt-2 mx-2"><a class="text-decoration-none text-light"
-                                                         href="{{ route('register') }}">{{Auth::user()->name}}님</a></h5>
-                                <button type="submit" class="btn btn-outline-light mr-3">Logout</button>
+                            <div class="container">
+                                <div class="row">
+                                    <img src="{{Auth::user()->profile_img}}" style="width: 1.5rem" class="my-auto">
+                                    <h5 class=" mx-2 my-auto"><a class="text-decoration-none text-light"
+                                                                  href="{{ route('register') }}">{{Auth::user()->name}}
+                                            님</a></h5>
+                                    <button type="submit" class="btn btn-outline-light mr-3">Logout</button>
+                                </div>
                             </div>
                         </form>
                     @else
                         <button type="button" class="btn btn-outline-light" data-toggle="modal"
-                                data-target="#exampleModal">Login</button>
+                                data-target="#exampleModal">Login
+                        </button>
                     @endauth
                 </div>
             @endif
