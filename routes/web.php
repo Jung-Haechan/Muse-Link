@@ -21,8 +21,12 @@ Route::get('/login/{driver}', 'Auth\LoginController@social_login')->name('login.
 Route::get('/login/{driver}/callback', 'Auth\LoginController@social_login_callback')->name('login.social.callback');
 
 Route::get('/project/{board}/index', 'ProjectController@index')->name('project.index');
-Route::get('/project/{board}/{id}', 'ProjectController@show')->name('project.show');
+Route::get('/project/{board}/{project}', 'ProjectController@show')->name('project.show');
 Route::resource('/project', 'ProjectController')->except(['index', 'show']);
 
-
+Route::prefix('project/{project}')->name('project.')->group(function(){
+    Route::get('/version/create/{role}', 'VersionController@create')->name('version.create');
+    Route::post('/version/{role}', 'VersionController@store')->name('version.store');
+    Route::resource('/version', 'VersionController')->only(['edit', 'update', 'destroy']);
+});
 

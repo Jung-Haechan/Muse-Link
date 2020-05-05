@@ -191,10 +191,10 @@
                 <div class="container mt-3 mb-3 text-center">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <a href="#" type="button" class="btn btn-outline-dark font-weight-bold bg-light disabled">작곡 신청</a>
-                            <a href="#" type="button" class="btn btn-outline-primary font-weight-bold bg-light">편곡 신청</a>
-                            <a href="#" type="button" class="btn btn-outline-success font-weight-bold bg-light">작사 신청</a>
-                            <a href="#" type="button" class="btn btn-outline-danger font-weight-bold bg-light">보컬 신청</a>
+                            <a href="{{ route('project.version.create', [$project->id, 'composer']) }}" type="button" class="btn btn-outline-dark font-weight-bold bg-light">작곡 신청</a>
+                            <a href="{{ route('project.version.create', [$project->id, 'editor']) }}" type="button" class="btn btn-outline-primary font-weight-bold bg-light">편곡 신청</a>
+                            <a href="{{ route('project.version.create', [$project->id, 'lyricist']) }}" type="button" class="btn btn-outline-success font-weight-bold bg-light">작사 신청</a>
+                            <a href="{{ route('project.version.create', [$project->id, 'singer']) }}" type="button" class="btn btn-outline-danger font-weight-bold bg-light">보컬 신청</a>
                         </div>
                     </div>
                 </div>
