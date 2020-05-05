@@ -1,1 +1,19 @@
 
+.dropdown-menu{
+    background-color: #2b170f;
+}
+.dropdown-item{
+    color: #ffffff;
+}
+
+
+@media screen and (max-width: 768px)
+    {
+    html{
+        font-size: 12px;
+    }
+    .jumbotron{
+        padding-top: 6.5rem;
+    }
+}
+

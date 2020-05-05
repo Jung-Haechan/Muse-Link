@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>MuseLink</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -24,7 +24,7 @@
 
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark py-lg-4 fixed-top" style="background:#2b170f;" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-3 fixed-top" style="background:#2b170f;" id="mainNav">
     <a class="navbar-brand" style="color: #d2ab39;" href="http://127.0.0.1:8000/">MuseLink</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,7 @@
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     게시판
                 </a>
-                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('music.index', 'collaboration') }}">협업 게시판</a>
                     <a class="dropdown-item" href="#">완성작 게시판</a>
                     <a class="dropdown-item" href="#">자유 게시판</a>
@@ -102,7 +102,7 @@
                         </form>
                     @else
                         <button type="button" class="btn btn-outline-light" data-toggle="modal"
-                                data-target="#exampleModal">Login</a>
+                                data-target="#exampleModal">Login</button>
                     @endauth
                 </div>
             @endif
@@ -110,15 +110,16 @@
     </div>
 </nav>
 
-<div class="content" style="background-image: url({{asset('storage/music.jpg')}}); background-size: cover;">
+<div class="content" style="background-image: url({{asset('storage/background/night.jpg')}}); background-size: cover;">
     <div class="jumbotron text-center"
-         style="background-image:
-             url( {{asset('storage/skin/edm2.jpg')}});
-             background-size: cover; padding-top: 200px;">
+         style="background-image: url({{asset('storage/skin/edm2.jpg')}}); background-size: cover; padding-top: 9.5rem;">
+
         @yield('jumbotron')
     </div>
+
     @yield('content')
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/muselink.js')}}"></script>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -148,7 +149,7 @@
         </div>
     </div>
 </div>
-<footer class="page-footer font-small blue">
+<footer class="page-footer font-small blue" style="background:#2b170f;">
 
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
         <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
