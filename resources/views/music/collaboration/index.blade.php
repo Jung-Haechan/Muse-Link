@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('jumbotron')
-    <h3 class="text-center">
-        <div class="section-subtitle font-weight-bold mb-3" style="color: #d2ab39;">당신의 미완성 프로젝트를 공유하세요!</div>
-    </h3>
+    <div class="text-center">
+        <h3 class="section-subtitle font-weight-bold mb-3" style="color: #d2ab39;">당신의 미완성 프로젝트를 공유하세요!</h3>
+    </div>
     <div class="section-title text-center text-light display-3">
         <a href="http://127.0.0.1:8000/music/collaboration"
-                                  class="text-light text-decoration-none">Collaboration</a>
+           class="text-light text-decoration-none">Collaboration</a>
     </div>
     <a href="{{ route('music.create') }}" class="btn btn-outline-light mt-3" style="font-size: 1.2rem">프로젝트 만들기</a>
 @endsection
@@ -19,7 +19,7 @@
              style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
             <div class="row">
                 @forelse($musics as $music)
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 mb-3">
                         <a class="text-decoration-none" href="{{ route('music.show', ['collaboration', $music->id]) }}">
                             <div class="card card-music container">
                                 <div class="row text-dark bg-dark" style="height: 9rem;">
@@ -30,13 +30,18 @@
 
                                 </div>
                                 <div class="card-body text-dark">
-                                    <h5 class="card-title">
-                                        @if($music->genre) [{{ $music->genre }}] @endif {{ $music->title }}
-                                    </h5>
-                                    <div class="card-text">
-                                        by {{ $music->user->name }}
+                                    <div class="row">
+                                        <h5 class="card-title text-left text-truncate col-10">
+                                            @if($music->genre) [{{ $music->genre }}] @endif {{ $music->title }}
+                                        </h5>
+                                        <div style="font-size: 0.7rem">{{ $music->user->name }}</div>
                                     </div>
-                                    <table class="table table-striped table-sm mt-3 text-center" style="margin-bottom: 0rem;">
+                                        <div class="card-text">
+                                            by {{ $music->user->name }}
+                                        </div>
+
+                                    <table class="table table-striped table-sm mt-3 text-center"
+                                           style="margin-bottom: 0rem;">
                                         <thead>
                                         <tr>
                                             <th scope="col">작곡</th>
