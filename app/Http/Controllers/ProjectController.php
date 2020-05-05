@@ -8,29 +8,28 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     public function index($board)
     {
-        if ($board === 'create') {
-            return $this->create();
-        } elseif ($board === 'edit') {
-            $this->edit();
-        } else {
-            $musics = Project::listMusic(0, $board)->get();
-            return view('music.'.$board.'.index', [
-                'musics' => $musics,
-            ]);
-        }
+        $projects = Project::listProjects(0, $board)->get();
+        return view('project.' . $board . '.index', [
+            'projects' => $projects,
+        ]);
     }
 
     public function show()
     {
-        return view('music.collaboration.show');
+        return view('project.collaboration.show');
 
     }
 
     public function create()
     {
-        return view('music.create');
+        return view('project.create');
     }
 
     public function store(Request $request)
@@ -40,36 +39,24 @@ class ProjectController extends Controller
             'genre' => 'nullable|max:20',
             'youtube_url' => 'nullable|url',
             'description' => 'required',
-            'lyrics' => 'nullable',
-            'composer' => 'nullable|max:100',
-            'editor' => 'nullable|max:100',
-            'lyricist' => 'nullable|max:100',
-            'singer' => 'nullable|max:100',
         ]);
-        if ($request->hasFile('audio_file') && explode('/', $request->file('audio_file')->getMimeType())[0] !== 'audio') {
-            return redirect()->back()
-                ->with('msg', '오디오 파일 형식이 잘못되었습니다.');
-        } elseif ($request->hasFile('cover_img_file') && explode('/', $request->file('cover_img_file')->getMimeType())[0] !== 'image') {
-            return redirect()->back()
-                ->with('msg', '이미지 파일 형식이 잘못되었습니다.');
-        } else {
-            if ($request->hasFile('audio_file')) {
-                $data['audio_file'] = $request->file('audio_file')->store('public/audio');
+        if ($request->hasFile('cover_img_file')) {
+            if (explode('/', $request->file('cover_img_file')->getMimeType())[0] !== 'image') {
+                return redirect()->back()
+                    ->with('msg', '이미지 파일 형식이 잘못되었습니다.');
             }
-            if ($request->hasFile('cover_img_file')) {
-                $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
-            }
-            $data['user_id'] = Auth::id();
-            Project::create($data);
-            var_dump($data);
-            return redirect()->route('index');
+            $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
         }
+        $data['user_id'] = Auth::id();
+        Project::create($data);
+        return redirect()->route('project.index', 'collaboration');
     }
 
     public function edit()
     {
 
     }
+
     public function update()
     {
 

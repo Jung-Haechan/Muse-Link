@@ -16,7 +16,7 @@ class CreateRepliesTable extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('music_id');
+            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('lecture_id');
             $table->unsignedBigInteger('parent_id');
@@ -26,7 +26,7 @@ class CreateRepliesTable extends Migration
 
             $table->foreign('user_id')
                 ->references('id')->on('users');
-            $table->foreign('music_id')
+            $table->foreign('project_id')
                 ->references('id')->on('projects');
             $table->foreign('post_id')
                 ->references('id')->on('posts');

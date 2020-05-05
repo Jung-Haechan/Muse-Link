@@ -29,7 +29,7 @@
                 <p>당신이 가수라면, 자신의 목소리를 올려서 당신에게 장신만의 노래를 만들어줄 사람을 찾아보세요.</p>
                 <p class="font-weight-bold">협업을 통해 당신만의 노래를 제작해, 진정한 음악가로 데뷔해보세요!</p>
             </div>
-            <div class="btn btn-lg btn-dark mt-5" onclick="location.href ='music/collaboration';">>
+            <div class="btn btn-lg btn-dark mt-5" onclick="location.href ='project/collaboration/index';">>
                 협업하러 가기
             </div>
         </div>

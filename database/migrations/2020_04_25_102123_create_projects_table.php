@@ -22,10 +22,10 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('lyrics_version_id')->nullable();
             $table->string('youtube_url')->nullable();
             $table->string('cover_img_file')->nullable();
-            $table->string('composer')->nullable();
-            $table->string('editor')->nullable();
-            $table->string('lyricist')->nullable();
-            $table->string('singer')->nullable();
+            $table->boolean('has_composer')->default(false);
+            $table->boolean('has_editor')->default(false);
+            $table->boolean('has_lyricist')->default(false);
+            $table->boolean('has_singer')->default(false);
             $table->boolean('is_completed')->default(false);
             $table->string('genre')->nullable();
             $table->integer('is_opened')->default(0); //0:전체 공개 1:회원 공개 2:팔로워 공개 3:나만 보기

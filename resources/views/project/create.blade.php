@@ -9,7 +9,7 @@
     <div class="col-md-7 p-5 mx-auto"
          style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
 
-        <form action="{{ route('music.store') }}" method="post" enctype="multipart/form-data" style="">
+        <form action="{{ route('project.store') }}" method="post" enctype="multipart/form-data" style="">
             @csrf
             <div class="form-row">
                 <div class="form-group col-sm-8">
