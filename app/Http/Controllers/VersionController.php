@@ -55,16 +55,15 @@ class VersionController extends Controller
             $data = $request->validate([
                 'title' => 'required|max:255',
                 'description' => 'nullable',
-                'project_audio_file' => 'required',
                 'lyrics' => 'required',
             ]);
         }
+        //Todo: 필요한 오디오 파일  재정립
         elseif ($role === 'singer') {
             $data = $request->validate([
                 'title' => 'required|max:255',
                 'description' => 'nullable',
                 'project_audio_file' => 'required',
-                'voice_audio_file' => 'required',
             ]);
             if (getFileType($request->file('project_audio_file')) === 'audio'
                 && getFileType($request->file('voice_audio_file')) === 'audio') {

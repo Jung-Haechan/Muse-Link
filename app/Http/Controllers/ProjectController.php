@@ -24,7 +24,7 @@ class ProjectController extends Controller
     public function show($board, Project $project)
     {
         $versions = $project->versions()->listVersions(0)->get();
-        return view('project.'.$board.'.show', [
+        return view('project.' . $board . '.show', [
             'project' => $project,
             'versions' => $versions,
         ]);
