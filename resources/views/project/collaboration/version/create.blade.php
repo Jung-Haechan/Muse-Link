@@ -17,10 +17,18 @@
                 <label for="title">버전 제목</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="제목">
             </div>
+            @error('description')
+            <div class="text-light" style="background: #721c2499">버전 제목을 입력해 주세요.</div>
+            @enderror
             @if ($role !== 'lyricist')
                 <div class="form-group">
-                    <label for="project_audio_file">프로젝트 파일</label>
+                    <label for="project_audio_file">프로젝트 파일(가이드 녹음)</label>
                     <input type="file" name="project_audio_file" id="project_audio_file"
+                           class="form-control-file btn btn-outline-light btn-sm">
+                </div>
+                <div class="form-group">
+                    <label for="project_audio_file">MR 파일</label>
+                    <input type="file" name="guide_audio_file" id="project_audio_file"
                            class="form-control-file btn btn-outline-light btn-sm">
                 </div>
                 @if ($role === 'singer')

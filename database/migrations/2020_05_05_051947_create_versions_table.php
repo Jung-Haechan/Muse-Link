@@ -21,6 +21,7 @@ class CreateVersionsTable extends Migration
             $table->text('description')->nullable();
             $table->string('role')->default('composer');
             $table->string('project_audio_file')->nullable();
+            $table->string('mr_audio_file')->nullable();
             $table->string('voice_audio_file')->nullable();
             $table->text('lyrics')->nullable();
             $table->unsignedTinyInteger('is_opened')->default(0); //0:전체 공개 1:회원공개 2:팔로워공개 3:협업자공개 4:비공개

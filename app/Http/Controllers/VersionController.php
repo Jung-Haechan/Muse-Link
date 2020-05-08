@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class VersionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function create(Project $project, $role)
     {
         return view('project.collaboration.version.create', [
@@ -23,15 +28,28 @@ class VersionController extends Controller
             $data = $request->validate([
                 'title' => 'required|max:255',
                 'description' => 'nullable',
-                'project_audio_file' => 'required',
             ]);
-            if (getFileType($request->file('project_audio_file')) === 'audio') {
-                $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
-            } else {
+            if (!$request->hasFile('project_audio_file') && !$request->hasFile('mr_audio_file')) {
                 return redirect()->back()
-                    ->with('alert', '오디오 파일 형식이 잘못되었습니다.');
+                    ->with('alert', '오디오 파일이 한 개 이상 필요합니다.');
+            } else {
+                if ($request->hasFile('project_audio_file')) {
+                    if (getFileType($request->file('project_audio_file')) === 'audio') {
+                        $data['guide_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
+                    } else {
+                        return redirect()->back()
+                            ->with('alert', '프로젝트 오디오 파일 형식이 잘못되었습니다.');
+                    }
+                }
+                if ($request->hasFile('mr_audio_file')) {
+                    if (getFileType($request->file('mr_audio_file')) === 'audio') {
+                        $data['guide_audio_file'] = $request->file('mr_audio_file')->store('public/audio/mr');
+                    } else {
+                        return redirect()->back()
+                            ->with('alert', 'MR 오디오 파일 형식이 잘못되었습니다.');
+                    }
+                }
             }
-
         }
         elseif ($role === 'lyricist') {
             $data = $request->validate([
@@ -57,6 +75,9 @@ class VersionController extends Controller
                     ->with('alert', '오디오 파일 형식이 잘못되었습니다.');
             }
 
+        } else {
+            return redirect()->back()
+                ->with('alert', '잘못된 경로입니다.');
         }
         $data['role'] = $role;
         $data['user_id'] = Auth::id();
