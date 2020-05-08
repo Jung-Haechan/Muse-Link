@@ -51,7 +51,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('project.index', 'collaboration') }}">협업 게시판</a>
-                    <a class="dropdown-item" href="#">완성작 게시판</a>
+                    <a class="dropdown-item" href="{{ route('project.index', 'completed') }}">완성작 게시판</a>
                     <a class="dropdown-item" href="#">자유 게시판</a>
                 </div>
             </li>
