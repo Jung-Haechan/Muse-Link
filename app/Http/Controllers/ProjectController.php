@@ -44,11 +44,12 @@ class ProjectController extends Controller
             'description' => 'required',
         ]);
         if ($request->hasFile('cover_img_file')) {
-            if (explode('/', $request->file('cover_img_file')->getMimeType())[0] !== 'image') {
+            if (getFileType($request->file('cover_img_file')) === 'image') {
+                $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
+            } else {
                 return redirect()->back()
-                    ->with('msg', '이미지 파일 형식이 잘못되었습니다.');
+                    ->with('alert', '이미지 파일 형식이 잘못되었습니다.');
             }
-            $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
         }
         $data['user_id'] = Auth::id();
         Project::create($data);

@@ -25,11 +25,13 @@ class VersionController extends Controller
                 'description' => 'nullable',
                 'project_audio_file' => 'required',
             ]);
-            if (explode('/', $request->file('project_audio_file')->getMimeType())[0] !== 'audio') {
+            if (getFileType($request->file('project_audio_file')) === 'audio') {
+                $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
+            } else {
                 return redirect()->back()
-                    ->with('msg', '오디오 파일 형식이 잘못되었습니다.');
+                    ->with('alert', '오디오 파일 형식이 잘못되었습니다.');
             }
-            $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
+
         }
         elseif ($role === 'lyricist') {
             $data = $request->validate([
@@ -46,13 +48,15 @@ class VersionController extends Controller
                 'project_audio_file' => 'required',
                 'voice_audio_file' => 'required',
             ]);
-            if (explode('/', $request->file('project_audio_file')->getMimeType())[0] !== 'audio'
-                || explode('/', $request->file('voice_audio_file')->getMimeType())[0] !== 'audio') {
+            if (getFileType($request->file('project_audio_file')) === 'audio'
+                && getFileType($request->file('voice_audio_file')) === 'audio') {
+                $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
+                $data['voice_audio_file'] = $request->file('voice_audio_file')->store('public/audio/voice');
+            } else {
                 return redirect()->back()
-                    ->with('msg', '오디오 파일 형식이 잘못되었습니다.');
+                    ->with('alert', '오디오 파일 형식이 잘못되었습니다.');
             }
-            $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
-            $data['voice_audio_file'] = $request->file('voice_audio_file')->store('public/audio/voice');
+
         }
         $data['role'] = $role;
         $data['user_id'] = Auth::id();
