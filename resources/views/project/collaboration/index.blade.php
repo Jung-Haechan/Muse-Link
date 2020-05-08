@@ -19,7 +19,7 @@
              style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
             <div class="row">
                 @forelse($projects as $project)
-                    <div class="col-lg-4 mb-3">
+                    <div class="col-lg-4 col-sm-6 mb-3">
                         <a class="text-decoration-none" href="{{ route('project.show', ['collaboration', $project->id]) }}">
                             <div class="card card-music container">
                                 <div class="row text-dark bg-dark" style="height: 9rem;">
