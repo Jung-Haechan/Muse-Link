@@ -1,59 +1,106 @@
 
-.dropdown-menu{
+.dropdown-menu {
     background-color: #2b170f;
 }
-.dropdown-item{
+
+.dropdown-item {
     color: #ffffff;
 }
-.project-image{
-    padding-bottom: 50%;
+
+.project-image {
+    width: 22rem;
+    height: 22rem;
+}
+
+.lyrics-background {
+    background-color: #2b170f77;
+    width: 22rem;
+    height: 22rem;
+}
+
+.disabled {
+    background-color: #4e555b;
+}
+.title {
+    font-size: 14px;
+    font-weight:bold;
+}
+.komen {
+    font-size:14px;
+}
+.geser {
+    margin-left:55px;
+    margin-top:5px;
 }
 
 
+@media screen and (max-width: 576px) {
+    .project-image {
+        width: 20rem;
+        height: 20rem;
+    }
 
+    .lyrics-background {
+        width: 20rem;
+        height: 20rem;
+    }
 
-@media screen and (max-width: 576px)
-{
 
 }
 
 
-@media screen and (max-width: 768px)
-{
-    html{
+@media screen and (max-width: 768px) {
+    html {
         font-size: 12px;
     }
+
     .jumbotron {
         padding-top: 6.5rem;
     }
 
-}
+    .lyrics {
+        font-size: 1.2rem;
 
-@media screen and  (max-width: 992px)
-{
-    .project-image{
-        padding-bottom: 100%;
     }
 }
 
-@media screen and (max-width: 1200px)
-{
+@media screen and  (max-width: 992px) {
+
+}
+
+@media screen and (max-width: 1200px) {
 
 }
 
 
-@media screen and (min-width: 576px) and (max-width: 768px)
-{
+@media screen and (min-width: 576px) and (max-width: 768px) {
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 992px)
-{
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .project-image {
+        width: 17rem;
+        height: 17rem;
+    }
 
+    .lyrics-background {
+        width: 17rem;
+        height: 17rem;
+    }
 }
 
-@media screen and (max-width: 1200px) and (min-width: 992px)
-{
+@media screen and (max-width: 1200px) and (min-width: 992px) {
+    .project-image {
+        width: 17rem;
+        height: 17rem;
+    }
 
+    .lyrics-background {
+        width: 17rem;
+        height: 17rem;
+    }
 }
+
+
+
 
