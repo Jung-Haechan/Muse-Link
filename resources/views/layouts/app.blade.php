@@ -17,6 +17,8 @@
             }
         }
     </script>
+    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/muselink.js')}}"></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -134,8 +136,6 @@
     </div>
 
     @yield('content')
-    <script src="{{asset('js/app.js')}}"></script>
-    <script src="{{asset('js/muselink.js')}}"></script>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

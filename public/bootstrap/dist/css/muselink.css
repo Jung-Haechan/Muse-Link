@@ -17,21 +17,14 @@
     width: 22rem;
     height: 22rem;
 }
+audio{
+    width: 20rem;
+}
 
 .disabled {
     background-color: #4e555b;
 }
-.title {
-    font-size: 14px;
-    font-weight:bold;
-}
-.komen {
-    font-size:14px;
-}
-.geser {
-    margin-left:55px;
-    margin-top:5px;
-}
+
 
 
 @media screen and (max-width: 576px) {
@@ -87,18 +80,13 @@
         width: 17rem;
         height: 17rem;
     }
+    audio{
+        width: 15rem;
+    }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 992px) {
-    .project-image {
-        width: 17rem;
-        height: 17rem;
-    }
 
-    .lyrics-background {
-        width: 17rem;
-        height: 17rem;
-    }
 }
 
 

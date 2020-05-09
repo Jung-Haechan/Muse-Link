@@ -18,6 +18,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="text-center">
+                        <audio controls="controls">
+                            <source src="track.ogg" type="audio/ogg"/>
+                            <source src="track.mp3" type="audio/mpeg"/>
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="accordion " id="accordionExample" style="">
@@ -30,7 +37,8 @@
                                                 data-toggle="collapse"
                                                 data-target="#collapse1"
                                                 aria-expanded="true" aria-controls="collapse1">
-                                            <div>#{{ $version->rownum }} {{ translateRole($version->role) }} {{ $version->title }}</div>
+                                            <div>
+                                                #{{ $version->rownum }} {{ translateRole($version->role) }} {{ $version->title }}</div>
                                             <div class="pt-2" style="font-size: small">{{ $version->user->name }}</div>
                                         </button>
                                     </h2>
@@ -74,13 +82,17 @@
             <div class="container mt-3 mb-3 text-center">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <a href="{{ route('project.version.create', [$project->id, 'composer']) }}" type="button" class="btn btn-outline-dark font-weight-bold bg-light disabled">작곡
+                        <a href="{{ route('project.version.create', [$project->id, 'composer']) }}" type="button"
+                           class="btn btn-outline-dark font-weight-bold bg-light disabled">작곡
                             신청</a>
-                        <a href="{{ route('project.version.create', [$project->id, 'editor']) }}" type="button" class="btn btn-outline-primary font-weight-bold bg-light">편곡
+                        <a href="{{ route('project.version.create', [$project->id, 'editor']) }}" type="button"
+                           class="btn btn-outline-primary font-weight-bold bg-light">편곡
                             신청</a>
-                        <a href="{{ route('project.version.create', [$project->id, 'lyricist']) }}" type="button" class="btn btn-outline-success font-weight-bold bg-light">작사
+                        <a href="{{ route('project.version.create', [$project->id, 'lyricist']) }}" type="button"
+                           class="btn btn-outline-success font-weight-bold bg-light">작사
                             신청</a>
-                        <a href="{{ route('project.version.create', [$project->id, 'singer']) }}" type="button" class="btn btn-outline-danger font-weight-bold bg-light">보컬 신청</a>
+                        <a href="{{ route('project.version.create', [$project->id, 'singer']) }}" type="button"
+                           class="btn btn-outline-danger font-weight-bold bg-light">보컬 신청</a>
                     </div>
                 </div>
                 <hr>
