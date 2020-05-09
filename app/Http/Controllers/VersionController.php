@@ -35,7 +35,7 @@ class VersionController extends Controller
             } else {
                 if ($request->hasFile('project_audio_file')) {
                     if (getFileType($request->file('project_audio_file')) === 'audio') {
-                        $data['guide_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
+                        $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
                     } else {
                         return redirect()->back()
                             ->with('alert', '프로젝트 오디오 파일 형식이 잘못되었습니다.');
@@ -43,7 +43,7 @@ class VersionController extends Controller
                 }
                 if ($request->hasFile('mr_audio_file')) {
                     if (getFileType($request->file('mr_audio_file')) === 'audio') {
-                        $data['guide_audio_file'] = $request->file('mr_audio_file')->store('public/audio/mr');
+                        $data['project_audio_file'] = $request->file('mr_audio_file')->store('public/audio/mr');
                     } else {
                         return redirect()->back()
                             ->with('alert', 'MR 오디오 파일 형식이 잘못되었습니다.');

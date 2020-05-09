@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Version;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,6 +25,8 @@ class ProjectController extends Controller
     public function show($board, Project $project)
     {
         $versions = $project->versions()->listVersions(0)->get();
+        $project['lyrics_version'] = Version::find($project->lyrics_version_id);
+        $project['audio_version'] = Version::find($project->audio_version_id);
         return view('project.' . $board . '.show', [
             'project' => $project,
             'versions' => $versions,

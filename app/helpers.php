@@ -19,3 +19,10 @@ function translateRole ($role) {
     elseif ($role === 'lyricist') return '작사';
     elseif ($role === 'singer') return '보컬';
 }
+
+function getRoleColor ($role) {
+    if ($role === 'composer') return 'dark';
+    elseif ($role === 'editor') return 'primary';
+    elseif ($role === 'lyricist') return 'success';
+    elseif ($role === 'singer') return 'danger';
+}

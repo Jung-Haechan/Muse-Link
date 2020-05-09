@@ -30,41 +30,50 @@
                     <div class="accordion " id="accordionExample" style="">
                         @forelse($versions as $version)
                             <div class="card">
-                                <div class="card-header" id="heading1">
+                                <div class="card-header" id="heading{{$version->rownum}}">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link text-decoration-none text-left text-success "
-                                                type="button"
-                                                data-toggle="collapse"
-                                                data-target="#collapse1"
-                                                aria-expanded="true" aria-controls="collapse1">
-                                            <div>
-                                                #{{ $version->rownum }} {{ translateRole($version->role) }} {{ $version->title }}</div>
+                                        <button
+                                            class="btn btn-link text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
+                                            type="button"
+                                            data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
+                                            data-target="#{{ $version->role === 'lyricist' ? 'modal'.$version->rownum : 'collapse'.$version->rownum }}"
+                                            aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
+                                            <div>#{{ $version->rownum }} [{{ translateRole($version->role) }}] {{ $version->title }}</div>
                                             <div class="pt-2" style="font-size: small">{{ $version->user->name }}</div>
                                         </button>
                                     </h2>
                                 </div>
+                                @if($version->role !== 'lyricist')
+                                    <div id="collapse{{$version->rownum}}" class="collapse show "
+                                         aria-labelledby="heading{{$version->rownum}}"
+                                         data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            {{ $version->description }}
+                                            <table class="table table-hover table-sm mt-1 text-center"
+                                                   style="margin-bottom: 0rem;">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">AudioFile</th>
 
-                                <div id="collapse1" class="collapse show " aria-labelledby="heading1"
-                                     data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        {{ $version->description }}
-                                        <table class="table table-hover table-sm mt-1 text-center"
-                                               style="margin-bottom: 0rem;">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">AudioFile</th>
-
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td><a href="#">{{ $version->title }}.mp3</a></td>
-
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    @if($version->project_audio_file)
+                                                        <td>메인 파일: <a href="#">{{ $version->title }} 메인.mp3</a>
+                                                        </td> @endif
+                                                    @if($version->mr_audio_file)
+                                                        <td>MR 파일: <a href="#">{{ $version->title }} MR.mp3</a>
+                                                        </td> @endif
+                                                    @if($version->voice_audio_file)
+                                                        <td>목소리 파일: <a href="#">{{ $version->title }}.mp3</a>
+                                                        </td> @endif
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         @empty
                         @endforelse
@@ -83,8 +92,12 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <a href="{{ route('project.version.create', [$project->id, 'composer']) }}" type="button"
-                           class="btn btn-outline-dark font-weight-bold bg-light disabled">작곡
-                            신청</a>
+                        <<<<<<< Updated upstream
+                        class="btn btn-outline-dark font-weight-bold bg-light disabled">작곡
+                        =======
+                        class="btn btn-outline-dark font-weight-bold bg-light">작곡
+                        >>>>>>> Stashed changes
+                        신청</a>
                         <a href="{{ route('project.version.create', [$project->id, 'editor']) }}" type="button"
                            class="btn btn-outline-primary font-weight-bold bg-light">편곡
                             신청</a>
