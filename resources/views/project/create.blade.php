@@ -15,6 +15,9 @@
                 <div class="form-group col-sm-8">
                     <label for="title">프로젝트 제목</label>
                     <input type="text" class="form-control" id="title" name="title" placeholder="제목">
+                    @error('title')
+                    <div class="text-light" style="background: #721c2499">제목을 입력해 주세요.</div>
+                    @enderror
                 </div>
                 <div class="form-group col-sm-4">
                     <label for="genre">장르</label>
@@ -30,6 +33,9 @@
                 <label for="description">프로젝트 설명</label>
                 <textarea type="text" class="form-control" id="description" name="description"
                           placeholder="노래 설명" cols="30" rows="10"></textarea>
+                @error('description')
+                <div class="text-light" style="background: #721c2499">프로젝트 설명을 입력해 주세요.</div>
+                @enderror
             </div>
 
             <div class="text-center mt-4">

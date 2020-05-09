@@ -6,6 +6,18 @@
 
     <title>MuseLink</title>
 
+    <script>
+        window.onpageshow = function (event) {
+            if (!(event.persisted || (window.performance && window.performance.navigation.type === 2))) {
+                var msg = '{{Session::get('alert')}}';
+                var exist = '{{Session::has('alert')}}';
+                if (exist) {
+                    alert(msg);
+                }
+            }
+        }
+    </script>
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <link href="{{asset('bootstrap/dist/css/bootstrap.css')}}" rel="stylesheet">
@@ -39,7 +51,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('project.index', 'collaboration') }}">협업 게시판</a>
-                    <a class="dropdown-item" href="#">완성작 게시판</a>
+                    <a class="dropdown-item" href="{{ route('project.index', 'completed') }}">완성작 게시판</a>
                     <a class="dropdown-item" href="#">자유 게시판</a>
                 </div>
             </li>

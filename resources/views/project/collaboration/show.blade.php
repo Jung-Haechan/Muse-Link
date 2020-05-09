@@ -267,6 +267,7 @@
                         </div>
                     </div>
                     <div class="row">
+<<<<<<< HEAD
 
                         <div class="geser">
                             <div class="media">
@@ -281,6 +282,13 @@
                                     </p>
                                 </div>
                             </div>
+=======
+                        <div class="col-12 text-center">
+                            <a href="{{ route('project.version.create', [$project->id, 'composer']) }}" type="button" class="btn btn-outline-dark font-weight-bold bg-light">작곡 신청</a>
+                            <a href="{{ route('project.version.create', [$project->id, 'editor']) }}" type="button" class="btn btn-outline-primary font-weight-bold bg-light">편곡 신청</a>
+                            <a href="{{ route('project.version.create', [$project->id, 'lyricist']) }}" type="button" class="btn btn-outline-success font-weight-bold bg-light">작사 신청</a>
+                            <a href="{{ route('project.version.create', [$project->id, 'singer']) }}" type="button" class="btn btn-outline-danger font-weight-bold bg-light">보컬 신청</a>
+>>>>>>> 4eb762a02c593e9a99a00e40ff78a848ab001391
                         </div>
 
                     </div>

@@ -1,7 +1,14 @@
 <?php
 
 function getFile($file) {
-    $file_name = 'storage/'.explode('/', $file, 2)[1];
-    return $file_name;
+    return 'storage/'.explode('/', $file, 2)[1];
 }
 
+function getFileType($file) {
+    if ($file) {
+        return explode('/', $file->getMimeType())[0];
+    }
+    else {
+        return NULL;
+    }
+}
