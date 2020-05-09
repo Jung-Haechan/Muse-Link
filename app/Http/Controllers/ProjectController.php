@@ -40,7 +40,6 @@ class ProjectController extends Controller
         $data = $request->validate([
             'title' => 'required|max:255',
             'genre' => 'nullable|max:20',
-            'youtube_url' => 'nullable|url',
             'description' => 'required',
         ]);
         if ($request->hasFile('cover_img_file')) {

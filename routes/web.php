@@ -26,7 +26,7 @@ Route::prefix('project')->name('project.')->group(function(){
     Route::get('/{board}', 'ProjectController@index')->name('index');
     Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
     Route::get('/{board}/{project}', 'ProjectController@show')->name('show');
-    Route::post('/', 'ProjectController@create')->name('store');
+    Route::post('/', 'ProjectController@store')->name('store');
     Route::put('/{project}', 'ProjectController@update')->name('update');
     Route::delete('/{project}', 'ProjectController@delete')->name('delete');
 
