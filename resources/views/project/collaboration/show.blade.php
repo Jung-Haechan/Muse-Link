@@ -38,7 +38,8 @@
                                             data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
                                             data-target="#{{ $version->role === 'lyricist' ? 'modal'.$version->rownum : 'collapse'.$version->rownum }}"
                                             aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
-                                            <div>#{{ $version->rownum }} [{{ translateRole($version->role) }}] {{ $version->title }}</div>
+                                            <div>#{{ $version->rownum }} [{{ translateRole($version->role) }}
+                                                ] {{ $version->title }}</div>
                                             <div class="pt-2" style="font-size: small">{{ $version->user->name }}</div>
                                         </button>
                                     </h2>
@@ -92,12 +93,8 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <a href="{{ route('project.version.create', [$project->id, 'composer']) }}" type="button"
-                        <<<<<<< Updated upstream
-                        class="btn btn-outline-dark font-weight-bold bg-light disabled">작곡
-                        =======
-                        class="btn btn-outline-dark font-weight-bold bg-light">작곡
-                        >>>>>>> Stashed changes
-                        신청</a>
+                           class="btn btn-outline-dark font-weight-bold bg-light">작곡
+                            신청</a>
                         <a href="{{ route('project.version.create', [$project->id, 'editor']) }}" type="button"
                            class="btn btn-outline-primary font-weight-bold bg-light">편곡
                             신청</a>
@@ -145,10 +142,4 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
 @endsection
