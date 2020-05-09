@@ -21,6 +21,10 @@ class Project extends Model
         return $this->hasMany('App\Models\Version');
     }
 
+    public function lyrics_version() {
+        return $this->hasOne('App\Models\Version');
+    }
+
     public function scopeListProjects($query, $open_range, $board) {
         if ($board === 'collaboration') {
             return $query->where('is_completed', false)->where('is_opened', $open_range);
