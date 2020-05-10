@@ -83,6 +83,15 @@ class ProjectController extends Controller
 
     }
 
+    public function update_face(Request $request, Project $project) {
+        $type = $request->role === 'lyricist' ? 'lyrics_version_id' : 'audio_version_id';
+        Project::where('id', $project->id)->update([
+            $type => $request->version_id,
+        ]);
+        return redirect()->back()
+            ->with('alert', $request->version_id.'해당 버전이 대표로 설정되었습니다.');
+    }
+
     public function destroy()
     {
 

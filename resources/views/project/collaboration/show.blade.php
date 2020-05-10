@@ -14,8 +14,8 @@
                     <div class="project-image mx-auto mb-3"
                          style="background-image: url({{ $project->cover_img_file ? asset(getFile($project->cover_img_file)) : asset('storage/base/base_logo.jpg') }}); background-size: cover; background-position: center;">
                         <div class="lyrics-background" style="overflow-y: scroll;">
-                            <div class="lyrics text-light p-5">
-                                {{ $project->lyrics_version ? $project->lyrics_version->lyrics : NULL }}
+                            <div class="lyrics text-light p-5"
+                                 style="white-space:pre-wrap">{{ $project->lyrics_version ? $project->lyrics_version->lyrics : NULL }}
                             </div>
                         </div>
                     </div>
@@ -44,6 +44,18 @@
                                         </button>
                                     </h2>
                                 </div>
+                                <form action="{{ route('project.update_face', $project->id) }}" method="post">
+                                    @csrf
+                                    @method('put')
+                                    <input type="hidden" name="role" value="{{ $version->role }}">
+                                    @if ($version->role === 'lyricist')
+                                        <input type="hidden" name="version_id" value="{{ $version->id }}">
+                                        <button type="submit">대표 가사로 설정</button>
+                                    @else
+                                        <input type="hidden" name="version_id" value="{{ $version->id }}">
+                                        <button type="submit">대표 음악으로 설정</button>
+                                    @endif
+                                </form>
                                 @if($version->role !== 'lyricist')
                                     <div id="collapse{{$version->rownum}}" class="collapse show "
                                          aria-labelledby="heading{{$version->rownum}}"
@@ -126,40 +138,6 @@
                     <a href="{{ route('project.collaborator.index', $project->id) }}">참여자 관리</a>
                 @endif
                 <hr>
-                <div class="container bg-light">
-                    <div class="row">
-
-                        <div class="media">
-                            <div class="media-left">
-                                <img src="http://fakeimg.pl/50x50" class="media-object" style="width:40px">
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading title">Fahmi Arif</h4>
-                                <p class="komen">
-                                    kalo bisa ya ndak usah gan biar cepet<br>
-                                    <a href="#">reply</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="geser">
-                            <div class="media">
-                                <div class="media-left">
-                                    <img src="http://fakeimg.pl/50x50" class="media-object" style="width:40px">
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading title">Fahmi Arif</h4>
-                                    <p class="komen">
-                                        kalo bisa ya ndak usah gan biar cepet<br>
-                                        <a href="#">reply</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -178,7 +156,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="font-weight-bold"> {{ $version->lyrics }} </div>
+                            <div class="font-weight-bold" style="white-space:pre-wrap">{{ $version->lyrics }}</div>
                             <hr>
                             <div> {{ $version->description }}</div>
                         </div>

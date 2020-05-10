@@ -50,6 +50,7 @@ Route::prefix('project')->name('project.')->group(function(){
     Route::get('/{board}/{project}', 'ProjectController@show')->name('show');
     Route::post('/', 'ProjectController@store')->name('store');
     Route::put('/{project}', 'ProjectController@update')->name('update');
+    Route::put('/{project}/face', 'ProjectController@update_face')->name('update_face');
     Route::delete('/{project}', 'ProjectController@delete')->name('delete');
 
 });
