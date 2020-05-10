@@ -30,32 +30,34 @@
                     <div class="accordion " id="accordionExample" style="">
                         @forelse($versions as $version)
                             <div class="card">
-                                <div class="card-header" id="heading{{$version->rownum}}">
-                                    <h2 class="mb-0">
-                                        <button
-                                            class="btn btn-link text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
-                                            type="button"
-                                            data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
-                                            data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
-                                            aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
-                                            <div>#{{ $version->rownum }} [{{ config('translate.role.'.$version->role) }}
-                                                ] {{ $version->title }}</div>
-                                            <div class="pt-2" style="font-size: small">{{ $version->user->name }}</div>
-                                        </button>
-                                    </h2>
-                                </div>
                                 <form action="{{ route('project.update_face', $project->id) }}" method="post">
                                     @csrf
                                     @method('put')
-                                    <input type="hidden" name="role" value="{{ $version->role }}">
-                                    @if ($version->role === 'lyricist')
-                                        <input type="hidden" name="version_id" value="{{ $version->id }}">
-                                        <button type="submit">대표 가사로 설정</button>
-                                    @else
-                                        <input type="hidden" name="version_id" value="{{ $version->id }}">
-                                        <button type="submit">대표 음악으로 설정</button>
-                                    @endif
+                                    <div class="card-header" id="heading{{$version->rownum}}">
+                                        <h2 class="mb-0">
+                                            <button
+                                                class="btn btn-link text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
+                                                type="button"
+                                                data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
+                                                data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
+                                                aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
+                                                <div>#{{ $version->rownum }} [{{ config('translate.role.'.$version->role) }}
+                                                    ] {{ $version->title }}</div>
+                                                <div class="pt-2" style="font-size: small">{{ $version->user->name }}</div>
+                                            </button>
+                                        </h2>
+                                        <input type="hidden" name="role" value="{{ $version->role }}">
+                                        @if ($version->role === 'lyricist')
+                                            <input type="hidden" name="version_id" value="{{ $version->id }}">
+                                            <button type="submit">대표 가사로 설정</button>
+                                        @else
+                                            <input type="hidden" name="version_id" value="{{ $version->id }}">
+                                            <button type="submit">대표 음악으로 설정</button>
+                                        @endif
+                                    </div>
                                 </form>
+
+
                                 @if($version->role !== 'lyricist')
                                     <div id="collapse{{$version->rownum}}" class="collapse show "
                                          aria-labelledby="heading{{$version->rownum}}"
