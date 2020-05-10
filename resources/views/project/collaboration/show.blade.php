@@ -113,7 +113,8 @@
                                 </a>
                             @else
                                 <a href="#"
-                                   class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light disabled" disabled="true">
+                                   class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light disabled"
+                                   disabled="true">
                                     {{ $role_kor }} 신청 거부당함
                                 </a>
                             @endif
@@ -160,7 +161,8 @@
     </div>
 
 
-    <div class="modal fade" id="lyricsModal1" tabindex="-1" role="dialog" aria-labelledby="lyricsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="lyricsModal{{ $version->rownum }}" tabindex="-1" role="dialog" aria-labelledby="lyricsModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -170,7 +172,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{ $version->lyrics }}
+                    <div class="font-weight-bold"> {{ $version->lyrics }} </div>
+                    <hr>
+                    <div> {{ $version->description }}</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
