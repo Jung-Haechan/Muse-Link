@@ -8,10 +8,11 @@
     <div>
         <div class="container col-md-10 p-5 mx-auto text-dark"
              style="background-color: #b9bbbe;  min-height: 1000px; opacity: 0.93; color: #d6d8db">
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="project-image mx-auto mb-3"
-                         style="background-image: url({{ $project->cover_img_file ? asset(getFile($project->cover_img_file)) : asset('storage/base/base_logo.jpg') }}); background-size: cover;">
+                         style="background-image: url({{ $project->cover_img_file ? asset(getFile($project->cover_img_file)) : asset('storage/base/base_logo.jpg') }}); background-size: cover; background-position: center;">
                         <div class="lyrics-background" style="overflow-y: scroll;">
                             <div class="lyrics text-light p-5">
                                 {{ $project->lyrics_version ? $project->lyrics_version->lyrics : NULL }}
@@ -35,7 +36,7 @@
                                             class="btn btn-link text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
                                             type="button"
                                             data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
-                                            data-target="#{{ $version->role === 'lyricist' ? 'modal'.$version->rownum : 'collapse'.$version->rownum }}"
+                                            data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
                                             aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
                                             <div>#{{ $version->rownum }} [{{ config('translate.role.'.$version->role) }}
                                                 ] {{ $version->title }}</div>
@@ -78,16 +79,13 @@
                         @empty
                         @endforelse
                     </div>
-
                 </div>
-
             </div>
             <div class="card mt-4">
                 <div class="card-body" style="min-height: 10rem; ">
                     {{ $project->description }}
                 </div>
             </div>
-
             <div class="container mt-3 mb-3 text-center">
                 <div class="row text-center mx-auto">
                     @foreach(config('translate.role') as $role_eng => $role_kor)
@@ -159,4 +157,25 @@
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div class="modal fade" id="lyricsModal1" tabindex="-1" role="dialog" aria-labelledby="lyricsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="lyricsModalLabel">가사</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ $version->lyrics }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
