@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class CollaboratorController extends Controller
 {
     use AuthTrait;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Request $request, Project $project) {
         $userStatus = $this->isCollaborator(Auth::user(), $project, $request->role);
         if ($userStatus === 0) {

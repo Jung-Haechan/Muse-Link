@@ -19,7 +19,9 @@ trait AuthTrait
     }
 
     function isProjectAdmin($user, $project) {
-        if ($project->user_id === $user->id) {
+        if ($user === NULL) {
+            return false;
+        } elseif ($project->user_id === $user->id) {
             return true;
         } elseif ($project->collaborators()
             ->where('user_id', $user->id)
@@ -32,7 +34,8 @@ trait AuthTrait
 
     function isCollaborator($user, $project, $role)
     {
-        if ($isApllied = Collaborator::where([
+        if ($user === NULL) return NULL;
+        elseif ($isApllied = Collaborator::where([
             'user_id' => $user->id,
             'project_id' => $project->id,
             'role' => $role,
