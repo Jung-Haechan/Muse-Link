@@ -14,15 +14,13 @@
                          style="background-image: url({{ $project->cover_img_file ? asset(getFile($project->cover_img_file)) : asset('storage/base/base_logo.jpg') }}); background-size: cover;">
                         <div class="lyrics-background" style="overflow-y: scroll;">
                             <div class="lyrics text-light p-5">
-                                {{ $project->lyrics_version ? $project->lyrics_version->lyrics : NULL}}
+                                {{ $project->lyrics_version ? $project->lyrics_version->lyrics : NULL }}
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
                         <audio controls="controls">
-                            <source src="track.ogg" type="audio/ogg"/>
-                            <source src="track.mp3" type="audio/mpeg"/>
-                            Your browser does not support the audio element.
+                            <source src="{{ $project->audio_version ? asset(getFile($project->audio_version->project_audio_file)) : NULL }}">
                         </audio>
                     </div>
                 </div>
