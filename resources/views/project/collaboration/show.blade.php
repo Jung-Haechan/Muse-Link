@@ -42,7 +42,8 @@
                                                 data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
                                                 aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
                                                 <div style="font-size: 1.1rem;">#{{ $version->rownum }}
-                                                    [{{ config('translate.role.'.$version->role) }}] {{ $version->title }}</div>
+                                                    [{{ config('translate.role.'.$version->role) }}
+                                                    ] {{ $version->title }}</div>
                                             </div>
                                             <div class="container pt-2" style="font-size: 0.8rem;">
                                                 <div class="row">
@@ -150,10 +151,11 @@
                             @endif
                         </div>
                     @endforeach
-                        @inject('AuthTrait', 'App\Traits\TraitsForView\AuthTraitForView')
-                        @if($AuthTrait->isProjectAdmin(Auth::user(), $project))
-                            <a href="{{ route('project.collaborator.index', $project->id) }}" class="btn btn-outline-dark bg-light font-weight-bold" style="">참여자 관리</a>
-                        @endif
+                    @inject('AuthTrait', 'App\Traits\TraitsForView\AuthTraitForView')
+                    @if($AuthTrait->isProjectAdmin(Auth::user(), $project))
+                        <a href="{{ route('project.collaborator.index', $project->id) }}"
+                           class="btn btn-outline-dark bg-light font-weight-bold" style="">참여자 관리</a>
+                    @endif
                 </div>
 
                 <hr>
@@ -170,6 +172,39 @@
                                 <button type="submit" class="btn btn-outline-dark btn-sm">등록</button>
                             </div>
                         </form>
+
+                        <hr style="margin: 0.1rem;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="ml-auto" style="font-size: 0.7rem;">2019.03.04.13:12</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-1 font-weight-bold">1</div>
+                                <div class="container col-10">
+                                    <div class="row">
+                                        <img src="{{Auth::user()->profile_img}}" style="width: 1.5rem"
+                                             class="my-auto mr-1">
+                                        <div class="font-weight-bold">우리들의 일그러진 영웅</div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row text-left mt-2">
+                                            오 이거 정말 띵곡이네요!! 저 작사 지원 가능합니까??
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="ml-auto">
+                                        <div class="row text-primary">
+                                            <div class="mr-2"><a href="#" class="text-decoration-none">답글3</a></div>
+                                            <div><a href="#" class="text-decoration-none">추천5</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin: 0.1rem;">
                     </div>
                 </div>
 
