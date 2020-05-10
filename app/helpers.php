@@ -13,13 +13,6 @@ function getFileType($file) {
     }
 }
 
-function translateRole ($role) {
-    if ($role === 'composer') return '작곡';
-    elseif ($role === 'editor') return '편곡';
-    elseif ($role === 'lyricist') return '작사';
-    elseif ($role === 'singer') return '보컬';
-}
-
 function getRoleColor ($role) {
     if ($role === 'composer') return 'dark';
     elseif ($role === 'editor') return 'primary';

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collaborator;
 use App\Models\Project;
 use App\Models\Version;
+use App\Traits\AuthTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+    use AuthTrait;
+
     public function __construct()
     {
         $this->middleware('auth')->except('index', 'show');
@@ -27,9 +31,14 @@ class ProjectController extends Controller
         $versions = $project->versions()->listVersions(0)->get();
         $project['lyrics_version'] = Version::find($project->lyrics_version_id);
         $project['audio_version'] = Version::find($project->audio_version_id);
+        $collaboratorStatus = [];
+        foreach (config('translate.role') as $role_eng => $role_kor) {
+            $collaboratorStatus[$role_eng] = $this->isCollaborator(Auth::user(), $project, $role_eng);
+        }
         return view('project.' . $board . '.show', [
             'project' => $project,
             'versions' => $versions,
+            'collaboratorStatus' => $collaboratorStatus,
         ]);
     }
 
@@ -55,6 +64,12 @@ class ProjectController extends Controller
         }
         $data['user_id'] = Auth::id();
         Project::create($data);
+        Collaborator::create([
+            'user_id' => Auth::id(),
+            'project_id' => Project::where('user_id', Auth::id())->first()->id,
+            'role' => 'master',
+            'is_approved' => 1,
+        ]);
         return redirect()->route('project.index', 'collaboration');
     }
 

@@ -20,7 +20,8 @@
                     </div>
                     <div class="text-center">
                         <audio controls="controls">
-                            <source src="{{ $project->audio_version ? asset(getFile($project->audio_version->project_audio_file)) : NULL }}">
+                            <source
+                                src="{{ $project->audio_version ? asset(getFile($project->audio_version->project_audio_file)) : NULL }}">
                         </audio>
                     </div>
                 </div>
@@ -36,7 +37,7 @@
                                             data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
                                             data-target="#{{ $version->role === 'lyricist' ? 'modal'.$version->rownum : 'collapse'.$version->rownum }}"
                                             aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
-                                            <div>#{{ $version->rownum }} [{{ translateRole($version->role) }}
+                                            <div>#{{ $version->rownum }} [{{ config('translate.role.'.$version->role) }}
                                                 ] {{ $version->title }}</div>
                                             <div class="pt-2" style="font-size: small">{{ $version->user->name }}</div>
                                         </button>
@@ -88,20 +89,28 @@
             </div>
 
             <div class="container mt-3 mb-3 text-center">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <a href="{{ route('project.version.create', [$project->id, 'composer']) }}" type="button"
-                           class="btn btn-outline-dark font-weight-bold bg-light">작곡
-                            신청</a>
-                        <a href="{{ route('project.version.create', [$project->id, 'editor']) }}" type="button"
-                           class="btn btn-outline-primary font-weight-bold bg-light">편곡
-                            신청</a>
-                        <a href="{{ route('project.version.create', [$project->id, 'lyricist']) }}" type="button"
-                           class="btn btn-outline-success font-weight-bold bg-light">작사
-                            신청</a>
-                        <a href="{{ route('project.version.create', [$project->id, 'singer']) }}" type="button"
-                           class="btn btn-outline-danger font-weight-bold bg-light">보컬 신청</a>
-                    </div>
+                <div class="row text-center mx-auto">
+                    @foreach(config('translate.role') as $role_eng => $role_kor)
+                        <div style="display: inline">
+                            <form class="form-inline" action="{{ route('project.collaborator.store', $project->id) }}"
+                                  method="post">
+                                @csrf
+                                <input type="hidden" name="role" value="{{ $role_eng }}">
+                                <button type="submit"
+                                        class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light @if($collaboratorStatus[$role_eng] === 2) disabled @endif">
+                                    @if ($collaboratorStatus[$role_eng] === NULL)
+                                        {{ $role_kor }} 신청
+                                    @elseif ($collaboratorStatus[$role_eng] === 0)
+                                        {{ $role_kor }} 신청 취소
+                                    @elseif ($collaboratorStatus[$role_eng] === 1)
+                                        {{ $role_kor }} 등록
+                                    @else
+                                        {{ $role_kor }} 거부당함
+                                    @endif
+                                </button>
+                            </form>
+                        </div>
+                    @endforeach
                 </div>
                 <hr>
                 <div class="container bg-light">

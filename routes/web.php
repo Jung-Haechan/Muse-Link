@@ -41,7 +41,12 @@ Route::prefix('project')->name('project.')->group(function(){
         Route::prefix('/reply')->name('reply.')->group(function(){
             Route::post('/', 'ReplyController@store')->name('store');
             Route::put('/{reply}', 'ReplyController@update')->name('update');
-            Route::delete('/{reply}', 'ReplyController@update')->name('delete');
+            Route::delete('/{reply}', 'ReplyController@delete')->name('delete');
+        });
+        Route::prefix('/collaborator')->name('collaborator.')->group(function(){
+            Route::post('/', 'CollaboratorController@store')->name('store');
+            Route::put('/{collaborator}', 'CollaboratorController@update')->name('update');
+            Route::delete('/{collaborator}', 'CollaboratorController@delete')->name('delete');
         });
     });
 });
@@ -59,7 +64,7 @@ Route::prefix('post')->name('post.')->group(function(){
         Route::prefix('/reply')->name('reply.')->group(function(){
             Route::post('/', 'ReplyController@store')->name('store');
             Route::put('/{reply}', 'ReplyController@update')->name('update');
-            Route::delete('/{reply}', 'ReplyController@update')->name('delete');
+            Route::delete('/{reply}', 'ReplyController@delete')->name('delete');
         });
     });
 });

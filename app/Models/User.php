@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function versions() {
         return $this->hasMany('App\Models\Version');
     }
+
+    public function collaborator() {
+        return $this->hasMany('App\Models\Collaborator');
+    }
 }

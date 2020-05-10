@@ -17,8 +17,7 @@
             }
         }
     </script>
-    <script src="{{asset('js/app.js')}}"></script>
-    <script src="{{asset('js/muselink.js')}}"></script>
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -172,6 +171,10 @@
     </div>
 
 </footer>
+
+<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/muselink.js')}}"></script>
+
 </body>
 
 

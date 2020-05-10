@@ -21,8 +21,8 @@ class Project extends Model
         return $this->hasMany('App\Models\Version');
     }
 
-    public function lyrics_version() {
-        return $this->hasOne('App\Models\Version');
+    public function collaborators() {
+        return $this->hasMany('App\Models\Collaborator');
     }
 
     public function scopeListProjects($query, $open_range, $board) {
