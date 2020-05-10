@@ -92,6 +92,15 @@ class ProjectController extends Controller
             ->with('alert', $request->version_id.'해당 버전이 대표로 설정되었습니다.');
     }
 
+    public function update_status(Request $request, Project $project) {
+        $action = $project['has_'.$request->role] ? '마감' : '개방';
+        Project::where('id', $project->id)->update([
+            'has_'.$request->role => !$project['has_'.$request->role],
+        ]);
+        return redirect()->back()
+            ->with('alert', config('translate.role.'.$request->role).' 신청을 '.$action.'했습니다.');
+    }
+
     public function destroy()
     {
 
