@@ -92,23 +92,33 @@
                 <div class="row text-center mx-auto">
                     @foreach(config('translate.role') as $role_eng => $role_kor)
                         <div style="display: inline">
-                            <form class="form-inline" action="{{ route('project.collaborator.store', $project->id) }}"
-                                  method="post">
-                                @csrf
-                                <input type="hidden" name="role" value="{{ $role_eng }}">
-                                <button type="submit"
-                                        class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light @if($collaboratorStatus[$role_eng] === 2) disabled @endif">
-                                    @if ($collaboratorStatus[$role_eng] === NULL)
+                            @if($collaboratorStatus[$role_eng] === NULL)
+                                <form class="form-inline"
+                                      action="{{ route('project.collaborator.store', $project->id) }}"
+                                      method="post">
+                                    @csrf
+                                    <input type="hidden" name="role" value="{{ $role_eng }}">
+                                    <button type="{{ $collaboratorStatus[$role_eng] === NULL ? 'submit' : NULL }}"
+                                            class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
                                         {{ $role_kor }} 신청
-                                    @elseif ($collaboratorStatus[$role_eng] === 0)
-                                        {{ $role_kor }} 신청 취소
-                                    @elseif ($collaboratorStatus[$role_eng] === 1)
-                                        {{ $role_kor }} 등록
-                                    @else
-                                        {{ $role_kor }} 거부당함
-                                    @endif
-                                </button>
-                            </form>
+                                    </button>
+                                </form>
+                            @elseif($collaboratorStatus[$role_eng] === 0)
+                                <a href="#"
+                                   class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
+                                    {{ $role_kor }} 신청 취소
+                                </a>
+                            @elseif($collaboratorStatus[$role_eng] === 1)
+                                <a href="{{ route('project.version.create', [$project->id, $role_eng]) }}"
+                                   class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
+                                    {{ $role_kor }} 등록
+                                </a>
+                            @else
+                                <a href="#"
+                                   class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light disabled" disabled="true">
+                                    {{ $role_kor }} 신청 거부당함
+                                </a>
+                            @endif
                         </div>
                     @endforeach
                 </div>
