@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <div class="project-image mx-auto mb-3"
                          style="background-image: url({{ $project->cover_img_file ? asset(getFile($project->cover_img_file)) : asset('storage/base/base_logo.jpg') }}); background-size: cover; background-position: center;">
-                        <div class="lyrics-background" style="overflow-y: scroll;">
+                        <div class="lyrics-background" style="overflow-y: auto;">
                             <div class="lyrics text-light p-5"
                                  style="white-space:pre-wrap">{{ $project->lyrics_version ? $project->lyrics_version->lyrics : NULL }}
                             </div>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="accordion " id="accordionExample" style="">
+                    <div class="accordion " id="projectTree" style="">
                         @forelse($versions as $version)
                             <div class="card">
                                 <form action="{{ route('project.update_face', $project->id) }}" method="post">
@@ -35,33 +35,49 @@
                                     @method('put')
                                     <div class="card-header" id="heading{{$version->rownum}}">
                                         <h2 class="mb-0">
-                                            <button
-                                                class="btn btn-link text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
+                                            <div
+                                                class="text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
                                                 type="button"
                                                 data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
                                                 data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
                                                 aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
-                                                <div>#{{ $version->rownum }} [{{ config('translate.role.'.$version->role) }}
-                                                    ] {{ $version->title }}</div>
-                                                <div class="pt-2" style="font-size: small">{{ $version->user->name }}</div>
-                                            </button>
+                                                <div style="font-size: 1.1rem;">#{{ $version->rownum }}
+                                                    [{{ config('translate.role.'.$version->role) }}] {{ $version->title }}</div>
+                                            </div>
+                                            <div class="container pt-2" style="font-size: 0.8rem;">
+                                                <div class="row">
+                                                    <div>
+                                                        {{ $version->user->name }}
+                                                    </div>
+                                                    <div class="ml-auto">
+                                                        <input type="hidden" name="role"
+                                                               value="{{ $version->role }}">
+                                                        @if ($version->role === 'lyricist')
+                                                            <input type="hidden" name="version_id"
+                                                                   value="{{ $version->id }}">
+                                                            <button type="submit" class="btn btn-outline-dark btn-sm">대표
+                                                                가사로 설정
+                                                            </button>
+                                                        @else
+                                                            <input type="hidden" name="version_id"
+                                                                   value="{{ $version->id }}">
+                                                            <button type="submit" class="btn btn-outline-dark btn-sm ">
+                                                                대표
+                                                                음악으로 설정
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </h2>
-                                        <input type="hidden" name="role" value="{{ $version->role }}">
-                                        @if ($version->role === 'lyricist')
-                                            <input type="hidden" name="version_id" value="{{ $version->id }}">
-                                            <button type="submit">대표 가사로 설정</button>
-                                        @else
-                                            <input type="hidden" name="version_id" value="{{ $version->id }}">
-                                            <button type="submit">대표 음악으로 설정</button>
-                                        @endif
+
                                     </div>
                                 </form>
-
-
                                 @if($version->role !== 'lyricist')
                                     <div id="collapse{{$version->rownum}}" class="collapse show "
                                          aria-labelledby="heading{{$version->rownum}}"
-                                         data-parent="#accordionExample">
+                                         data-parent="#projectTree">
                                         <div class="card-body">
                                             {{ $version->description }}
                                             <table class="table table-hover table-sm mt-1 text-center"
@@ -100,7 +116,7 @@
                     {{ $project->description }}
                 </div>
             </div>
-            <div class="container mt-3 mb-3 text-center">
+            <div class="mt-3 mb-3 text-center">
                 <div class="row text-center mx-auto">
                     @foreach(config('translate.role') as $role_eng => $role_kor)
                         <div style="display: inline">
@@ -134,12 +150,29 @@
                             @endif
                         </div>
                     @endforeach
+                        @inject('AuthTrait', 'App\Traits\TraitsForView\AuthTraitForView')
+                        @if($AuthTrait->isProjectAdmin(Auth::user(), $project))
+                            <a href="{{ route('project.collaborator.index', $project->id) }}" class="btn btn-outline-dark bg-light font-weight-bold" style="">참여자 관리</a>
+                        @endif
                 </div>
-                @inject('AuthTrait', 'App\Traits\TraitsForView\AuthTraitForView')
-                @if($AuthTrait->isProjectAdmin(Auth::user(), $project))
-                    <a href="{{ route('project.collaborator.index', $project->id) }}">참여자 관리</a>
-                @endif
+
                 <hr>
+
+                <div class="bg-light" style="min-height: 100rem;">
+                    <div class="container pt-3">
+                        <form>
+                            <div class="form-group" style="margin-bottom: 0.3rem;">
+                                <label for="description" style="display: none"></label>
+                                <textarea type="text" class="form-control" id="description" name="description"
+                                          placeholder="댓글을 입력하세요." cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="text-right mb-4">
+                                <button type="submit" class="btn btn-outline-dark btn-sm">등록</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
