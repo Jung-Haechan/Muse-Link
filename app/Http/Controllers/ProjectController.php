@@ -93,7 +93,7 @@ class ProjectController extends Controller
     }
 
     public function update_status(Request $request, Project $project) {
-        $action = $project['has_'.$request->role] ? '마감' : '개방';
+        $action = $project['has_'.$request->role] ? '개방' : '마감';
         Project::where('id', $project->id)->update([
             'has_'.$request->role => !$project['has_'.$request->role],
         ]);
