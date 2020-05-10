@@ -17,6 +17,15 @@ class CollaboratorController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(Project $project)
+    {
+        $collaborator = $project->collaborators()->latest()->paginate(10);
+        return view('project.collaboration.collaborator.index', [
+            'project' => $project,
+            'collaborators' => $collaborator,
+        ]);
+    }
+
     public function store(Request $request, Project $project)
     {
         $data = [

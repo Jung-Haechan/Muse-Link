@@ -22,14 +22,6 @@ Route::get('/login/{driver}/callback', 'Auth\LoginController@social_login_callba
 
 Route::prefix('project')->name('project.')->group(function(){
 
-    Route::get('/create', 'ProjectController@create')->name('create');
-    Route::get('/{board}', 'ProjectController@index')->name('index');
-    Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
-    Route::get('/{board}/{project}', 'ProjectController@show')->name('show');
-    Route::post('/', 'ProjectController@store')->name('store');
-    Route::put('/{project}', 'ProjectController@update')->name('update');
-    Route::delete('/{project}', 'ProjectController@delete')->name('delete');
-
     Route::prefix('/{project}')->group(function(){
         Route::prefix('/version')->name('version.')->group(function(){
             Route::get('/create/{role}', 'VersionController@create')->name('create');
@@ -45,10 +37,21 @@ Route::prefix('project')->name('project.')->group(function(){
         });
         Route::prefix('/collaborator')->name('collaborator.')->group(function(){
             Route::post('/', 'CollaboratorController@store')->name('store');
+            Route::get('/create', 'CollaboratorController@create')->name('create');
+            Route::get('/', 'CollaboratorController@index')->name('index');
             Route::put('/{collaborator}', 'CollaboratorController@update')->name('update');
             Route::delete('/{collaborator}', 'CollaboratorController@delete')->name('delete');
         });
     });
+
+    Route::get('/create', 'ProjectController@create')->name('create');
+    Route::get('/{board}', 'ProjectController@index')->name('index');
+    Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
+    Route::get('/{board}/{project}', 'ProjectController@show')->name('show');
+    Route::post('/', 'ProjectController@store')->name('store');
+    Route::put('/{project}', 'ProjectController@update')->name('update');
+    Route::delete('/{project}', 'ProjectController@delete')->name('delete');
+
 });
 
 Route::prefix('post')->name('post.')->group(function(){
