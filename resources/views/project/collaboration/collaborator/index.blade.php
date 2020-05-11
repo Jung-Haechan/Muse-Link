@@ -8,8 +8,8 @@
     <div class="container col-md-10 p-5 mx-auto text-dark"
          style="background-color: #b9bbbe;  min-height: 1000px; opacity: 0.93; color: #d6d8db">
         <div class="row">
-            <div class="col-lg-8">
-                <table class="table table-light">
+            <div class="col-lg-9">
+                <table class="table table-light table-hover">
                     <thead>
                     <tr>
                         <th>이름</th>
@@ -57,7 +57,7 @@
                 </table>
 
             </div>
-            <div class="col-4">
+            <div class="">
                 @foreach(config('translate.role') as $role_eng => $role_kor)
                     <form action="{{ route('project.update_status', $project) }}" method="post">
                         @csrf

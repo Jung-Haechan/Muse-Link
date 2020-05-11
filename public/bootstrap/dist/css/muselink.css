@@ -8,14 +8,14 @@
 }
 
 .project-image {
-    width: 22rem;
-    height: 22rem;
+    width: 21rem;
+    height: 21rem;
 }
 
 .lyrics-background {
     background-color: #2b170f77;
-    width: 22rem;
-    height: 22rem;
+    width: 21rem;
+    height: 21rem;
 }
 audio{
     width: 20rem;
@@ -24,19 +24,18 @@ audio{
 .disabled {
     background-color: #4e555b;
 }
+.reply {
+    font-size: 1rem;
+}
 
 
+@media screen and (max-width: 355px) {
+
+
+}
 
 @media screen and (max-width: 576px) {
-    .project-image {
-        width: 20rem;
-        height: 20rem;
-    }
 
-    .lyrics-background {
-        width: 20rem;
-        height: 20rem;
-    }
 
 
 }
@@ -53,7 +52,15 @@ audio{
 
     .lyrics {
         font-size: 1.2rem;
-
+    }
+    .reply {
+        font-size: 0.9rem;
+    }
+    .project-describe-bg {
+        min-height: 10rem;
+    }
+    .project-describe {
+        font-size: 1rem;
     }
 }
 
@@ -63,32 +70,55 @@ audio{
 
 @media screen and (max-width: 1200px) {
 
+
+}
+
+@media screen and (min-width: 355px) and (max-width: 576px) {
+
+
 }
 
 
 @media screen and (min-width: 576px) and (max-width: 768px) {
 
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
     .project-image {
-        width: 17rem;
-        height: 17rem;
+        width: 15rem;
+        height: 15rem;
     }
 
     .lyrics-background {
-        width: 17rem;
-        height: 17rem;
+        width: 15rem;
+        height: 15rem;
     }
     audio{
         width: 15rem;
     }
+    .project-describe-bg {
+        height: 17rem;
+    }
+    .project-describe {
+        font-size: 0.85rem;
+    }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 992px) {
-
+    .project-describe-bg {
+        height: 21rem;
+    }
+    .project-describe {
+        font-size: 0.85rem;
+    }
 }
 
+@media screen and (min-width: 1200px) {
+    .project-describe-bg {
+        height: 23rem;
+    }
 
+}
 
 
