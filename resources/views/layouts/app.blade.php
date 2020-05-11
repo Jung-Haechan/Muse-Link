@@ -38,7 +38,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark py-lg-3 fixed-top" style="background:#2b170f;" id="mainNav">
-    <a class="navbar-brand" style="color: #d2ab39;" href="http://127.0.0.1:8000/">MuseLink</a>
+    <a class="navbar-brand" style="color: #d2ab39;" href="{{ route('index') }}">MuseLink</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
