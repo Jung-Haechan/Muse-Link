@@ -42,8 +42,7 @@
                                                 data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
                                                 aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
                                                 <div style="font-size: 1.1rem;">#{{ $version->rownum }}
-                                                    [{{ config('translate.role.'.$version->role) }}
-                                                    ] {{ $version->title }}</div>
+                                                    [{{ config('translate.role.'.$version->role) }}] {{ $version->title }}</div>
                                             </div>
                                             <div class="container pt-2" style="font-size: 0.8rem;">
                                                 <div class="row">
@@ -112,8 +111,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-4">
-                <div class="card-body" style="min-height: 10rem; ">
+            <div class="card bg-dark mt-4">
+                <div class="card-body bg-dark text-light" style="min-height: 10rem;">
                     {{ $project->description }}
                 </div>
             </div>
