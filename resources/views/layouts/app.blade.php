@@ -109,9 +109,13 @@
                             <div class="container">
                                 <div class="row">
                                     <img src="{{Auth::user()->profile_img}}" style="width: 1.5rem" class="my-auto">
-                                    <h5 class=" mx-2 my-auto"><a class="text-decoration-none text-light"
-                                                                  href="{{ route('register') }}">{{Auth::user()->name}}
-                                            님</a></h5>
+                                    <h5 class=" mx-2 my-auto dropdown">
+                                        <a class="text-decoration-none text-light dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->name}}님</a>
+                                        <div class="dropdown-menu">
+                                            <a href="{{ route('register') }}" class="dropdown-item">내정보 수정</a>
+                                            <a href="{{ route('register') }}" class="dropdown-item">내 채널</a>
+                                        </div>
+                                    </h5>
                                     <button type="submit" class="btn btn-outline-light mr-3">Logout</button>
                                 </div>
                             </div>
