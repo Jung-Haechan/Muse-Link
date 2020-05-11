@@ -37,4 +37,20 @@ class CollaboratorController extends Controller
         return redirect()->route('project.show', ['collaboration', $project->id])
             ->with('alert', '신청이 완료되었습니다. 프로젝트 관리자의 승인을 기다리세요.');
     }
+
+    public function update(Project $project, Collaborator $collaborator, Request $request)
+    {
+        Collaborator::where('id', $collaborator->id)->update([
+            'is_approved' => $request->is_approved,
+        ]);
+        return redirect()->back()
+            ->with('alert', '참여자의 권한을 변경하였습니다.');
+    }
+
+    public function delete(Project $project, Collaborator $collaborator, Request $request)
+    {
+        $collaborator->delete();
+        return redirect()->back()
+            ->with('alert', '참여자를 삭제하였습니다.');
+    }
 }
