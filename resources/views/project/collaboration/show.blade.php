@@ -53,20 +53,14 @@
                                                     <div class="ml-auto">
                                                         <input type="hidden" name="role"
                                                                value="{{ $version->role }}">
-                                                        @if ($version->role === 'lyricist')
                                                             <input type="hidden" name="version_id"
                                                                    value="{{ $version->id }}">
-                                                            <button type="submit" class="btn btn-outline-dark btn-sm">대표
-                                                                가사로 설정
+                                                            <button type="submit" class="btn btn-outline-dark btn-sm
+                                                                @if($project->audio_version_id === $version->id)bg-dark text-light disabled" style="cursor:auto;" disabled> 대표 음악
+                                                                @elseif($project->lyrics_version_id === $version->id)bg-dark text-light disabled" style="cursor:auto;" disabled> 대표 가사
+                                                                @else "> 대표 @if($version->role === 'lyricist') 가사로 @else 음악으로 @endif 설정
+                                                                @endif
                                                             </button>
-                                                        @else
-                                                            <input type="hidden" name="version_id"
-                                                                   value="{{ $version->id }}">
-                                                            <button type="submit" class="btn btn-outline-dark btn-sm ">
-                                                                대표
-                                                                음악으로 설정
-                                                            </button>
-                                                        @endif
                                                     </div>
                                                 </div>
 
