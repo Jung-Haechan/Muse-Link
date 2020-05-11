@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Version extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'user_id', 'project_id', 'title', 'description', 'project_audio_file', 'mr_audio_file', 'voice_audio_file', 'lyrics', 'role'
     ];

@@ -25,6 +25,10 @@ class Project extends Model
         return $this->hasMany('App\Models\Collaborator');
     }
 
+    public function replies() {
+        return $this->hasMany('App\Models\Reply');
+    }
+
     public function scopeListProjects($query, $open_range, $board) {
         if ($board === 'collaboration') {
             return $query->where('is_completed', false)->where('is_opened', $open_range);

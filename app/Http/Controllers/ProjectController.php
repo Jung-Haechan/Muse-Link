@@ -29,6 +29,7 @@ class ProjectController extends Controller
     public function show($board, Project $project)
     {
         $versions = $project->versions()->listVersions(0)->get();
+        $replies = $project->replies()->latest()->get();
         $project['lyrics_version'] = Version::find($project->lyrics_version_id);
         $project['audio_version'] = Version::find($project->audio_version_id);
         $collaboratorStatus = [];
@@ -38,6 +39,7 @@ class ProjectController extends Controller
         return view('project.' . $board . '.show', [
             'project' => $project,
             'versions' => $versions,
+            'replies' => $replies,
             'collaboratorStatus' => $collaboratorStatus,
         ]);
     }

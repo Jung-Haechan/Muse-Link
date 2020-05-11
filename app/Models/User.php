@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function collaborator() {
         return $this->hasMany('App\Models\Collaborator');
     }
+
+    public function replies() {
+        return $this->hasMany('App\Models\Reply');
+    }
 }

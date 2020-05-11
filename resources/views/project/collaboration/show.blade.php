@@ -162,10 +162,12 @@
 
                 <div class="bg-light" style="min-height: 100rem;">
                     <div class="container pt-3">
-                        <form>
+                        <form action="{{ route('project.reply.store', $project) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="board" value="project">
                             <div class="form-group" style="margin-bottom: 0.3rem;">
-                                <label for="description" style="display: none"></label>
-                                <textarea type="text" class="form-control" id="description" name="description"
+                                <label for="reply" style="display: none"></label>
+                                <textarea type="text" class="form-control" id="content" name="content"
                                           placeholder="댓글을 입력하세요." cols="30" rows="5"></textarea>
                             </div>
                             <div class="text-right mb-4">
@@ -173,38 +175,39 @@
                             </div>
                         </form>
 
-                        <hr style="margin: 0.1rem;">
-                        <div class="container">
-                            <div class="row">
-                                <div class="ml-auto" style="font-size: 0.7rem;">2019.03.04.13:12</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1 font-weight-bold">1</div>
-                                <div class="container col-10">
-                                    <div class="row">
-                                        <img src="{{Auth::user()->profile_img}}" style="width: 1.5rem"
-                                             class="my-auto mr-1">
-                                        <div class="font-weight-bold">우리들의 일그러진 영웅</div>
-                                    </div>
-                                    <div class="container">
-                                        <div class="row text-left mt-2">
-                                            오 이거 정말 띵곡이네요!! 저 작사 지원 가능합니까??
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        @forelse($replies as $reply)
+                            <hr style="margin: 0.1rem;">
                             <div class="container">
                                 <div class="row">
-                                    <div class="ml-auto">
-                                        <div class="row text-primary">
-                                            <div class="mr-2"><a href="#" class="text-decoration-none">답글3</a></div>
-                                            <div><a href="#" class="text-decoration-none">추천5</a></div>
+                                    <div class="ml-auto" style="font-size: 0.7rem;">{{ $reply->created_at }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="container col-10">
+                                        <div class="row">
+                                            <img src="{{ $reply->user->profile_img }}" style="width: 1.5rem"
+                                                 class="my-auto mr-1">
+                                            <div class="font-weight-bold">{{ $reply->user->name }}</div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row text-left mt-2">
+                                                {{ $reply->content }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="ml-auto">
+                                            <div class="row text-primary">
+                                                <div class="mr-2"><a href="#" class="text-decoration-none">답글3</a></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr style="margin: 0.1rem;">
+                            <hr style="margin: 0.1rem;">
+                        @empty
+                        @endforelse
                     </div>
                 </div>
 
