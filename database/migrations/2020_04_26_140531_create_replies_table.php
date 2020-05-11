@@ -16,10 +16,10 @@ class CreateRepliesTable extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('lecture_id');
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('project_id')->nullable();
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->unsignedBigInteger('lecture_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->text('content');
             $table->timestamps();
             $table->softDeletes();
