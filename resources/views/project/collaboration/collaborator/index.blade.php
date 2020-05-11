@@ -20,43 +20,70 @@
             <button type="submit">{{ $role_kor }} 모집 {{ $project['has_'.$role_eng] ? '개방하기' : '마감하기' }}</button>
         </form>
     @endforeach
-        <table class="table table-light">
-            <thead>
-                <tr>
-                    <th>이름</th>
-                    <th>역할</th>
-                    <th>승인 상태</th>
-                </tr>
-            </thead>
-            <tbody>
-            @forelse($collaborators as $collaborator)
-                <tr>
-                    <td>{{ $collaborator->user->name }}</td>
-                    <td>{{ $collaborator->role }}</td>
-                    <td>
-                        @if($collaborator->is_approved === 0)
-                            미승인
-                        @elseif($collaborator->is_approved === 1)
-                            승인 완료
-                        @elseif($collaborator->is_approved === 2)
-                            승인 거부
-                        @endif
-                    </td>
-                    <td>
-                        <form class="form-inline" action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}" method="post">
-                            <input type="hidden" name="role" value="{{ $collaborator->role }}">
+    <table class="table table-light">
+        <thead>
+        <tr>
+            <th>이름</th>
+            <th>역할</th>
+            <th>승인 상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse($collaborators as $collaborator)
+            <tr>
+                <td>{{ $collaborator->user->name }}</td>
+                <td>{{ $collaborator->role }}</td>
+                <td>
+                    @if($collaborator->is_approved === 0)
+                        미승인
+                    @elseif($collaborator->is_approved === 1)
+                        승인 완료
+                    @elseif($collaborator->is_approved === 2)
+                        승인 거부
+                    @elseif($collaborator->is_approved === 3)
+                        강제 탈퇴
+                    @endif
+                </td>
+                <td>
+                    @if($collaborator->is_approved === 0)
+                        <form class="form-inline"
+                              action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
+                              method="post">
+                            @csrf
+                            @method('put')
                             <input type="hidden" name="is_approved" value="1">
                             <button type="submit">승인하기</button>
                         </form>
-                        <form class="form-inline" action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}" method="post">
-                            <input type="hidden" name="role" value="{{ $collaborator->role }}">
+                        <form class="form-inline"
+                              action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
+                              method="post">
+                            @csrf
+                            @method('put')
                             <input type="hidden" name="is_approved" value="2">
                             <button type="submit">승인거부</button>
                         </form>
-                    </td>
-                </tr>
-            @empty
-            @endforelse
-        </table>
+                    @elseif($collaborator->is_approved === 1)
+                        <form class="form-inline"
+                              action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
+                              method="post">
+                            @csrf
+                            @method('put')
+                            <input type="hidden" name="is_approved" value="3">
+                            <button type="submit">권한제거</button>
+                        </form>
+                    @else
+                        <form class="form-inline"
+                              action="{{ route('project.collaborator.delete', [$project->id, $collaborator->id]) }}"
+                              method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit">삭제</button>
+                        </form>
+                    @endif
+                </td>
+            </tr>
+        @empty
+        @endforelse
+    </table>
 
 @endsection
