@@ -20,7 +20,7 @@ class ProjectController extends Controller
 
     public function index($board)
     {
-        $projects = Project::listProjects(0, $board)->get();
+        $projects = Project::listAll(0, $board)->paginate(12);
         return view('project.' . $board . '.index', [
             'projects' => $projects,
         ]);
@@ -28,7 +28,7 @@ class ProjectController extends Controller
 
     public function show($board, Project $project)
     {
-        $versions = $project->versions()->listVersions(0)->get();
+        $versions = $project->versions()->listAll(0)->get();
         $replies = $project->replies()->latest()->get();
         $project['lyrics_version'] = Version::find($project->lyrics_version_id);
         $project['audio_version'] = Version::find($project->audio_version_id);

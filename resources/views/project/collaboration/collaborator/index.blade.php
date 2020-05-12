@@ -144,6 +144,9 @@
         @empty
         @endforelse
     </table>
+<<<<<<< HEAD
 >>>>>>> 5c794148dd3ddac009463090b3e3470a97c8f850
+=======
+>>>>>>> c5c6a70e405a29f05348364f5ea768e5196f6282
 
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -9,11 +10,16 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param $board
+     * @return void
      */
-    public function index()
+    public function index($board)
     {
-        //
+        $users = User::listAll($board)->paginate(10);
+        return view('user.index', [
+            'users' => $users,
+            'board' => $board,
+        ]);
     }
 
     /**

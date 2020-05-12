@@ -54,4 +54,12 @@ class User extends Authenticatable
     public function replies() {
         return $this->hasMany('App\Models\Reply');
     }
+
+    public function scopeListAll($query, $board) {
+        if ($board === 'producer') {
+            return $query->where('is_composer', true)->orWhere('is_lyricist', true)->orWhere('is_editor', true)->latest();
+        } else {
+            return $query->where('is_singer', true)->latest();
+        }
+    }
 }

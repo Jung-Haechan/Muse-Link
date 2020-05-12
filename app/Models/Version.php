@@ -22,7 +22,7 @@ class Version extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function scopeListVersions($query, $open_range) {
+    public function scopeListAll($query, $open_range) {
         $count = $query->where('is_opened', $open_range)
             ->orderByDesc('id')->count();
         DB::statement(DB::raw('set @rownum:=1+'.$count));
