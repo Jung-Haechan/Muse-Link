@@ -6,7 +6,7 @@
         <h3 class="font-weight-bold mb-3 section-subtitle" style="color: #d2ab39;">당신의 음악을 완성하세요!</h3>
     </div>
     <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="http://127.0.0.1:8000/" class="text-light text-decoration-none">MuseLink</a>
+        <div class="display-1 section-title"><a href="{{ route('index') }}" class="text-light text-decoration-none">MuseLink</a>
         </div>
     </h1>
 

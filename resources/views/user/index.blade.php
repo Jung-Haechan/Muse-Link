@@ -14,7 +14,7 @@
         </h3>
     </div>
     <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="http://127.0.0.1:8000/"
+        <div class="display-1 section-title"><a href="{{ route('user.index', $board) }}"
                                                 class="text-light text-decoration-none">{{ $board }}s</a>
         </div>
     </h1>
