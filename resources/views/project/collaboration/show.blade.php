@@ -29,7 +29,6 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <<<<<<< HEAD
                     <div class="project-describe-bg card bg-secondary" style="overflow-y: auto;">
                         <div class="project-describe card-body bg-secondary text-light">
                             {{ $project->description }}
