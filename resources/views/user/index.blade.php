@@ -25,8 +25,41 @@
 @section('content')
     <div class="container">
         @forelse($users as $user)
-            <div class="text-light">
-                {{ $user->name }}
+            <div class="row p-2 bg-light">
+                <div class="px-2">
+                    <img src="{{ asset($user->profile_img) }}" style="width: 4rem" alt="">
+                </div>
+                <div class="px-2">
+                    @foreach(config('translate.role') as $role_eng => $role_kor)
+                        @if($role_eng === 'singer')
+                            @continue
+                        @endif
+                        @if($user['is_'.$role_eng])
+                            <div class="d-inline text-{{getRoleColor($role_eng)}}">
+                                [{{ $role_kor }}]
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                <div class="col-2">
+                    {{ $user->name }} {{getProjectCreatedTime($user->created_at)}}
+                </div>
+                <div class="col-6">
+                    {{ $user->introduce }}
+                </div>
+                <div class="col-2">
+                    @foreach(config('translate.role') as $role_eng => $role_kor)
+                        @if($role_eng === 'singer' || $role_eng === 'master')
+                            @continue
+                        @endif
+                        <div>
+                            {{$role_kor}} 참여: {{ $user[$role_eng.'_num'] }}
+                        </div>
+                    @endforeach
+                        <div>
+                            개설한 프로젝트: {{ $user['master_num'] }}
+                        </div>
+                </div>
             </div>
         @empty
         @endforelse
