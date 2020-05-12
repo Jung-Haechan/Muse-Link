@@ -6,5 +6,6 @@ return [
         'editor' => '편곡',
         'lyricist' => '작사',
         'singer' => '보컬',
+        'master' => '관리자',
     ]
 ];
