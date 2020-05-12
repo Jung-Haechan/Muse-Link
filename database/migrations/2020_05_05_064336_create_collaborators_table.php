@@ -21,6 +21,11 @@ class CreateCollaboratorsTable extends Migration
             $table->unsignedTinyInteger('is_approved')->default(0); //0:승인대기 1:승인 2:승인거부 3:권한취소
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users');
+            $table->foreign('project_id')
+                ->references('id')->on('projects');
         });
     }
 

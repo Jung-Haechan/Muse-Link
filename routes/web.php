@@ -20,22 +20,22 @@ Auth::routes();
 Route::get('/login/{driver}', 'Auth\LoginController@social_login')->name('login.social');
 Route::get('/login/{driver}/callback', 'Auth\LoginController@social_login_callback')->name('login.social.callback');
 
-Route::prefix('project')->name('project.')->group(function(){
+Route::prefix('project')->name('project.')->group(function () {
 
-    Route::prefix('/{project}')->group(function(){
-        Route::prefix('/version')->name('version.')->group(function(){
+    Route::prefix('/{project}')->group(function () {
+        Route::prefix('/version')->name('version.')->group(function () {
             Route::get('/create/{role}', 'VersionController@create')->name('create');
             Route::post('/{role}', 'VersionController@store')->name('store');
             Route::get('/{version}/edit', 'VersionController@edit')->name('edit');
             Route::put('/{version}', 'VersionController@update')->name('update');
             Route::delete('/{version}', 'VersionController@update')->name('delete');
         });
-        Route::prefix('/reply')->name('reply.')->group(function(){
+        Route::prefix('/reply')->name('reply.')->group(function () {
             Route::post('/', 'ReplyController@store')->name('store');
             Route::put('/{reply}', 'ReplyController@update')->name('update');
             Route::delete('/{reply}', 'ReplyController@delete')->name('delete');
         });
-        Route::prefix('/collaborator')->name('collaborator.')->group(function(){
+        Route::prefix('/collaborator')->name('collaborator.')->group(function () {
             Route::post('/', 'CollaboratorController@store')->name('store');
             Route::get('/create', 'CollaboratorController@create')->name('create');
             Route::get('/', 'CollaboratorController@index')->name('index');
@@ -56,23 +56,32 @@ Route::prefix('project')->name('project.')->group(function(){
 
 });
 
-Route::prefix('post')->name('post.')->group(function(){
+Route::prefix('post')->name('post.')->group(function () {
     Route::get('/', 'PostController@index')->name('index');
     Route::get('/{post}', 'PostController@show')->name('show');
     Route::get('/create', 'PostController@create')->name('create');
     Route::get('/{post}/edit', 'PostController@edit')->name('edit');
-    Route::post('/', 'PostController@create')->name('store');
+    Route::post('/', 'PostController@store')->name('store');
     Route::put('/{post}', 'PostController@update')->name('update');
     Route::delete('/{post}', 'PostController@delete')->name('delete');
 
-    Route::prefix('/{post}')->group(function(){
-        Route::prefix('/reply')->name('reply.')->group(function(){
+    Route::prefix('/{post}')->group(function () {
+        Route::prefix('/reply')->name('reply.')->group(function () {
             Route::post('/', 'ReplyController@store')->name('store');
             Route::put('/{reply}', 'ReplyController@update')->name('update');
             Route::delete('/{reply}', 'ReplyController@delete')->name('delete');
         });
     });
 });
+
+Route::prefix('user')->name('user.')->group(function () {
+    Route::get('/{board}', 'UserController@index')->name('index');
+    Route::get('/{user}/edit', 'UserController@edit')->name('edit');
+    Route::get('/{board}/{user}', 'UserController@show')->name('show');
+    Route::put('/{user}', 'UserController@update')->name('update');
+    Route::delete('/{user}', 'PostController@delete')->name('delete');
+});
+
 
 
 

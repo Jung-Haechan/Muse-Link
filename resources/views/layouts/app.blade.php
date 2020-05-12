@@ -62,8 +62,8 @@
                     커뮤니티
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">프로듀서 검색</a>
-                    <a class="dropdown-item" href="#">보컬 검색</a>
+                    <a class="dropdown-item" href="{{ route('user.index', 'producer') }}">프로듀서 검색</a>
+                    <a class="dropdown-item" href="{{ route('user.index', 'singer') }}">보컬 검색</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
