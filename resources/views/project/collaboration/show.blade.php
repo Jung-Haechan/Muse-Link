@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-<<<<<<< HEAD
+                    <<<<<<< HEAD
                     <div class="project-describe-bg card bg-secondary" style="overflow-y: auto;">
                         <div class="project-describe card-body bg-secondary text-light">
                             {{ $project->description }}
@@ -100,9 +100,7 @@
                                         </div>
                                         <div class="container pt-2" style="font-size: 0.8rem;">
                                             <div class="row">
-                                                <img src="{{ $version->user->profile_img }}" style="width: 1.1rem"
-                                                     class="my-auto mr-1">
-                                                <div class="my-auto">
+                                                <div>
                                                     {{ $version->user->name }}
                                                 </div>
                                                 <div class="ml-auto">
@@ -119,49 +117,10 @@
                                                             음악으로 @endif 설정
                                                         @endif
                                                     </button>
-=======
-                    <div class="accordion " id="projectTree" style="">
-                        @forelse($versions as $version)
-                            <div class="card">
-                                <form action="{{ route('project.update_face', $project->id) }}" method="post">
-                                    @csrf
-                                    @method('put')
-                                    <div class="card-header" id="heading{{$version->rownum}}">
-                                        <h2 class="mb-0">
-                                            <div
-                                                class="text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
-                                                type="button"
-                                                data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
-                                                data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
-                                                aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
-                                                <div style="font-size: 1.1rem;">#{{ $version->rownum }}
-                                                    [{{ config('translate.role.'.$version->role) }}
-                                                    ] {{ $version->title }}</div>
-                                            </div>
-                                            <div class="container pt-2" style="font-size: 0.8rem;">
-                                                <div class="row">
-                                                    <div>
-                                                        {{ $version->user->name }}
-                                                    </div>
-                                                    <div class="ml-auto">
-                                                        <input type="hidden" name="role"
-                                                               value="{{ $version->role }}">
-                                                            <input type="hidden" name="version_id"
-                                                                   value="{{ $version->id }}">
-                                                            <button type="submit" class="btn btn-outline-dark btn-sm
-                                                                @if($project->audio_version_id === $version->id)bg-dark text-light disabled" style="cursor:auto;" disabled> 대표 음악
-                                                                @elseif($project->lyrics_version_id === $version->id)bg-dark text-light disabled" style="cursor:auto;" disabled> 대표 가사
-                                                                @else "> 대표 @if($version->role === 'lyricist') 가사로 @else 음악으로 @endif 설정
-                                                                @endif
-                                                            </button>
-                                                    </div>
->>>>>>> c5c6a70e405a29f05348364f5ea768e5196f6282
                                                 </div>
                                             </div>
                                         </div>
-
                                     </h2>
-
                                 </div>
                             </form>
                             @if($version->role !== 'lyricist')
