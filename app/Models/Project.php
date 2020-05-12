@@ -29,11 +29,11 @@ class Project extends Model
         return $this->hasMany('App\Models\Reply');
     }
 
-    public function scopeListProjects($query, $open_range, $board) {
+    public function scopeListAll($query, $open_range, $board) {
         if ($board === 'collaboration') {
-            return $query->where('is_completed', false)->where('is_opened', $open_range);
+            return $query->where('is_completed', false)->where('is_opened', $open_range)->latest();
         } else {
-            return $query->where('is_completed', true)->where('is_opened', $open_range);
+            return $query->where('is_completed', true)->where('is_opened', $open_range)->latest();
         }
     }
 }
