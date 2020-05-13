@@ -23,7 +23,9 @@
                             <td>{{ $collaborator->user->name }}</td>
                             <td>{{ $collaborator->role }}</td>
                             <td>
-                                @if($collaborator->is_approved === 0)
+                                @if($collaborator->user_id === Auth::id())
+                                    프로젝트 개설
+                                @elseif($collaborator->is_approved === 0)
                                     미승인
                                 @elseif($collaborator->is_approved === 1)
                                     승인 완료
@@ -43,7 +45,7 @@
                                                 @csrf
                                                 @method('put')
                                                 <input type="hidden" name="is_approved" value="1">
-                                                <button type="submit" class="btn btn btn-info p-1 btn-sm">승인</button>
+                                                <button type="submit" class="btn btn btn-info btn-sm mr-2">승인</button>
                                             </form>
                                             <form class="form-inline"
                                                   action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
@@ -51,24 +53,28 @@
                                                 @csrf
                                                 @method('put')
                                                 <input type="hidden" name="role" value="{{ $collaborator->role }}">
-                                                <button type="submit" class="btn btn btn-danger p-1 btn-sm">거절</button>
+                                                <button type="submit" class="btn btn btn-danger btn-sm">거절</button>
                                             </form>
                                         @elseif($collaborator->is_approved === 1)
-                                            <form class="form-inline"
-                                                  action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
-                                                  method="post">
-                                                @csrf
-                                                @method('put')
-                                                <input type="hidden" name="is_approved" value="3">
-                                                <button type="submit" class="btn btn btn-danger p-1 btn-sm">권한제거</button>
-                                            </form>
+                                            @if($project->user_id !== Auth::id())
+                                                <form class="form-inline"
+                                                      action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('put')
+                                                    <input type="hidden" name="is_approved" value="3">
+                                                    <button type="submit" class="btn btn btn-danger btn-sm">권한제거
+                                                    </button>
+                                                </form>
+                                            @endif
                                         @else
                                             <form class="form-inline"
                                                   action="{{ route('project.collaborator.delete', [$project->id, $collaborator->id]) }}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn btn-danger p-1 btn-sm">강제탈퇴</button>
+                                                <button type="submit" class="btn btn btn-danger btn-sm">강제탈퇴
+                                                </button>
                                             </form>
                                         @endif
                                     </div>
@@ -89,6 +95,9 @@
                         <button type="submit" class="btn btn btn-outline-dark bg-light mb-1">{{ $role_kor }}
                             모집 {{ $project['has_'.$role_eng] ? '개방하기' : '마감하기' }}</button>
                     </form>
+                    @if($role_eng === 'singer')
+                        @break
+                    @endif
                 @endforeach
             </div>
         </div>
