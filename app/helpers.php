@@ -19,3 +19,18 @@ function getRoleColor ($role) {
     elseif ($role === 'lyricist') return 'success';
     elseif ($role === 'singer') return 'danger';
 }
+
+function getProjectCreatedTime($created_at) {
+    $created_at = strtotime($created_at);
+    $now = strtotime('Now');
+    $gap = $now - $created_at;
+    if ($gap < 60) {
+        return $gap.'초 전';
+    } elseif ($gap < 3600) {
+        return round($gap/60).'분 전';
+    } elseif ($gap < 86400) {
+        return round($gap/3600).'시간 전';
+    } else {
+        return date('Y-m-d', $created_at);
+    }
+}
