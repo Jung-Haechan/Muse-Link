@@ -28,6 +28,9 @@ class ProjectController extends Controller
 
     public function show($board, Project $project)
     {
+        Project::where('id', $project->id)->update([
+            'views' => $project->views + 1,
+        ]);
         $versions = $project->versions()->listAll(0)->get();
         $replies = $project->replies()->latest()->get();
         $project['lyrics_version'] = Version::find($project->lyrics_version_id);
