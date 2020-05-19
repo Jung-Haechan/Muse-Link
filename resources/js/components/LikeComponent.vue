@@ -1,7 +1,8 @@
 <template>
     <button
-        class="btn btn-warning ml-auto"
+        class="btn ml-auto"
         @click="like"
+        :class="{ 'btn-warning' : !alreadyLikeV, 'btn-success' : alreadyLikeV }"
     >
         <img :src="iconDir" alt="" style="width: 1.5rem;">
         <span>{{ this.likeNumber }}</span>
@@ -13,28 +14,29 @@
         mounted() {
             console.log('Component mounted.')
         },
-        props: ['iconDir', 'projectId', 'isLoggedIn'],
+        props: {
+            iconDir: String,
+            projectId: Number,
+            isLoggedIn: Boolean,
+            likes: Number,
+            alreadyLike: Boolean,
+        },
         created() {
-            axios.get('/project/'+this.projectId+'/like').then(res => {
-                this.likeNumber = res.data.like_number;
-                this.alreadyLike = res.data.already_like;
-            }).catch(
 
-            );
         },
         data() {
             return {
-                likeNumber: 0,
-                alreadyLike: null,
+                likeNumber: JSON.parse(this.likes),
+                alreadyLikeV: JSON.parse(this.alreadyLike),
             }
         },
         methods: {
             like() {
-                if(!this.alreadyLike) {
+                if(this.alreadyLikeV===false) {
                     if(this.isLoggedIn) {
                         axios.post('/project/'+this.projectId+'/like');
                         this.likeNumber = this.likeNumber + 1;
-                        this.alreadyLike = 1;
+                        this.alreadyLikeV = true;
                     }
                     else {
                         alert('로그인 후 이용 가능합니다.');

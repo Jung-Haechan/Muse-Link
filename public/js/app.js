@@ -1918,32 +1918,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
   },
-  props: ['iconDir', 'projectId', 'isLoggedIn'],
-  created: function created() {
-    var _this = this;
-
-    axios.get('/project/' + this.projectId + '/like').then(function (res) {
-      _this.likeNumber = res.data.like_number;
-      _this.alreadyLike = res.data.already_like;
-    })["catch"]();
+  props: {
+    iconDir: String,
+    projectId: Number,
+    isLoggedIn: Boolean,
+    likes: Number,
+    alreadyLike: Boolean
   },
+  created: function created() {},
   data: function data() {
     return {
-      likeNumber: 0,
-      alreadyLike: null
+      likeNumber: JSON.parse(this.likes),
+      alreadyLikeV: JSON.parse(this.alreadyLike)
     };
   },
   methods: {
     like: function like() {
-      if (!this.alreadyLike) {
+      if (this.alreadyLikeV === false) {
         if (this.isLoggedIn) {
           axios.post('/project/' + this.projectId + '/like');
           this.likeNumber = this.likeNumber + 1;
-          this.alreadyLike = 1;
+          this.alreadyLikeV = true;
         } else {
           alert('로그인 후 이용 가능합니다.');
         }
@@ -37602,7 +37602,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "button",
-    { staticClass: "btn btn-warning ml-auto", on: { click: _vm.like } },
+    {
+      staticClass: "btn ml-auto",
+      class: {
+        "btn-warning": !_vm.alreadyLikeV,
+        "btn-success": _vm.alreadyLikeV
+      },
+      on: { click: _vm.like }
+    },
     [
       _c("img", {
         staticStyle: { width: "1.5rem" },

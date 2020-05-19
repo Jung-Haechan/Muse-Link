@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collaborator;
+use App\Models\Like;
 use App\Models\Project;
 use App\Models\Version;
 use App\Traits\AuthTrait;
@@ -33,6 +34,8 @@ class ProjectController extends Controller
         ]);
         $versions = $project->versions()->listAll(0)->get();
         $replies = $project->replies()->latest()->get();
+        $project['likes'] = $project->likes()->count();
+        $project['already_like'] = $project->likes()->where('user_id', Auth::id())->first() != NULL;
         $project['lyrics_version'] = Version::find($project->lyrics_version_id);
         $project['audio_version'] = Version::find($project->audio_version_id);
         $collaboratorStatus = [];
