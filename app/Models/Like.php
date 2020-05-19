@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Like extends Model
 {
     use SoftDeletes;
+
+    protected $fillable = [
+        'user_id', 'project_id', 'post_id', 'lecture_id'
+    ];
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function project() {
+        return $this->belongsTo('App\Models\Project');
+    }
 }

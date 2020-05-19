@@ -29,6 +29,10 @@ class Project extends Model
         return $this->hasMany('App\Models\Reply');
     }
 
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
+
     public function scopeListAll($query, $open_range, $board) {
         if ($board === 'collaboration') {
             return $query->where('is_completed', false)->where('is_opened', $open_range)->latest();

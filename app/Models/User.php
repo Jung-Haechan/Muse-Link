@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Reply');
     }
 
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
+
     public function scopeListAll($query, $board) {
         if ($board === 'producer') {
             return $query->where('is_composer', true)->orWhere('is_lyricist', true)->orWhere('is_editor', true)->latest();

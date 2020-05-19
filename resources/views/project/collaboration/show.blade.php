@@ -29,7 +29,9 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="project-describe-bg card bg-secondary" style="overflow-y: auto;">
+                    <h2>{{ $project->title }}</h2>
+                    <div>조회수: {{ $project->views }}</div>
+                    <div class="mt-3 project-describe-bg card bg-secondary" style="overflow-y: auto;">
                         <div class="project-describe card-body bg-secondary text-light">
                             {{ $project->description }}
                         </div>
@@ -46,34 +48,42 @@
                                             <input type="hidden" name="role" value="{{ $role_eng }}">
                                             <button
                                                 type="{{ $collaboratorStatus[$role_eng] === NULL ? 'submit' : NULL }}"
-                                                class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
+                                                class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
                                                 {{ $role_kor }} 신청
                                             </button>
                                         </form>
                                     @elseif($collaboratorStatus[$role_eng] === 0)
                                         <a href="#"
-                                           class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
+                                           class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
                                             {{ $role_kor }} 신청 취소
                                         </a>
                                     @elseif($collaboratorStatus[$role_eng] === 1)
                                         <a href="{{ route('project.version.create', [$project->id, $role_eng]) }}"
-                                           class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
+                                           class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
                                             {{ $role_kor }} 등록
                                         </a>
                                     @else
                                         <a href="#"
-                                           class="btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light disabled"
+                                           class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light disabled"
                                            disabled="true">
                                             {{ $role_kor }} 신청 거부당함
                                         </a>
                                     @endif
                                 </div>
+                                @if($role_eng === 'singer')
+                                    @break
+                                @endif
                             @endforeach
                             @inject('AuthTrait', 'App\Traits\TraitsForView\AuthTraitForView')
                             @if($AuthTrait->isProjectAdmin(Auth::user(), $project))
                                 <a href="{{ route('project.collaborator.index', $project->id) }}"
-                                   class="btn btn-outline-dark bg-light font-weight-bold" style="">참여자 관리</a>
+                                   class="btn btn-outline-dark bg-light font-weight-bold">참여자 관리</a>
                             @endif
+                            <like
+                                icon-dir="{{ asset('storage/icon/like.png') }}"
+                                project-id="{{ $project->id }}"
+                                is-logged-in="{{ Auth::check() }}"
+                            ></like>
                         </div>
                     </div>
                 </div>

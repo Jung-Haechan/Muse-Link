@@ -42,6 +42,10 @@ Route::prefix('project')->name('project.')->group(function () {
             Route::put('/{collaborator}', 'CollaboratorController@update')->name('update');
             Route::delete('/{collaborator}', 'CollaboratorController@delete')->name('delete');
         });
+        Route::prefix('/like')->group(function() {
+           Route::get('/', 'LikeController@show');
+           Route::post('/', 'LikeController@store');
+        });
     });
 
     Route::get('/create', 'ProjectController@create')->name('create');
