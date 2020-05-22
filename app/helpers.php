@@ -34,3 +34,11 @@ function getProjectCreatedTime($created_at) {
         return date('Y-m-d', $created_at);
     }
 }
+
+function isAdmin($user) {
+    return $user !== NULL && $user->id === 1;
+}
+
+function isProjectAdmin($user, $project) {
+    return $user !== NULL && (isAdmin($user) || $project->user_id === $user->id);
+}

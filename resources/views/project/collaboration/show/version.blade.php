@@ -1,6 +1,17 @@
 <div class="accordion bg-secondary p-3 mt-3" id="projectTree">
     @forelse($versions as $version)
         <div class="card">
+            @if(isProjectAdmin(Auth::user(), $project))
+                <div class="text-right bg-light pr-1">
+                    <form action="{{ route('project.version.delete', [$project->id, $version->id]) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn" style="font-size: 0.7rem;">
+                            삭제
+                        </button>
+                    </form>
+                </div>
+            @endif
             <form action="{{ route('project.update_face', $project->id) }}" method="post">
                 @csrf
                 @method('put')
@@ -21,21 +32,26 @@
                                 <div>
                                     {{ $version->user->name }}
                                 </div>
-                                <div class="ml-auto">
-                                    <input type="hidden" name="role"
-                                           value="{{ $version->role }}">
-                                    <input type="hidden" name="version_id"
-                                           value="{{ $version->id }}">
-                                    <button type="submit" class="btn btn-outline-dark btn-sm
-                                                                @if($project->audio_version_id === $version->id)bg-dark text-light disabled"
-                                            style="cursor:auto;" disabled> 대표 음악
-                                        @elseif($project->lyrics_version_id === $version->id)bg-dark
-                                        text-light disabled" style="cursor:auto;" disabled> 대표 가사
-                                        @else "> 대표 @if($version->role === 'lyricist') 가사로 @else
-                                            음악으로 @endif 설정
-                                        @endif
-                                    </button>
-                                </div>
+                                @if(isProjectAdmin(Auth::user(), $project))
+                                    <div class="ml-auto">
+                                        <input type="hidden" name="role"
+                                               value="{{ $version->role }}">
+                                        <input type="hidden" name="version_id"
+                                               value="{{ $version->id }}">
+                                        <button type="submit" class="btn btn-outline-dark btn-sm
+                                        @if($project->audio_version_id === $version->id)bg-dark text-light disabled"
+                                                style="cursor:auto;" disabled> 대표 음악
+                                            @elseif($project->lyrics_version_id === $version->id)
+                                                bg-dark text-light disabled" style="cursor:auto;" disabled> 대표 가사
+                                            @else "> 대표
+                                            @if($version->role === 'lyricist') 가사로
+                                            @else 음악으로
+                                            @endif
+                                            설정
+                                            @endif
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </h2>
@@ -51,8 +67,7 @@
                                style="margin-bottom: 0rem;">
                             <thead>
                             <tr>
-                                <th scope="col">AudioFile</th>
-
+                                <th scope="col" colspan="2">AudioFile</th>
                             </tr>
                             </thead>
                             <tbody>

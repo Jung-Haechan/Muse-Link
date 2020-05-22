@@ -108,6 +108,10 @@ class ProjectController extends Controller
     }
 
     public function update_face(Request $request, Project $project) {
+        if(!isProjectAdmin(Auth::user(), $project)) {
+            return redirect()->back()
+                ->with('alert', '권한이 없습니다.');
+        }
         $type = $request->role === 'lyricist' ? 'lyrics_version_id' : 'audio_version_id';
         Project::where('id', $project->id)->update([
             $type => $request->version_id,
@@ -125,7 +129,7 @@ class ProjectController extends Controller
             ->with('alert', config('translate.role.'.$request->role).' 신청을 '.$action.'했습니다.');
     }
 
-    public function destroy(Project $project)
+    public function delete(Project $project)
     {
         $project->delete();
         return redirect()->route('project.index', 'collaboration')->with('alert', '삭제가 완료되었습니다.');

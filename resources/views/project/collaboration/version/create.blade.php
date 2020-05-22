@@ -32,8 +32,8 @@
                 </div>
                 @if ($role === 'composer' || $role === 'editor')
                     <div class="form-group">
-                        <label for="project_audio_file">MR 파일</label>
-                        <input type="file" name="guide_audio_file" id="project_audio_file"
+                        <label for="mr_audio_file">MR 파일</label>
+                        <input type="file" name="mr_audio_file" id="mr_audio_file"
                                class="form-control-file btn btn-outline-light btn-sm">
                     </div>
                 @endif

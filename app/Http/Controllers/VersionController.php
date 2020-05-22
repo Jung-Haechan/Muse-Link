@@ -43,7 +43,7 @@ class VersionController extends Controller
                 }
                 if ($request->hasFile('mr_audio_file')) {
                     if (getFileType($request->file('mr_audio_file')) === 'audio') {
-                        $data['project_audio_file'] = $request->file('mr_audio_file')->store('public/audio/mr');
+                        $data['mr_audio_file'] = $request->file('mr_audio_file')->store('public/audio/mr');
                     } else {
                         return redirect()->back()
                             ->with('alert', 'MR 오디오 파일 형식이 잘못되었습니다.');
@@ -84,5 +84,21 @@ class VersionController extends Controller
 
         Version::create($data);
         return redirect()->route('project.show', ['collaboration', $project->id]);
+    }
+
+    public function delete(Project $project, Version $version)
+    {
+        if($project->audio_version_id === $version->id) {
+            $project->update([
+                'audio_version_id' => NULL,
+            ]);
+        }
+        if($project->lyrics_version_id === $version->id) {
+            $project->update([
+                'lyrics_version_id' => NULL,
+            ]);
+        }
+        $version->delete();
+        return redirect()->back()->with('alert', '버전이 삭제되었습니다.');
     }
 }
