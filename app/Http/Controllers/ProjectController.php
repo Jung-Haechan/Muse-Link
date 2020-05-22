@@ -42,7 +42,7 @@ class ProjectController extends Controller
         foreach (config('translate.role') as $role_eng => $role_kor) {
             $collaboratorStatus[$role_eng] = $this->isCollaborator(Auth::user(), $project, $role_eng);
         }
-        return view('project.' . $board . '.show', [
+        return view('project.' . $board . '.show.app', [
             'project' => $project,
             'versions' => $versions,
             'replies' => $replies,
@@ -97,7 +97,7 @@ class ProjectController extends Controller
             $type => $request->version_id,
         ]);
         return redirect()->back()
-            ->with('alert', $request->version_id.'해당 버전이 대표로 설정되었습니다.');
+            ->with('alert', '해당 버전이 대표로 설정되었습니다.');
     }
 
     public function update_status(Request $request, Project $project) {
