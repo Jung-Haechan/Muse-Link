@@ -28,7 +28,7 @@ Route::prefix('project')->name('project.')->group(function () {
             Route::post('/{role}', 'VersionController@store')->name('store');
             Route::get('/{version}/edit', 'VersionController@edit')->name('edit');
             Route::put('/{version}', 'VersionController@update')->name('update');
-            Route::delete('/{version}', 'VersionController@update')->name('delete');
+            Route::delete('/{version}', 'VersionController@delete')->name('delete');
         });
         Route::prefix('/reply')->name('reply.')->group(function () {
             Route::post('/', 'ReplyController@store')->name('store');
@@ -56,7 +56,7 @@ Route::prefix('project')->name('project.')->group(function () {
     Route::put('/{project}', 'ProjectController@update')->name('update');
     Route::put('/{project}/status', 'ProjectController@update_status')->name('update_status');
     Route::put('/{project}/face', 'ProjectController@update_face')->name('update_face');
-    Route::delete('/{project}', 'ProjectController@delete')->name('delete');
+    Route::delete('/{project}', 'ProjectController@destroy')->name('delete');
 
 });
 

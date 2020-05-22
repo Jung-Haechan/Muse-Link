@@ -29,7 +29,7 @@ class ProjectController extends Controller
 
     public function show($board, Project $project)
     {
-        Project::where('id', $project->id)->update([
+        $project->update([
             'views' => $project->views + 1,
         ]);
         $versions = $project->versions()->listAll(0)->get();
@@ -81,14 +81,30 @@ class ProjectController extends Controller
         return redirect()->route('project.index', 'collaboration');
     }
 
-    public function edit()
+    public function edit(Project $project)
     {
-
+        return view('project.edit', [
+            'project' => $project,
+        ]);
     }
 
-    public function update()
+    public function update(Project $project, Request $request)
     {
-
+        $data = $request->validate([
+            'title' => 'required|max:255',
+            'genre' => 'nullable|max:20',
+            'description' => 'required',
+        ]);
+        if ($request->hasFile('cover_img_file')) {
+            if (getFileType($request->file('cover_img_file')) === 'image') {
+                $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
+            } else {
+                return redirect()->back()
+                    ->with('alert', '이미지 파일 형식이 잘못되었습니다.');
+            }
+        }
+        $project->update($data);
+        return redirect()->route('project.show', ['collaboration', $project->id]);
     }
 
     public function update_face(Request $request, Project $project) {
@@ -109,8 +125,9 @@ class ProjectController extends Controller
             ->with('alert', config('translate.role.'.$request->role).' 신청을 '.$action.'했습니다.');
     }
 
-    public function destroy()
+    public function destroy(Project $project)
     {
-
+        $project->delete();
+        return redirect()->route('project.index', 'collaboration')->with('alert', '삭제가 완료되었습니다.');
     }
 }

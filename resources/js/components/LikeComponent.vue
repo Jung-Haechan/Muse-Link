@@ -33,7 +33,7 @@
         methods: {
             like() {
                 if(this.alreadyLikeV===false) {
-                    if(this.isLoggedIn) {
+                    if(this.isLoggedIn===true) {
                         axios.post('/project/'+this.projectId+'/like');
                         this.likeNumber = this.likeNumber + 1;
                         this.alreadyLikeV = true;
