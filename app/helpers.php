@@ -1,7 +1,13 @@
 <?php
 
 function getFile($file) {
-    return 'storage/'.explode('/', $file, 2)[1];
+    if ($file === NULL) {
+        return asset('storage/base/base_logo.jpg');
+    } elseif (strpos($file, 'http') !== false) {
+        return $file;
+    } else {
+        return asset('storage/'.explode('/', $file, 2)[1]);
+    }
 }
 
 function getFileType($file) {

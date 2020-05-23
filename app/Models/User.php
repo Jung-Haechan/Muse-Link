@@ -39,6 +39,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function exhibits() {
+        return $this->hasMany('App\Models\Exhibit');
+    }
+
+
     public function projects() {
         return $this->hasMany('App\Models\Project');
     }
@@ -47,7 +52,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Version');
     }
 
-    public function collaborator() {
+    public function collaborators() {
         return $this->hasMany('App\Models\Collaborator');
     }
 

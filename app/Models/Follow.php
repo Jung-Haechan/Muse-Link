@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Follow extends Model
 {
     use SoftDeletes;
+
+    protected $fillable = [
+        'user_id', 'followee_id'
+    ];
 }

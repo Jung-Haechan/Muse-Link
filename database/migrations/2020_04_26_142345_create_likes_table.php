@@ -18,7 +18,7 @@ class CreateLikesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('post_id')->nullable();
-            $table->unsignedBigInteger('lecture_id')->nullable();
+            $table->unsignedBigInteger('lecture_category_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -28,7 +28,7 @@ class CreateLikesTable extends Migration
                 ->references('id')->on('projects');
             $table->foreign('post_id')
                 ->references('id')->on('posts');
-            $table->foreign('lecture_id')
+            $table->foreign('lecture_category_id')
                 ->references('id')->on('lectures');
         });
     }

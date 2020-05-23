@@ -1934,13 +1934,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       likeNumber: JSON.parse(this.likes),
-      alreadyLikeV: JSON.parse(this.alreadyLike)
+      alreadyLikeV: JSON.parse(this.alreadyLike),
+      isLoggedInV: JSON.parse(this.isLoggedIn)
     };
   },
   methods: {
     like: function like() {
       if (this.alreadyLikeV === false) {
-        if (this.isLoggedIn === true) {
+        if (this.isLoggedInV === true) {
           axios.post('/project/' + this.projectId + '/like');
           this.likeNumber = this.likeNumber + 1;
           this.alreadyLikeV = true;

@@ -5,15 +5,12 @@
         <h3 class="section-subtitle font-weight-bold mb-3" style="color: #d2ab39;">당신의 미완성 프로젝트를 공유하세요!</h3>
     </div>
     <div class="section-title text-center text-light display-3">
-        <a href="{{ route('project.index', 'collaboration') }}"
-           class="text-light text-decoration-none">Collaboration</a>
+        <a href="{{ route('project.index', 'completed') }}"
+           class="text-light text-decoration-none">Masterpiece</a>
     </div>
-    <a href="{{ route('project.create') }}" class="btn btn-outline-light mt-3" style="font-size: 1.2rem">프로젝트 만들기</a>
 @endsection
 
 @section('content')
-
-
     <div class="container">
         <div class="col-md-11 p-5 mx-auto"
              style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
@@ -25,7 +22,7 @@
                                 <div class="row text-dark bg-dark" style="height: 9rem;">
 
                                     <img class="card-img-top mb-3 mx-auto"
-                                         src="{{ $project->cover_img_file ? asset(getFile($project->cover_img_file)) : asset('storage/base/base_logo.jpg') }}"
+                                         src="{{ $project->cover_img_file ? getFile($project->cover_img_file) : asset('storage/base/base_logo.jpg') }}"
                                          style="width:9rem; height:9rem; object-fit: cover;" alt="Card image cap">
 
                                 </div>

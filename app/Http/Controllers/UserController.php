@@ -23,8 +23,9 @@ class UserController extends Controller
             foreach(config('translate.role') as $role_eng => $role_korean) {
                 $user[$role_eng.'_num'] = Collaborator::where('user_id', Auth::id())->where('role', $role_eng)->count();
             }
+
         }
-        return view('user.index', [
+        return view('user.'.$board.'.index', [
             'users' => $users,
             'board' => $board,
         ]);

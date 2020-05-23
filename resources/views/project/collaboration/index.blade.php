@@ -25,7 +25,7 @@
                                 <div class="row text-dark bg-dark" style="height: 9rem;">
 
                                     <img class="card-img-top mb-3 mx-auto"
-                                         src="{{ $project->cover_img_file ? asset(getFile($project->cover_img_file)) : asset('storage/base/base_logo.jpg') }}"
+                                         src="{{ getFile($project->cover_img_file) }}"
                                          style="width:9rem; height:9rem; object-fit: cover;" alt="Card image cap">
 
                                 </div>
