@@ -23,11 +23,9 @@ class Version extends Model
     }
 
     public function scopeListAll($query, $open_range) {
-        $count = $query->where('is_opened', $open_range)
-            ->orderByDesc('id')->count();
+        $count = $query->orderByDesc('id')->count();
         DB::statement(DB::raw('set @rownum:=1+'.$count));
-        return $query->where('is_opened', $open_range)
-            ->selectRaw('*, @rownum:=@rownum-1 as rownum')
+        return $query->selectRaw('*, @rownum:=@rownum-1 as rownum')
             ->orderByDesc('id');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collaborator;
+use App\Models\Project;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,12 @@ class UserController extends Controller
      */
     public function index($board)
     {
-        $users = User::listAll($board)->paginate(10);
+        $users = User::listAll($board)->paginate(20);
         foreach($users as $user) {
             foreach(config('translate.role') as $role_eng => $role_korean) {
-                $user[$role_eng.'_num'] = Collaborator::where('user_id', Auth::id())->where('role', $role_eng)->count();
+                $user[$role_eng.'_num'] = Collaborator::where('user_id', $user->id)->where('role', $role_eng)->count();
             }
-
+            $user['my_projects_num'] = Project::where('user_id', $user->id)->count();
         }
         return view('user.'.$board.'.index', [
             'users' => $users,

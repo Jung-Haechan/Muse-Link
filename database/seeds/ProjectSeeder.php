@@ -28,9 +28,11 @@ class ProjectSeeder extends Seeder
         factory(Version::class, 500)->create();
         foreach($projects as $project) {
             $audio_versions = $project->versions()
-                ->where('role', 'composer')
-                ->orWhere('role', 'editor')
-                ->orWhere('role', 'lyricist');
+                ->where(function($query) {
+                    $query->where('role', 'composer')
+                        ->orWhere('role', 'editor')
+                        ->orWhere('role', 'lyricist');
+                });
             $lyrics_versions = $project->versions()
                 ->where('role', 'lyricist');
             $has_audio_version = $audio_versions->first();
