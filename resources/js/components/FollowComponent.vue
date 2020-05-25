@@ -30,24 +30,18 @@
         },
         methods: {
             follow() {
-                if(this.alreadyFollowedV===false) {
-                    if(this.isLoggedInV===true) {
-                        axios.post('/user/'+this.followeeIdV+'/follow');
+                if (this.isLoggedInV == true) {
+                    if (this.alreadyFollowedV === false) {
+                        axios.post('/user/' + this.followeeIdV + '/follow');
                         this.alreadyFollowedV = true;
-                    }
-                    else {
-                        alert('로그인 후 이용 가능합니다.');
-                    }
-                }
-                else {
-                    if(this.isLoggedInV===true) {
-                        axios.delete('/user/'+this.followeeIdV+'/follow');
+                    } else {
+                        axios.delete('/user/' + this.followeeIdV + '/follow');
                         this.alreadyFollowedV = false;
                     }
-                    else {
-                        alert('로그인 후 이용 가능합니다.');
-                    }
+                } else {
+                    alert('로그인 후 이용 가능합니다.');
                 }
+
             }
         }
     }

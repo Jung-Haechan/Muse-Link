@@ -16,19 +16,19 @@
         },
         props: {
             iconDir: String,
-            projectId: Number,
-            isLoggedIn: Boolean,
-            likes: Number,
-            alreadyLike: Boolean,
+            projectId: String,
+            isLoggedIn: String,
+            likes: String,
+            alreadyLike: String,
         },
         created() {
 
         },
         data() {
             return {
-                likeNumber: JSON.parse(this.likes),
-                alreadyLikeV: JSON.parse(this.alreadyLike),
-                isLoggedInV: JSON.parse(this.isLoggedIn)
+                likeNumber: Number(this.likes),
+                alreadyLikeV: Boolean(this.alreadyLike),
+                isLoggedInV: Boolean(this.isLoggedIn)
             }
         },
         methods: {
