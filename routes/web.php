@@ -79,6 +79,14 @@ Route::prefix('post')->name('post.')->group(function () {
 });
 
 Route::prefix('user')->name('user.')->group(function () {
+
+    Route::prefix('/{user}')->group(function() {
+        Route::prefix('/follow')->name('follow')->group(function() {
+            Route::post('/', 'FollowController@store')->name('store');
+            Route::delete('/', 'FollowController@delete')->name('delete');
+        });
+    });
+
     Route::get('/{board}', 'UserController@index')->name('index');
     Route::get('/{user}/edit', 'UserController@edit')->name('edit');
     Route::get('/{board}/{user}', 'UserController@show')->name('show');

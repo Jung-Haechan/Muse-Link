@@ -43,6 +43,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Exhibit');
     }
 
+    public function face_exhibit() {
+        return $this->hasOne('App\Models\Exhibit', 'id', 'face_exhibit_id');
+    }
 
     public function projects() {
         return $this->hasMany('App\Models\Project');
@@ -62,6 +65,10 @@ class User extends Authenticatable
 
     public function likes() {
         return $this->hasMany('App\Models\Like');
+    }
+
+    public function follows() {
+        return $this->hasMany('App\Models\Follow');
     }
 
     public function scopeListAll($query, $board) {

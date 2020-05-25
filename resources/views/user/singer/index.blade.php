@@ -8,7 +8,8 @@
         </h3>
     </div>
     <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="{{ route('user.index', 'producer') }}"
+        <div class="display-1 section-title">
+            <a href="{{ route('user.index', 'singer') }}"
                                                 class="text-light text-decoration-none">Singers</a>
         </div>
     </h1>

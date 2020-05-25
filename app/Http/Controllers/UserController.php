@@ -57,11 +57,21 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show($board, User $user)
     {
-        //
+        $already_followed = Auth::check() ?
+            Auth::user()->follows()->where('followee_id', $user->id)->first() :
+            NULL;
+
+        return view('user.'.$board.'.show.app', [
+            'user' => $user,
+            'board' => $board,
+            'exhibits' => $user->exhibits()->where('board', $board)->get(),
+            'face_exhibit' => $user->face_exhibit()->where('board', $board)->first(),
+            'already_followed' => $already_followed,
+        ]);
     }
 
     /**

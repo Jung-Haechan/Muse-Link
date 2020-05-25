@@ -20,47 +20,50 @@
     <div class="container py-2"
          style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9;">
         @forelse($users as $user)
-            <div class="row p-2 m-2 bg-light">
-                <div class="col-lg-1 px-2">
-                    <img src="{{ asset($user->profile_img) }}" style="width: 4rem" alt="">
-                </div>
-                <div class="col-lg-2 px-2">
-                    @foreach(config('translate.role') as $role_eng => $role_kor)
-                        @if($role_eng === 'singer')
-                            @continue
-                        @endif
-                        @if($user['is_'.$role_eng])
-                            <div class="d-inline text-{{getRoleColor($role_eng)}}">
-                                [{{ $role_kor }}]
+            <a href="{{ route('user.show', ['producer', $user->id]) }}" class="text-dark text-decoration-none">
+                <div class="row p-2 m-2 bg-light">
+                    <div class="col-lg-1 px-2">
+                        <img src="{{ asset($user->profile_img) }}" style="width: 4rem" alt="">
+                    </div>
+                    <div class="col-lg-2 px-2">
+                        @foreach(config('translate.role') as $role_eng => $role_kor)
+                            @if($role_eng === 'singer')
+                                @continue
+                            @endif
+                            @if($user['is_'.$role_eng])
+                                <div class="d-inline text-{{getRoleColor($role_eng)}}">
+                                    [{{ $role_kor }}]
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="col-lg-2">
+                        {{ $user->name }} {{getProjectCreatedTime($user->created_at)}}
+                    </div>
+                    <div class="col-lg-5">
+                        {{ $user->introduce }}
+                    </div>
+                    <div class="col-lg-2">
+                        @foreach(config('translate.role') as $role_eng => $role_kor)
+                            @if($role_eng === 'singer' || $role_eng === 'master')
+                                @continue
+                            @endif
+                            <div>
+                                {{$role_kor}} 참여: {{ $user[$role_eng.'_num'] }}
                             </div>
-                        @endif
-                    @endforeach
-                </div>
-                <div class="col-lg-2">
-                    {{ $user->name }} {{getProjectCreatedTime($user->created_at)}}
-                </div>
-                <div class="col-lg-5">
-                    {{ $user->introduce }}
-                </div>
-                <div class="col-lg-2">
-                    @foreach(config('translate.role') as $role_eng => $role_kor)
-                        @if($role_eng === 'singer' || $role_eng === 'master')
-                            @continue
-                        @endif
+                        @endforeach
                         <div>
-                            {{$role_kor}} 참여: {{ $user[$role_eng.'_num'] }}
+                            개설한 프로젝트: {{ $user['my_projects_num'] }}
                         </div>
-                    @endforeach
-                    <div>
-                        개설한 프로젝트: {{ $user['my_projects_num'] }}
                     </div>
                 </div>
-            </div>
+            </a>
         @empty
         @endforelse
         <div class="m-3">
             {{ $users->links() }}
         </div>
     </div>
+
 
 @endsection
