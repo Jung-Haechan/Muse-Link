@@ -11,7 +11,7 @@ class Exhibit extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'title', 'description', 'audio_file', 'yputube_url', 'cover_img_file', 'lyrics', 'board', 'is_opened'
+        'user_id', 'title', 'description', 'audio_file', 'youtube_url', 'cover_img_file', 'lyrics', 'role', 'is_opened'
     ];
 
     public function user() {

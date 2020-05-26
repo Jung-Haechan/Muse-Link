@@ -74,7 +74,7 @@
                                         <a class="text-decoration-none text-light dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->name}}님</a>
                                         <div class="dropdown-menu">
                                             <a href="{{ route('register') }}" class="dropdown-item">내정보 수정</a>
-                                            <a href="{{ route('register') }}" class="dropdown-item">내 채널</a>
+                                            <a href="{{ route('user.show', ['producer', Auth::id()]) }}" class="dropdown-item">내 채널</a>
                                         </div>
                                     </h5>
                                     <button type="submit" class="btn btn-outline-light mr-3">Logout</button>

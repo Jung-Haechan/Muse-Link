@@ -38,7 +38,8 @@
                         @endforeach
                     </div>
                     <div class="col-lg-2">
-                        {{ $user->name }} {{getProjectCreatedTime($user->created_at)}}
+                        <div>{{ $user->name }}</div>
+                        <div>{{getProjectCreatedTime($user->created_at)}}</div>
                     </div>
                     <div class="col-lg-5">
                         {{ $user->introduce }}

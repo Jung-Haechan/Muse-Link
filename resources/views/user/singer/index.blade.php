@@ -25,11 +25,14 @@
                 <div class="col-lg-1 px-2">
                     <img src="{{ asset($user->profile_img) }}" style="width: 4rem" alt="">
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     {{ $user->name }} {{getProjectCreatedTime($user->created_at)}}
                 </div>
                 <div class="col-lg-5">
                     {{ $user->introduce }}
+                </div>
+                <div class="col-lg-3">
+                    참여한 프로젝트: {{ $user->singer_num }}
                 </div>
             </div>
         @empty

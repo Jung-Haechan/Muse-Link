@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -73,7 +73,8 @@ class UserController extends Controller
             'already_followed' => $already_followed != NULL,
             'opened_projects' => $user->projects,
             'collaborations' => $user->collaborators()->where('role', '!=', 'master')->get(),
-            'followers' => $user->followers,
+            'followers' => $user->followers()->latest()->paginate(5),
+            'followers_number' => $user->followers()->count(),
             'follows' => $user->follows,
         ]);
     }
@@ -96,9 +97,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update_face(Request $request, User $user)
     {
-        //
+        if($user->id !== Auth::id()) {
+            return redirect()->back()
+                ->with('alert', '권한이 없습니다.');
+        }
+        $user->update([
+            'face_exhibit_id' => $request->exhibit_id
+        ]);
+        return redirect()->back()
+            ->with('alert', '해당 작품이 대표로 설정되었습니다.');
     }
 
     /**

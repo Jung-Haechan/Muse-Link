@@ -3,18 +3,4 @@
     <div class="card-body bg-secondary text-light">
         {{ $face_exhibit ? $face_exhibit->description : '대표작 없음' }}
     </div>
-{{--    @if(isProjectAdmin(Auth::user(), $project))--}}
-{{--        <div class="p-3 text-right">--}}
-{{--            <form action="{{ route('project.delete', $project->id) }}" method="post" style="display: inline">--}}
-{{--                @csrf--}}
-{{--                @method('delete')--}}
-{{--                <button class="btn btn-light">--}}
-{{--                    삭제--}}
-{{--                </button>--}}
-{{--            </form>--}}
-{{--            <a href="{{ route('project.edit', $project->id) }}" class="btn btn-light">--}}
-{{--                수정--}}
-{{--            </a>--}}
-{{--        </div>--}}
-{{--    @endif--}}
 </div>

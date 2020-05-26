@@ -1,18 +1,24 @@
 <div class="bg-secondary text-light p-3" style="height: 100%">
-    <div>팔로워 {{ $followers->count() }}명</div>
-            @forelse($followers as $follower)
-                <div class="bg-light p-1 m-1 text-dark">
-                    <span>
-                        <img src="{{ getFile($follower->user->profile_img) }}" alt="" style="width: 3rem;">
-                    </span>
-                    <span class="ml-2">
-                        {{ $follower->user->name }}
-                    </span>
-                </div>
-            @empty
-                <div>
-                    팔로워 없음
-                </div>
-            @endforelse
+    <div>
+        팔로워 {{ $followers_number }}명
+        <span style="float:right">
+            +
+        </span>
+    </div>
+    @forelse($followers as $follower)
+        <a href="{{ route('user.show', ['producer', $follower->user_id]) }}" class="text-decoration-none">
+            <div class="bg-light p-1 my-1 text-dark">
+                <span>
+                    <img src="{{ getFile($follower->user->profile_img) }}" alt="" style="width: 3rem;">
+                </span>
+                <span class="ml-2">
+                    {{ $follower->user->name }}
+                </span>
+            </div>
+        </a>
+    @empty
+        <div>
+            팔로워 없음
         </div>
+    @endforelse
 </div>

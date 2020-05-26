@@ -48,3 +48,7 @@ function isAdmin($user) {
 function isProjectAdmin($user, $project) {
     return $user !== NULL && (isAdmin($user) || $project->user_id === $user->id);
 }
+
+function getYoutubeUrl($url) {
+    return explode('watch?v=', $url)[0].'embed/'.explode('watch?v=', $url)[1];
+}

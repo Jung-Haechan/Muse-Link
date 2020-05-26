@@ -41,5 +41,5 @@
             </div>
         </div>
     </div>
-    {{--    @include('project.collaboration.show.modal')--}}
+        @include('user.producer.show.modal')
 @endsection

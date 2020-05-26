@@ -82,9 +82,16 @@ Route::prefix('post')->name('post.')->group(function () {
 Route::prefix('user')->name('user.')->group(function () {
 
     Route::prefix('/{user}')->group(function() {
-        Route::prefix('/follow')->name('follow')->group(function() {
+        Route::prefix('/follow')->name('follow.')->group(function() {
             Route::post('/', 'FollowController@store')->name('store');
             Route::delete('/', 'FollowController@delete')->name('delete');
+        });
+        Route::prefix('/{board}/exhibit')->name('exhibit.')->group(function() {
+            Route::get('/create', 'ExhibitController@create')->name('create');
+            Route::post('/', 'ExhibitController@store')->name('store');
+            Route::get('/{exhibit}/edit', 'ExhibitController@edit')->name('edit');
+            Route::put('/{exhibit}', 'ExhibitController@update')->name('update');
+            Route::delete('/{exhibit}', 'ExhibitController@delete')->name('delete');
         });
     });
 
@@ -92,6 +99,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/{user}/edit', 'UserController@edit')->name('edit');
     Route::get('/{board}/{user}', 'UserController@show')->name('show');
     Route::put('/{user}', 'UserController@update')->name('update');
+    Route::put('/{user}/face', 'UserController@update_face')->name('update_face');
     Route::delete('/{user}', 'PostController@delete')->name('delete');
 });
 
