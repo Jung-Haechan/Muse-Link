@@ -27,8 +27,8 @@
         data() {
             return {
                 likeNumber: Number(this.likes),
-                alreadyLikeV: Boolean(this.alreadyLike),
-                isLoggedInV: Boolean(this.isLoggedIn)
+                alreadyLikeV: this.alreadyLike === 'true',
+                isLoggedInV: this.isLoggedIn === 'true',
             }
         },
         methods: {

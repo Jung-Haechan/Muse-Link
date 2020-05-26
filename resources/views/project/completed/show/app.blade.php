@@ -11,17 +11,15 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    @include('project.collaboration.show.face')
+                    @include('project.completed.show.face')
                 </div>
                 <div class="col-md-6">
-                    @include('project.collaboration.show.info')
-                    @include('project.collaboration.show.button')
+                    @include('project.completed.show.info')
+                    @include('project.completed.show.button')
                 </div>
             </div>
-            @include('project.collaboration.show.version')
             <hr>
-            @include('project.collaboration.show.reply')
+            @include('project.completed.show.reply')
         </div>
     </div>
-    @include('project.collaboration.show.modal')
 @endsection

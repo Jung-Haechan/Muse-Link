@@ -25,7 +25,7 @@ $factory->define(Exhibit::class, function (Faker $faker) {
         'youtube_url' => $youtube_url,
         'cover_img_file' => 'https://i.picsum.photos/id/'.rand(0, 1000).'/300/300.jpg',
         'lyrics' => $faker->realText(),
-        'board' => $faker->randomElement(['producer', 'singer']),
+        'role' => $faker->randomElement(['composer', 'editor', 'lyricist', 'singer']),
         'is_opened' => $faker->numberBetween(0, 3),
         'created_at' => $faker->dateTimeBetween('-10 months', 'now', 'asia/Seoul'),
         'updated_at' => now('asia/Seoul'),

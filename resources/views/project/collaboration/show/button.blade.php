@@ -38,13 +38,11 @@
     @inject('AuthTrait', 'App\Traits\TraitsForView\AuthTraitForView')
     @if($AuthTrait->isProjectAdmin(Auth::user(), $project))
         <a href="{{ route('project.collaborator.index', $project->id) }}"
-           class="btn btn-outline-dark bg-light font-weight-bold">참여자 관리</a>
+           class="btn mr-2 btn-outline-dark bg-light font-weight-bold">참여자 관리</a>
+        <form action="{{ route('project.update_complete', $project->id) }}" method="post">
+            @csrf
+            @method('put')
+            <button type="submit" class="btn btn-outline-warning bg-light font-weight-bold">완료</button>
+        </form>
     @endif
-    <like
-        icon-dir="{{ asset('storage/icon/like.png') }}"
-        project-id="{{ $project->id }}"
-        is-logged-in="{{ json_encode(Auth::check()) }}"
-        likes="{{ json_encode($project->likes) }}"
-        already-like="{{ json_encode($project->already_like) }}"
-    ></like>
 </div>

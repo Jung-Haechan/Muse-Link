@@ -1,9 +1,9 @@
-<div class="accordion bg-secondary p-3 mt-3" id="projectTree">
+<div class="accordion bg-secondary p-3" id="projectTree">
     @forelse($exhibits as $exhibit)
         <div class="card">
             @if($user->id === Auth::id())
                 <div class="text-right bg-light pr-1">
-                    <form action="{{ route('project.version.delete', [$project->id, $version->id]) }}" method="post">
+                    <form action="" method="post">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn" style="font-size: 0.7rem;">
@@ -12,43 +12,33 @@
                     </form>
                 </div>
             @endif
-            <form action="{{ route('project.update_face', $project->id) }}" method="post">
+            <form action="" method="post">
                 @csrf
                 @method('put')
-                <div class="card-header" id="heading{{$version->rownum}}">
+                <div class="card-header" id="heading{{$exhibit->id}}">
                     <h2 class="mb-0">
                         <div
-                            class="text-decoration-none text-left text-{{ getRoleColor($version->role) }}"
+                            class="text-decoration-none text-left text-{{ getRoleColor($exhibit->role) }}"
                             type="button"
-                            data-toggle="{{ $version->role === 'lyricist' ? 'modal' : 'collapse' }}"
-                            data-target="#{{ $version->role === 'lyricist' ? 'lyricsModal'.$version->rownum : 'collapse'.$version->rownum }}"
-                            aria-expanded="true" aria-controls="collapse{{$version->rownum}}">
-                            <div style="font-size: 1.1rem;">#{{ $version->rownum }}
-                                [{{ config('translate.role.'.$version->role) }}
-                                ] {{ $version->title }}</div>
+                            data-toggle="{{ $exhibit->role === 'lyricist' ? 'modal' : 'collapse' }}"
+                            data-target="#{{ $exhibit->role === 'lyricist' ? 'lyricsModal'.$exhibit->id : 'collapse'.$exhibit->id }}"
+                            aria-expanded="true" aria-controls="collapse{{$exhibit->id}}">
+                            <div style="font-size: 1.1rem;">#{{ $exhibit->id }}
+                                [{{ config('translate.role.'.$exhibit->role) }}
+                                ] {{ $exhibit->title }}</div>
                         </div>
                         <div class="container pt-2" style="font-size: 0.8rem;">
                             <div class="row">
                                 <div>
-                                    {{ $version->user->name }}
+                                    {{ $exhibit->user->name }}
                                 </div>
-                                @if(isProjectAdmin(Auth::user(), $project))
+                                @if($user->id === Auth::id())
                                     <div class="ml-auto">
-                                        <input type="hidden" name="role"
-                                               value="{{ $version->role }}">
                                         <input type="hidden" name="version_id"
-                                               value="{{ $version->id }}">
-                                        <button type="submit" class="btn btn-outline-dark btn-sm
-                                        @if($project->audio_version_id === $version->id)bg-dark text-light disabled"
-                                                style="cursor:auto;" disabled> 대표 음악
-                                            @elseif($project->lyrics_version_id === $version->id)
-                                                bg-dark text-light disabled" style="cursor:auto;" disabled> 대표 가사
-                                            @else "> 대표
-                                            @if($version->role === 'lyricist') 가사로
-                                            @else 음악으로
-                                            @endif
-                                            설정
-                                            @endif
+                                               value="{{ $exhibit->id }}">
+                                        <button type="submit"
+                                                class="btn btn-outline-dark btn-sm bg-dark text-light disabled"
+                                                style="cursor:auto;" disabled>
                                         </button>
                                     </div>
                                 @endif
@@ -57,33 +47,23 @@
                     </h2>
                 </div>
             </form>
-            @if($version->role !== 'lyricist')
-                <div id="collapse{{$version->rownum}}" class="collapse show "
-                     aria-labelledby="heading{{$version->rownum}}"
+            @if($exhibit->role !== 'lyricist')
+                <div id="collapse{{ $exhibit->id }}" class="collapse show"
+                     aria-labelledby="heading{{$exhibit->id}}"
                      data-parent="#projectTree">
                     <div class="card-body">
-                        {{ $version->description }}
-                        <table class="table table-hover table-sm mt-1 text-center"
-                               style="margin-bottom: 0rem;">
-                            <thead>
-                            <tr>
-                                <th scope="col" colspan="2">AudioFile</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                @if($version->project_audio_file)
-                                    <td>메인 파일: <a href="#">{{ $version->title }} 메인.mp3</a>
-                                    </td> @endif
-                                @if($version->mr_audio_file)
-                                    <td>MR 파일: <a href="#">{{ $version->title }} MR.mp3</a>
-                                    </td> @endif
-                                @if($version->voice_audio_file)
-                                    <td>목소리 파일: <a href="#">{{ $version->title }}.mp3</a>
-                                    </td> @endif
-                            </tr>
-                            </tbody>
-                        </table>
+                        {{ $exhibit->description }}
+                    </div>
+
+                    <div class="text-center mb-3">
+                        @if($exhibit->audio_file)
+                            <audio controls="controls">
+                                <source
+                                    src="{{ getFile($exhibit->audio_file) }}">
+                            </audio>
+                        @elseif($exhibit->youtube_url)
+                            <a target="_blank" href="{{ $exhibit->youtube_url }}">{{ $exhibit->youtube_url }}</a>
+                        @endif
                     </div>
                 </div>
             @endif

@@ -1931,26 +1931,22 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       followeeIdV: Number(this.followeeId),
-      alreadyFollowedV: Boolean(this.alreadyFollowed),
-      isLoggedInV: Boolean(this.isLoggedIn)
+      alreadyFollowedV: this.alreadyFollowed === 'true',
+      isLoggedInV: this.isLoggedIn === 'true'
     };
   },
   methods: {
     follow: function follow() {
-      if (this.alreadyFollowedV === false) {
-        if (this.isLoggedInV === true) {
+      if (this.isLoggedInV == true) {
+        if (this.alreadyFollowedV === false) {
           axios.post('/user/' + this.followeeIdV + '/follow');
           this.alreadyFollowedV = true;
         } else {
-          alert('로그인 후 이용 가능합니다.');
-        }
-      } else {
-        if (this.isLoggedInV === true) {
           axios["delete"]('/user/' + this.followeeIdV + '/follow');
           this.alreadyFollowedV = false;
-        } else {
-          alert('로그인 후 이용 가능합니다.');
         }
+      } else {
+        alert('로그인 후 이용 가능합니다.');
       }
     }
   }
@@ -1984,17 +1980,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     iconDir: String,
-    projectId: Number,
-    isLoggedIn: Boolean,
-    likes: Number,
-    alreadyLike: Boolean
+    projectId: String,
+    isLoggedIn: String,
+    likes: String,
+    alreadyLike: String
   },
   created: function created() {},
   data: function data() {
     return {
-      likeNumber: JSON.parse(this.likes),
-      alreadyLikeV: JSON.parse(this.alreadyLike),
-      isLoggedInV: JSON.parse(this.isLoggedIn)
+      likeNumber: Number(this.likes),
+      alreadyLikeV: this.alreadyLike === 'true',
+      isLoggedInV: this.isLoggedIn === 'true'
     };
   },
   methods: {

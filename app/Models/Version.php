@@ -22,7 +22,7 @@ class Version extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
-    public function scopeListAll($query, $open_range) {
+    public function scopeListAll($query) {
         $count = $query->orderByDesc('id')->count();
         DB::statement(DB::raw('set @rownum:=1+'.$count));
         return $query->selectRaw('*, @rownum:=@rownum-1 as rownum')

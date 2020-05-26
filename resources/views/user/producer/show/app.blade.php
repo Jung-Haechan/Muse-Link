@@ -27,9 +27,17 @@
                     @include('user.producer.show.button')
                 </div>
             </div>
-            {{--            @include('project.collaboration.show.version')--}}
-            {{--            <hr>--}}
-            {{--            @include('project.collaboration.show.reply')--}}
+            @include('user.producer.show.exhibit')
+            <div class="row mt-3">
+                <div class="col-lg-4">
+                    @include('user.producer.show.opened_project')
+                </div>
+                <div class="col-lg-4">
+                    @include('user.producer.show.joined_project')
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
         </div>
     </div>
     {{--    @include('project.collaboration.show.modal')--}}

@@ -24,8 +24,8 @@
         data() {
             return {
                 followeeIdV: Number(this.followeeId),
-                alreadyFollowedV: Boolean(this.alreadyFollowed),
-                isLoggedInV: Boolean(this.isLoggedIn),
+                alreadyFollowedV: this.alreadyFollowed === 'true',
+                isLoggedInV: this.isLoggedIn === 'true',
             }
         },
         methods: {

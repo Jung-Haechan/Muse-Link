@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div class="text-light bg-secondary p-3">
+        <div class="text-light bg-secondary p-3" style="height:100%">
             {{ $user->introduce }}
         </div>
     </div>

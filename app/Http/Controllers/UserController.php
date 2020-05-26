@@ -68,9 +68,11 @@ class UserController extends Controller
         return view('user.'.$board.'.show.app', [
             'user' => $user,
             'board' => $board,
-            'exhibits' => $user->exhibits()->where('board', $board)->get(),
-            'face_exhibit' => $user->face_exhibit()->where('board', $board)->first(),
+            'exhibits' => $user->exhibits()->listAll($board)->get(),
+            'face_exhibit' => $user->face_exhibit,
             'already_followed' => $already_followed,
+            'opened_projects' => $user->projects,
+            'collaborations' => $user->collaborators()->where('role', '!=', 'master')->get(),
         ]);
     }
 

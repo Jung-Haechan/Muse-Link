@@ -31,7 +31,7 @@ class ProjectSeeder extends Seeder
                 ->where(function($query) {
                     $query->where('role', 'composer')
                         ->orWhere('role', 'editor')
-                        ->orWhere('role', 'lyricist');
+                        ->orWhere('role', 'singer');
                 });
             $lyrics_versions = $project->versions()
                 ->where('role', 'lyricist');

@@ -17,7 +17,7 @@ $factory->define(Like::class, function (Faker $faker) {
     $lecture_category_id = NULL;
 
     if ($category === 'project') {
-        $project_id = Project::all()->random()->id;
+        $project_id = Project::where('is_complete', true)->random()->id;
     } elseif ($category === 'post') {
         $post_id = Post::all()->random()->id;
     } else {
