@@ -56,6 +56,7 @@ Route::prefix('project')->name('project.')->group(function () {
     Route::put('/{project}', 'ProjectController@update')->name('update');
     Route::put('/{project}/status', 'ProjectController@update_status')->name('update_status');
     Route::put('/{project}/face', 'ProjectController@update_face')->name('update_face');
+    Route::put('/{project}/complete', 'ProjectController@update_complete')->name('update_complete');
     Route::delete('/{project}', 'ProjectController@delete')->name('delete');
 
 });

@@ -18,7 +18,7 @@
                 @forelse($projects as $project)
                     <div class="col-lg-4 col-sm-6 mb-3">
                         <a class="text-decoration-none"
-                           href="{{ route('project.show', ['collaboration', $project->id]) }}">
+                           href="{{ route('project.show', ['completed', $project->id]) }}">
                             <div class="card card-music container">
                                 <div class="row text-dark bg-dark" style="height: 9rem;">
 

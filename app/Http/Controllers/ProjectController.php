@@ -7,12 +7,13 @@ use App\Models\Like;
 use App\Models\Project;
 use App\Models\Version;
 use App\Traits\AuthTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-    use AuthTrait;
+    use AuthTrait, SoftDeletes;
 
     public function __construct()
     {
@@ -32,7 +33,7 @@ class ProjectController extends Controller
         $project->update([
             'views' => $project->views + 1,
         ]);
-        $versions = $project->versions()->listAll(0)->get();
+        $versions = $project->versions()->listAll()->get();
         $replies = $project->replies()->latest()->get();
         $project['likes'] = $project->likes()->count();
         $project['already_like'] = $project->likes()->where('user_id', Auth::id())->first() != NULL;
@@ -127,6 +128,21 @@ class ProjectController extends Controller
         ]);
         return redirect()->back()
             ->with('alert', config('translate.role.'.$request->role).' 신청을 '.$action.'했습니다.');
+    }
+
+    public function update_complete(Project $project) {
+        if ($project->audio_version_id && $project->lyrics_version_id) {
+            $project->update([
+                'is_completed' => true,
+            ]);
+            return redirect()->route('project.index', 'completed')
+                ->with('alert', '프로젝트가 완성작으로 등록되었습니다.');
+        } else {
+            return redirect()->back()
+                ->with('alert', '프로젝트가 완료되지 않았습니다.');
+        }
+
+
     }
 
     public function delete(Project $project)

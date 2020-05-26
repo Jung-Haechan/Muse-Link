@@ -10,7 +10,7 @@ class Project extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'title', 'genre', 'youtube_url', 'description', 'cover_img_file', 'views'
+        'user_id', 'title', 'genre', 'youtube_url', 'description', 'cover_img_file', 'views', 'is_completed'
     ];
 
     public function user() {
