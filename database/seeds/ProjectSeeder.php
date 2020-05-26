@@ -24,7 +24,7 @@ class ProjectSeeder extends Seeder
                 'is_approved' => 1,
             ]);
         }
-        factory(Collaborator::class, 300)->create();
+        factory(Collaborator::class, 500)->create();
         factory(Version::class, 500)->create();
         foreach($projects as $project) {
             $audio_versions = $project->versions()
