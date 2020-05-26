@@ -71,6 +71,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Follow');
     }
 
+    public function followers() {
+        return $this->hasMany('App\Models\Follow', 'followee_id', 'id');
+    }
+
     public function scopeListAll($query, $board) {
         if ($board === 'producer') {
             return $query->where('is_composer', true)->orWhere('is_lyricist', true)->orWhere('is_editor', true)->latest();

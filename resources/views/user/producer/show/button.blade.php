@@ -1,8 +1,8 @@
 <div class="row mt-3 mx-auto">
     <follow
-        already-followed="{{ $already_followed }}"
+        already-followed="{{ json_encode($already_followed) }}"
         followee-id="{{ $user->id }}"
-        is-logged-in="{{ Auth::check() }}"
+        is-logged-in="{{ json_encode(Auth::check()) }}"
     ></follow>
 </div>
 

@@ -70,9 +70,11 @@ class UserController extends Controller
             'board' => $board,
             'exhibits' => $user->exhibits()->listAll($board)->get(),
             'face_exhibit' => $user->face_exhibit,
-            'already_followed' => $already_followed,
+            'already_followed' => $already_followed != NULL,
             'opened_projects' => $user->projects,
             'collaborations' => $user->collaborators()->where('role', '!=', 'master')->get(),
+            'followers' => $user->followers,
+            'follows' => $user->follows,
         ]);
     }
 

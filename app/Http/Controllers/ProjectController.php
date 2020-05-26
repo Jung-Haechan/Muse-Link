@@ -141,8 +141,6 @@ class ProjectController extends Controller
             return redirect()->back()
                 ->with('alert', '프로젝트가 완료되지 않았습니다.');
         }
-
-
     }
 
     public function delete(Project $project)

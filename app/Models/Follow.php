@@ -14,10 +14,10 @@ class Follow extends Model
     ];
 
     public function user() {
-        return $this->belongsTo('App\User', 'id', 'user_id');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function followee() {
-        return $this->belongsTo('App\User', 'id', 'followee_id');
+        return $this->belongsTo('App\User', 'followee_id', 'id');
     }
 }

@@ -36,6 +36,7 @@
                     @include('user.producer.show.joined_project')
                 </div>
                 <div class="col-lg-4">
+                    @include('user.producer.show.follower')
                 </div>
             </div>
         </div>

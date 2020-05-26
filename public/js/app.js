@@ -1937,7 +1937,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     follow: function follow() {
-      if (this.isLoggedInV == true) {
+      if (this.isLoggedInV === true) {
         if (this.alreadyFollowedV === false) {
           axios.post('/user/' + this.followeeIdV + '/follow');
           this.alreadyFollowedV = true;
