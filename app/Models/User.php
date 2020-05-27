@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'resource_server', 'profile_img', 'introduce', 'is_composer', 'is_editor', 'is_lyricist', 'is_singer', 'face_exhibit_id'
+        'name', 'email', 'resource_server', 'profile_img', 'introduce', 'is_composer', 'is_editor', 'is_lyricist', 'is_singer', 'producer_exhibit_id', 'singer_exhibit_id', 'gender'
     ];
 
     protected $attributes = [
@@ -43,8 +43,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Exhibit');
     }
 
-    public function face_exhibit() {
-        return $this->hasOne('App\Models\Exhibit', 'id', 'face_exhibit_id');
+    public function producer_exhibit() {
+        return $this->hasOne('App\Models\Exhibit', 'id', 'producer_exhibit_id');
+    }
+
+    public function singer_exhibit() {
+        return $this->hasOne('App\Models\Exhibit', 'id', 'singer_exhibit_id');
     }
 
     public function projects() {
@@ -81,5 +85,9 @@ class User extends Authenticatable
         } else {
             return $query->where('is_singer', true)->latest();
         }
+    }
+
+    public function getIsProducerAttribute() {
+        return $this->is_composer || $this->is_editor || $this->is_lyricist;
     }
 }

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('resource_server');
             $table->string('name')->unique();
             $table->string('profile_img')->nullable();
+            $table->enum('gender', ['male', 'female']);
             $table->string('introduce')->nullable();
             $table->boolean('is_composer')->default(false);
             $table->boolean('is_editor')->default(false);

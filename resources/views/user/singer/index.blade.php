@@ -21,20 +21,30 @@
     <div class="container py-2"
          style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9;">
         @forelse($users as $user)
-            <div class="row p-2 m-2 bg-light">
-                <div class="col-lg-1 px-2">
-                    <img src="{{ asset($user->profile_img) }}" style="width: 4rem" alt="">
+            <a href="{{ route('user.show', ['singer', $user->id]) }}" class="text-decoration-none text-dark">
+                <div class="row p-2 m-2 bg-light">
+                    <div class="col-lg-1 px-2">
+                        <img src="{{ asset($user->profile_img) }}" style="width: 4rem" alt="">
+                    </div>
+                    <div class="col-lg-3">
+                        <div>
+                            {{ $user->name }}
+                        </div>
+                        <div>
+                            {{getProjectCreatedTime($user->created_at)}}
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        {{ $user->introduce }}
+                    </div>
+                    <div class="col-lg-2">
+                        참여한 프로젝트: {{ $user->singer_num }}
+                    </div>
+                    <div class="col-lg-1">
+                        <img src="{{ getFile('storage/icon/gender-'.$user->gender.'.jpg') }}" style="width:3rem;" alt="">
+                    </div>
                 </div>
-                <div class="col-lg-3">
-                    {{ $user->name }} {{getProjectCreatedTime($user->created_at)}}
-                </div>
-                <div class="col-lg-5">
-                    {{ $user->introduce }}
-                </div>
-                <div class="col-lg-3">
-                    참여한 프로젝트: {{ $user->singer_num }}
-                </div>
-            </div>
+            </a>
         @empty
         @endforelse
         <div class="m-3">

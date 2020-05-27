@@ -99,7 +99,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/{user}/edit', 'UserController@edit')->name('edit');
     Route::get('/{board}/{user}', 'UserController@show')->name('show');
     Route::put('/{user}', 'UserController@update')->name('update');
-    Route::put('/{user}/face', 'UserController@update_face')->name('update_face');
+    Route::put('/{user}/{board}/face', 'UserController@update_face')->name('update_face');
     Route::delete('/{user}', 'PostController@delete')->name('delete');
 });
 

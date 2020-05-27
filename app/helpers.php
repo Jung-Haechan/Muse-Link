@@ -52,3 +52,11 @@ function isProjectAdmin($user, $project) {
 function getYoutubeUrl($url) {
     return explode('watch?v=', $url)[0].'embed/'.explode('watch?v=', $url)[1];
 }
+
+function isFaceExhibit($user, $exhibit, $board) {
+    return $exhibit->id === $user[$board.'_exhibit_id'];
+}
+
+function isUserAdmin($user, $channel_user) {
+    return $user !== NULL && (isAdmin($user) || $user->id === $channel_user->id);
+}

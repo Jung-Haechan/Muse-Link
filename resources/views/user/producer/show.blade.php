@@ -20,10 +20,10 @@
     <div class="container py-2"
          style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9;">
         <div class="text-light">
-            {{ $user->face_exhibit->title }}
+            {{ $user->producer_exhibit->title }}
         </div>
         @forelse($user->exhibits as $exhibit)
-            @if($exhibit->id === $user->face_exhibit_id)
+            @if(isFaceExhibit($user, $exhibit, 'producer'))
                 @continue
             @endif
             <div>

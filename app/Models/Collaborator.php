@@ -20,4 +20,12 @@ class Collaborator extends Model
     public function project() {
         return $this->belongsTo('App\Models\Project');
     }
+
+    public function scopeListJoined($query, $board) {
+        if ($board === 'producer') {
+            return $query->where('role', '!=', 'master')->where('role', '!=', 'singer');
+        } else {
+            return $query->where('role', '!=', 'singer');
+        }
+    }
 }

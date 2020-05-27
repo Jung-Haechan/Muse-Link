@@ -85,9 +85,9 @@ class ExhibitController extends Controller
     }
 
     public function delete(User $user, $board, Exhibit $exhibit) {
-        if($user->face_exhibit_id === $exhibit->id) {
+        if($user[$board.'_exhibit_id'] === $exhibit->id) {
             $user->update([
-                'face_exhibit_id' => NULL,
+                $board.'_exhibit_id' => NULL,
             ]);
         }
         $exhibit->delete();

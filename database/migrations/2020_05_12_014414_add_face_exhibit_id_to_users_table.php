@@ -14,9 +14,12 @@ class AddFaceExhibitIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('face_exhibit_id')->after('is_singer')->nullable();
+            $table->unsignedBigInteger('producer_exhibit_id')->after('is_singer')->nullable();
+            $table->unsignedBigInteger('singer_exhibit_id')->after('is_singer')->nullable();
 
-            $table->foreign('face_exhibit_id')
+            $table->foreign('producer_exhibit_id')
+                ->references('id')->on('exhibits');
+            $table->foreign('singer_exhibit_id')
                 ->references('id')->on('exhibits');
         });
     }

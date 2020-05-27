@@ -29,7 +29,22 @@
                                 @enderror
 
                             </div>
-
+                            <div class="form-group row">
+                                <div class="form-check col-6 mx-auto text-center">
+                                    <input class="form-check-input" type="radio" name="gender" id="gender-male" value="male"
+                                           {{ $user->gender === 'male' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="gender-male">
+                                        남성
+                                    </label>
+                                </div>
+                                <div class="form-check col-6 text-center">
+                                    <input class="form-check-input" type="radio" name="gender" id="gender-female" value="female"
+                                        {{ $user->gender === 'female' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="gender-female">
+                                        여성
+                                    </label>
+                                </div>
+                            </div>
                             <div class="form-group row mt-3 px-5">
                                 <label for="introduce" class="col-form-label text-md-right">Introduce</label>
 

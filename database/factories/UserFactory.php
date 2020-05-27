@@ -23,6 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'resource_server' => 'google',
         'name' => $faker->name,
         'profile_img' => 'https://i.picsum.photos/id/'.rand(0, 1000).'/300/300.jpg',
+        'gender' => $faker->randomElement(['male', 'female']),
         'remember_token' => Str::random(10),
         'introduce' => $faker->realText(100),
         'is_composer' => $faker->boolean,

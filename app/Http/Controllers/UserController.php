@@ -69,10 +69,10 @@ class UserController extends Controller
             'user' => $user,
             'board' => $board,
             'exhibits' => $user->exhibits()->listAll($board)->get(),
-            'face_exhibit' => $user->face_exhibit,
+            'face_exhibit' => $user[$board.'_exhibit'],
             'already_followed' => $already_followed != NULL,
             'opened_projects' => $user->projects,
-            'collaborations' => $user->collaborators()->where('role', '!=', 'master')->get(),
+            'collaborations' => $user->collaborators()->listJoined($board)->get(),
             'followers' => $user->followers()->latest()->paginate(5),
             'followers_number' => $user->followers()->count(),
             'follows' => $user->follows,
@@ -97,14 +97,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update_face(Request $request, User $user)
+    public function update_face(Request $request, User $user, $board)
     {
         if($user->id !== Auth::id()) {
             return redirect()->back()
                 ->with('alert', '권한이 없습니다.');
         }
         $user->update([
-            'face_exhibit_id' => $request->exhibit_id
+            $board.'_exhibit_id' => $request->exhibit_id
         ]);
         return redirect()->back()
             ->with('alert', '해당 작품이 대표로 설정되었습니다.');

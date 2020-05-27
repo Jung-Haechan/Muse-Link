@@ -7,6 +7,5 @@ return [
         'lyricist' => '작사',
         'singer' => '보컬',
         'master' => '관리자',
-        'producer' => '프로듀서'
     ]
 ];

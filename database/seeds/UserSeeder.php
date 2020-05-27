@@ -19,10 +19,19 @@ class UserSeeder extends Seeder
 
         $users = User::all();
         foreach ($users as $user) {
-            if ($user->exhibits()->first()) {
-                $user->update([
-                    'face_exhibit_id' => $user->exhibits->random()->id
-                ]);
+            if($user->is_singer) {
+                if ($user->exhibits()->listAll('singer')->first()) {
+                    $user->update([
+                        'singer_exhibit_id' => $user->exhibits()->listAll('singer')->get()->random()->id
+                    ]);
+                }
+            }
+            if($user->is_producer) {
+                if ($user->exhibits()->listAll('producer')->first()) {
+                    $user->update([
+                        'producer_exhibit_id' => $user->exhibits()->listAll('producer')->get()->random()->id
+                    ]);
+                }
             }
         }
         factory(Follow::class, 1500)->create();

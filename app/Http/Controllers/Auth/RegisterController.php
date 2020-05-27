@@ -64,6 +64,7 @@ class RegisterController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'introduce' => 'nullable',
+            'gender' => 'required',
         ]);
         $data['is_composer'] = $request->has('is_composer');
         $data['is_editor'] = $request->has('is_editor');
