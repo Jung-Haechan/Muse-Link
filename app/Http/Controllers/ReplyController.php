@@ -10,15 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ReplyController extends Controller
 {
-    public function store(Request $request, Project $project) {
-        $board = $request->board;
+    public function store(Request $request, $id) {
+        $board = $request->segment(1);
         $data = $request->validate([
             'content' => 'required'
         ]);
         $data['user_id'] = Auth::id();
-        $data[$board.'_id'] = $$board->id;
+        $data[$board.'_id'] = $id;
         Reply::create($data);
         return redirect()->back()
             ->with('alert', '댓글이 등록되었습니다.');
+    }
+
+    public function delete($id, Reply $reply) {
+        $reply->delete();
+        return redirect()->back()
+            ->with('alert', '댓글이 삭제되었습니다.');
     }
 }

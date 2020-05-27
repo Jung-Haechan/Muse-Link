@@ -63,8 +63,8 @@ Route::prefix('project')->name('project.')->group(function () {
 
 Route::prefix('post')->name('post.')->group(function () {
     Route::get('/', 'PostController@index')->name('index');
-    Route::get('/{post}', 'PostController@show')->name('show');
     Route::get('/create', 'PostController@create')->name('create');
+    Route::get('/{post}', 'PostController@show')->name('show');
     Route::get('/{post}/edit', 'PostController@edit')->name('edit');
     Route::post('/', 'PostController@store')->name('store');
     Route::put('/{post}', 'PostController@update')->name('update');
@@ -102,6 +102,8 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::put('/{user}/{board}/face', 'UserController@update_face')->name('update_face');
     Route::delete('/{user}', 'PostController@delete')->name('delete');
 });
+
+
 
 
 

@@ -30,7 +30,7 @@
 
     <!-- Styles -->
     <style>
-
+        @yield('css')
     </style>
 
 </head>

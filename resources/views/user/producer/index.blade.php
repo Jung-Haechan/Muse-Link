@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-lg-2">
                         <div>{{ $user->name }}</div>
-                        <div>{{getProjectCreatedTime($user->created_at)}}</div>
+                        <div>{{getTime($user->created_at)}}</div>
                     </div>
                     <div class="col-lg-5">
                         {{ $user->introduce }}

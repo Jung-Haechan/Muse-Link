@@ -12,4 +12,28 @@ class Post extends Model
     protected $fillable = [
         'user_id', 'title', 'content', 'views'
     ];
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
+
+    public function replies() {
+        return $this->hasMany('App\Models\Reply');
+    }
+
+    public function scopeListAll($query) {
+        return $query->latest();
+    }
+
+    public function scopeGetNeighbor($query, $post, $n_or_p) {
+        if ($n_or_p === 'next') {
+            return $query->where('created_at', '>', $post->created_at)->limit(1);
+        } else {
+            return $query->where('created_at', '<', $post->created_at)->limit(1)->latest();
+        }
+    }
 }

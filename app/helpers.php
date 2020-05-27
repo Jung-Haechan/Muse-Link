@@ -26,7 +26,7 @@ function getRoleColor ($role) {
     elseif ($role === 'singer') return 'danger';
 }
 
-function getProjectCreatedTime($created_at) {
+function getTime($created_at) {
     $created_at = strtotime($created_at);
     $now = strtotime('Now');
     $gap = $now - $created_at;
@@ -47,6 +47,18 @@ function isAdmin($user) {
 
 function isProjectAdmin($user, $project) {
     return $user !== NULL && (isAdmin($user) || $project->user_id === $user->id);
+}
+
+function isPostAdmin($user, $post) {
+    return $user !== NULL && (isAdmin($user) || $post->user_id === $user->id);
+}
+
+function isProjectReplyAdmin($user, $reply) {
+    return $user !== NULL && (isProjectAdmin($user, $reply->project) || $reply->user_id === $user->id);
+}
+
+function isPostReplyAdmin($user, $reply) {
+    return $user !== NULL && (isPostAdmin($user, $reply->post) || $reply->user_id === $user->id);
 }
 
 function getYoutubeUrl($url) {

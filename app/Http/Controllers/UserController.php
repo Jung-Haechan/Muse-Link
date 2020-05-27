@@ -99,7 +99,7 @@ class UserController extends Controller
      */
     public function update_face(Request $request, User $user, $board)
     {
-        if($user->id !== Auth::id()) {
+        if(!isUserAdmin(Auth::user(), $user)) {
             return redirect()->back()
                 ->with('alert', '권한이 없습니다.');
         }

@@ -27,7 +27,7 @@
                     </form>
                 </div>
             @endif
-            <form action="{{ route('user.update_face', $user->id) }}" method="post">
+            <form action="{{ route('user.update_face', [$user->id, $board]) }}" method="post">
                 @csrf
                 @method('put')
                 <div class="card-header" id="heading{{$exhibit->id}}">
@@ -47,7 +47,7 @@
                                 <div>
                                     {{ $exhibit->user->name }}
                                 </div>
-                                @if($user->id === Auth::id())
+                                @if(isUserAdmin(Auth::user(), $user))
                                     <div class="ml-auto">
                                         <input type="hidden" name="exhibit_id"
                                                value="{{ $exhibit->id }}">

@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="ml-auto" style="font-size: 0.7rem;">{{ $reply->created_at }}</div>
             </div>
-            <div class="row">
+            <div class="row pb-3">
                 <div class="container col-sm-11">
                     <div class="row">
                         <img src="{{ $reply->user->profile_img }}" style="width: 1.5rem"
@@ -28,15 +28,6 @@
                     <div class="container">
                         <div class="row text-left mt-2">
                             {{ $reply->content }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="ml-auto">
-                        <div class="row text-primary">
-                            <div class="mr-2"><a href="#" class="text-decoration-none">답글3</a></div>
                         </div>
                     </div>
                 </div>

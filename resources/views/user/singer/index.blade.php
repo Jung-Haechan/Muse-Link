@@ -31,7 +31,7 @@
                             {{ $user->name }}
                         </div>
                         <div>
-                            {{getProjectCreatedTime($user->created_at)}}
+                            {{getTime($user->created_at)}}
                         </div>
                     </div>
                     <div class="col-lg-5">
