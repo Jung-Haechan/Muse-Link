@@ -72,3 +72,13 @@ function isFaceExhibit($user, $exhibit, $board) {
 function isUserAdmin($user, $channel_user) {
     return $user !== NULL && (isAdmin($user) || $user->id === $channel_user->id);
 }
+
+function getLastPeriod($period) {
+    $time = 0;
+    if ($period === 'week') {
+        $time = 604800;
+    } elseif ($period) {
+        $time = 18144000;
+    }
+    return date('Y-m-d H:i:s', strtotime('Now') - $time);
+}

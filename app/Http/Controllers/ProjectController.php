@@ -20,9 +20,10 @@ class ProjectController extends Controller
         $this->middleware('auth')->except('index', 'show');
     }
 
-    public function index($board)
+    public function index(Request $request, $board)
     {
-        $projects = Project::listAll(0, $board)->paginate(12);
+        $period = $request->period;
+        $projects = Project::listAll(0, $board, $period)->paginate(12);
         return view('project.' . $board . '.index', [
             'projects' => $projects,
         ]);

@@ -33,11 +33,16 @@ class Project extends Model
         return $this->hasMany('App\Models\Like');
     }
 
-    public function scopeListAll($query, $open_range, $board) {
+    public function scopeListAll($query, $open_range, $board, $period = NULL) {
         if ($board === 'collaboration') {
             return $query->where('is_completed', false)->where('is_opened', $open_range)->latest();
-        } else {
+        } elseif ($board === 'completed') {
             return $query->where('is_completed', true)->where('is_opened', $open_range)->latest();
+        } elseif ($board === 'chart') {
+            $query->where('is_completed', true)->where('is_opened', $open_range)
+                ->withCount(['likes as likes_month' => function($query) {
+                    return $query->where('created_at', '>', getLastPeriod('month'));
+                }])->orderByDesc('likes_month');
         }
     }
 }

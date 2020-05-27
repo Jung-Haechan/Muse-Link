@@ -15,5 +15,8 @@ class LikeController extends Controller
             'user_id' => Auth::id(),
             'project_id' => $project->id,
         ]);
+        $project->update([
+            'likes' => $project->likes + 1,
+        ]);
     }
 }

@@ -34,7 +34,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">지금 핫한 노래</a>
-                    <a class="dropdown-item" href="#">주간 TOP100</a>
+                    <a class="dropdown-item" href="{{ route('project.index', 'chart') }}">주간 TOP100</a>
                     <a class="dropdown-item" href="#">월간 TOP100</a>
                 </div>
             </li>

@@ -58,4 +58,10 @@ class PostController extends Controller
         return redirect()->route('post.index')
             ->with('alert', '수정이 완료되었습니다.');
     }
+
+    public function delete(Post $post) {
+        $post->delete();
+        return redirect()->route('post.index')
+            ->with('alert', '게시글이 삭제되었습니다.');
+    }
 }

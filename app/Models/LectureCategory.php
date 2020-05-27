@@ -12,4 +12,8 @@ class LectureCategory extends Model
     protected $fillable = [
         'title', 'description', 'thumbnail_img', 'price'
     ];
+
+    public function likes() {
+        return $this->hasMany('App\Models\Like');
+    }
 }
