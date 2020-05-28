@@ -28,7 +28,7 @@
 
                                 </div>
                                 <div class="card-body text-dark">
-                                    <div class="" style="font-size: 0.7rem">{{ getTime($project->created_at) }}</div>
+                                    <div class="" style="font-size: 0.7rem">{{ getTime($project->versions()->first()->created_at) }}</div>
                                         <h5 class="card-title text-left text-truncate">
                                             @if($project->genre) [{{ $project->genre }}] @endif {{ $project->title }}
                                         </h5>

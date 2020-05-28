@@ -20,7 +20,7 @@ class Project extends Model
     }
 
     public function versions() {
-        return $this->hasMany('App\Models\Version');
+        return $this->hasMany('App\Models\Version')->latest();
     }
 
     public function collaborators() {
@@ -49,28 +49,25 @@ class Project extends Model
 
     public function scopeListAll($query, $open_range, $board, $period = NULL) {
         if ($board === 'collaboration') {
-            return $query->whereNull('completed_at')->where('is_opened', $open_range)->latest();
+            return $query->whereNull('completed_at')->where('is_opened', $open_range)
+                ->orderByDesc(
+                    Version::select('created_at')
+                        ->whereColumn('project_id', 'projects.id')
+                        ->orderByDesc('created_at')
+                        ->limit(1)
+                );
         }
         elseif ($board === 'completed') {
-            return $query->whereNotNull('completed_at')->where('is_opened', $open_range)->orderBy('completed_at');
+            return $query->whereNotNull('completed_at')->where('is_opened', $open_range)
+                ->orderByDesc('completed_at');
         }
-        elseif ($board === 'chart' && $period === 'week') {
-            DB::statement(DB::raw('set @rownum:=0'));
+        elseif ($board === 'chart') {
             $query->whereNotNull('completed_at')
                 ->where('is_opened', $open_range)
-                ->withCount(['likes as likes_week' => function($query) {
-                    return $query->where('created_at', '>', getLastPeriod('week'));
+                ->withCount(['likes as likes_'.$period => function($query) use($period) {
+                    return $query->where('created_at', '>', getLastPeriod($period));
                 }])
-                ->orderByDesc('likes_week');
-        }
-        elseif ($board === 'chart' && $period === 'month') {
-            DB::statement(DB::raw('set @rownum:=0'));
-            $query->whereNotNull('completed_at')
-                ->where('is_opened', $open_range)
-                ->withCount(['likes as likes_month' => function($query) {
-                    return $query->where('created_at', '>', getLastPeriod('month'));
-                }])
-                ->orderByDesc('likes_month');
+                ->orderByDesc('likes_'.$period);
         }
     }
 }

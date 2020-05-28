@@ -25,7 +25,6 @@ class Version extends Model
     public function scopeListAll($query) {
         $count = $query->orderByDesc('id')->count();
         DB::statement(DB::raw('set @rownum:=1+'.$count));
-        return $query->selectRaw('*, @rownum:=@rownum-1 as rownum')
-            ->orderByDesc('id');
+        return $query->selectRaw('*, @rownum:=@rownum-1 as rownum');
     }
 }

@@ -80,8 +80,8 @@
                             <div>
                                 <a href="{{route('post.show', $post->id)}}" class="text-dark">
                                     {{$post['title']}}
-                                    @if($post['replies_number'])
-                                        <span class="text-danger">[{{$post->replies_number}}]</span>
+                                    @if($post->replies()->first())
+                                        <span class="text-danger">[{{ $post->replies()->count() }}]</span>
                                     @endif
                                 </a>
                             </div>

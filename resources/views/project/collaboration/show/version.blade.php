@@ -29,9 +29,12 @@
                         </div>
                         <div class="container pt-2" style="font-size: 0.8rem;">
                             <div class="row">
-                                <div>
+                                <span class="mr-3">
                                     {{ $version->user->name }}
-                                </div>
+                                </span>
+                                <span class="text-secondary">
+                                    {{ getTime($version->created_at) }}
+                                </span>
                                 @if(isProjectAdmin(Auth::user(), $project))
                                     <div class="ml-auto">
                                         <input type="hidden" name="role"

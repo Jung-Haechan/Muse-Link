@@ -18,9 +18,8 @@
                 {{ config('translate.period.'.$period) }} 차트
             </h3>
             @forelse($projects as $num => $project)
-                <a href="{{ route('project.show', ['completed', $project->id]) }}"
-                   class="text-dark text-decoration-none">
-                    <div class="row p-2 m-2 bg-light">
+
+                    <div class="row p-2 m-2 bg-light text-dark">
                         <div class="col-1 px-2">
                             {{ $num+1 }}위
                         </div>
@@ -28,7 +27,10 @@
                             <img src="{{ getFile($project->cover_img_file) }}" style="width: 4rem" alt="">
                         </div>
                         <div class="col-3">
+                            <a href="{{ route('project.show', ['completed', $project->id]) }}"
+                               class="text-dark text-decoration-none">
                             {{ $project->title }}
+                            </a>
                         </div>
                         <div class="col-2">
                             {{ $project->genre }}
@@ -49,12 +51,8 @@
                             ></like>
                         </div>
                     </div>
-                </a>
             @empty
             @endforelse
-            <div class="mx-auto">
-                {{ $projects->links() }}
-            </div>
         </div>
     </div>
 
