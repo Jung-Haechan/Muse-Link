@@ -10,7 +10,7 @@
                     ">
                     <div class="mx-auto" style="width: 80%">
                         <a class="text-decoration-none"
-                           href="{{ route('project.show', [$opened_project->is_completed ? 'completed' : 'collaboration', $opened_project->id]) }}">
+                           href="{{ route('project.show', [$opened_project->completed_at ? 'completed' : 'collaboration', $opened_project->id]) }}">
                             <div class="card card-music container">
                                 <div class="row text-dark bg-dark" style="height: 9rem;">
                                     <img class="card-img-top mb-3 mx-auto"

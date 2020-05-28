@@ -8,6 +8,15 @@ use Faker\Generator as Faker;
 
 $factory->define(Project::class, function (Faker $faker) {
     $user = User::all()->random();
+    $is_completed = $faker->numberBetween(1, 10) > 8;
+
+    if ($is_completed) {
+        $completed_at = $faker->dateTimeBetween('-1 months', 'now', 'asia/Seoul');
+        $is_opened = 0;
+    } else {
+        $completed_at = NULL;
+        $is_opened = $faker->numberBetween(0, 4);
+    }
     return [
         'title' => $faker->realText(20),
         'description' => $faker->realText(),
@@ -17,9 +26,9 @@ $factory->define(Project::class, function (Faker $faker) {
         'has_editor' => $faker->boolean,
         'has_lyricist' => $faker->boolean,
         'has_singer' => $faker->boolean,
-        'is_completed' => $faker->numberBetween(1, 10) > 8,
+        'completed_at' => $completed_at,
         'genre' => $faker->realText(10),
-        'is_opened' => $faker->numberBetween(0, 4),
+        'is_opened' => $is_opened,
         'views' => $faker->numberBetween(0, 1000),
         'created_at' => $faker->dateTimeBetween('-10 months', 'now', 'asia/Seoul'),
         'updated_at' => now('asia/Seoul'),
