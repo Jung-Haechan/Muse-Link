@@ -1,17 +1,6 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-    <div class="text-center">
-        <h3 class="font-weight-bold mb-3 section-subtitle" style="color: #d2ab39;">
-            Producer
-        </h3>
-    </div>
-    <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="{{ route('user.show', ['producer', $user->id]) }}"
-                                                class="text-light text-decoration-none">{{ $user->name }}</a>
-        </div>
-    </h1>
-@endsection
+@include('user.producer.jumbotron')
 
 @section('content')
     <div>

@@ -1,14 +1,8 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-    <div class="text-center">
-        <h3 class="section-subtitle font-weight-bold mb-3" style="color: #d2ab39;">여러분의 작품이 차트에 올라갔나요?</h3>
-    </div>
-    <div class="section-title text-center text-light display-3">
-        <a href="{{ route('project.index', 'completed') }}"
-           class="text-light text-decoration-none">Chart</a>
-    </div>
-@endsection
+@section('jumbotron.comment', '당신의 작품이 차트에 있나요?')
+@section('jumbotron.url', route('project.index', 'chart').'?period='.$period)
+@section('jumbotron.page', 'Chart')
 
 @section('content')
     <div class="container">

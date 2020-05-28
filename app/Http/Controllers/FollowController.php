@@ -12,6 +12,10 @@ class FollowController extends Controller
 {
     use SoftDeletes;
 
+    public function index($board) {
+
+    }
+
     public function store(User $user) {
         $data = [
             'user_id' => Auth::id(),

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-
-@endsection
+@include('project.completed.jumbotron')
 
 @section('content')
     <div>
@@ -18,6 +16,7 @@
                     @include('project.completed.show.button')
                 </div>
             </div>
+            @include('project.completed.show.collaborator')
             <hr>
             @include('project.completed.show.reply')
         </div>

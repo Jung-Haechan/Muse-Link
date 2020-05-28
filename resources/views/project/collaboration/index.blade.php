@@ -1,15 +1,6 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-    <div class="text-center">
-        <h3 class="section-subtitle font-weight-bold mb-3" style="color: #d2ab39;">당신의 미완성 프로젝트를 공유하세요!</h3>
-    </div>
-    <div class="section-title text-center text-light display-3">
-        <a href="{{ route('project.index', 'collaboration') }}"
-           class="text-light text-decoration-none">Collaboration</a>
-    </div>
-    <a href="{{ route('project.create') }}" class="btn btn-outline-light mt-3" style="font-size: 1.2rem">프로젝트 만들기</a>
-@endsection
+@include('project.collaboration.jumbotron')
 
 @section('content')
     <div class="container">

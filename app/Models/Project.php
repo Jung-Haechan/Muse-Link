@@ -47,6 +47,38 @@ class Project extends Model
         return $this->likes()->where('user_id', Auth::id())->first() !== NULL;
     }
 
+    public function composers() {
+        if($this->collaborators()->where('role', 'composer')->first()) {
+            return $this->collaborators()->where('role', 'composer');
+        } else {
+            return $this->collaborators()->where('role', 'master');
+        }
+    }
+
+    public function editors() {
+        if($this->collaborators()->where('role', 'editor')->first()) {
+            return $this->collaborators()->where('role', 'editor');
+        } else {
+            return $this->collaborators()->where('role', 'master');
+        }
+    }
+
+    public function lyricists() {
+        if($this->collaborators()->where('role', 'lyricist')->first()) {
+            return $this->collaborators()->where('role', 'lyricist');
+        } else {
+            return $this->collaborators()->where('role', 'master');
+        }
+    }
+
+    public function singers() {
+        if($this->collaborators()->where('role', 'singer')->first()) {
+            return $this->collaborators()->where('role', 'singer');
+        } else {
+            return $this->collaborators()->where('role', 'master');
+        }
+    }
+
     public function scopeListAll($query, $open_range, $board, $period = NULL) {
         if ($board === 'collaboration') {
             return $query->whereNull('completed_at')

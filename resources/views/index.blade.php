@@ -1,21 +1,10 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-
-    <div class="text-center">
-        <h3 class="font-weight-bold mb-3 section-subtitle" style="color: #d2ab39;">당신의 음악을 완성하세요!</h3>
-    </div>
-    <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="{{ route('index') }}" class="text-light text-decoration-none">MuseLink</a>
-        </div>
-    </h1>
-
-
-@endsection
+@section('jumbotron.comment', '당신의 음악을 완성하세요')
+@section('jumbotron.url', route('index'))
+@section('jumbotron.page', 'MuseLink')
 
 @section('content')
-
-
     <div class="container">
         <div class="col-md-9 p-5 mx-auto text-center"
              style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9; color: #d6d8db">

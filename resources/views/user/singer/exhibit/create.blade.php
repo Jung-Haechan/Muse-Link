@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="col-md-7 p-5 mx-auto"
          style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
         <form action="{{ route('user.exhibit.store', [$user->id, 'producer']) }}" method="post" enctype="multipart/form-data" style="">

@@ -1,21 +1,6 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-
-    <div class="text-center">
-        <h3 class="font-weight-bold mb-3 section-subtitle" style="color: #d2ab39;">
-            당신과 협업할 가수를 찾아보세요!
-        </h3>
-    </div>
-    <h1 class="text-center text-light">
-        <div class="display-1 section-title">
-            <a href="{{ route('user.index', 'singer') }}"
-               class="text-light text-decoration-none">Singers</a>
-        </div>
-    </h1>
-
-
-@endsection
+@include('user.singer.jumbotron')
 
 @section('content')
     <div class="container">

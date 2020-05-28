@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-
-@endsection
+@include('project.collaboration.jumbotron')
 
 @section('content')
     <div class="container col-md-10 p-5 mx-auto text-dark"

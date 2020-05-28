@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-
-@endsection
-
 @section('content')
 
     <div class="col-md-7 p-5 mx-auto"

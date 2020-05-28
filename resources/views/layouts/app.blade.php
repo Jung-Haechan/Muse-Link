@@ -43,8 +43,7 @@
     <div class="content pb-5" style="background-image: url({{asset('storage/background/night.jpg')}}); background-size: cover;">
         <div class="jumbotron text-center"
              style="background-image: url({{asset('storage/skin/edm2.jpg')}}); background-size: cover; padding-top: 9.5rem;">
-
-            @yield('jumbotron')
+            @include('layouts.jumbotron')
         </div>
 
         @yield('content')

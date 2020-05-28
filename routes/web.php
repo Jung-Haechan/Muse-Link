@@ -83,6 +83,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
     Route::prefix('/{user}')->group(function() {
         Route::prefix('/follow')->name('follow.')->group(function() {
+            Route::get('/{board}', 'FollowController@index')->name('index');
             Route::post('/', 'FollowController@store')->name('store');
             Route::delete('/', 'FollowController@delete')->name('delete');
         });

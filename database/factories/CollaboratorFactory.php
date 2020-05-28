@@ -13,7 +13,7 @@ $factory->define(Collaborator::class, function (Faker $faker) {
     return [
         'user_id' => $user->id,
         'project_id' => $project->id,
-        'role' => $faker->randomElement(['composer', 'editor', 'lyricist', 'singer', 'master']),
+        'role' => $faker->randomElement(['composer', 'editor', 'lyricist', 'singer']),
         'is_approved' => $faker->numberBetween(0, 3),
         'created_at' => $faker->dateTimeBetween('-10 months', 'now', 'asia/Seoul'),
         'updated_at' => now('asia/Seoul'),

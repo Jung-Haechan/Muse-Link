@@ -47,15 +47,7 @@
     </style>
 @endsection
 
-@section('jumbotron')
-    <div class="text-center">
-        <h3 class="font-weight-bold mb-3 section-subtitle" style="color: #d2ab39;">음악가들과 자유롭게 소통하세요!</h3>
-    </div>
-    <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="{{ route('post.index') }}" class="text-light text-decoration-none">Forum</a>
-        </div>
-    </h1>
-@endsection
+@include('post.jumbotron')
 
 @section('content')
     <div class="container">

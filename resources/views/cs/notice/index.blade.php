@@ -37,16 +37,7 @@
     </style>
 @endsection
 
-@section('jumbotron')
-    <div class="text-center">
-        <h3 class="font-weight-bold mb-3 section-subtitle" style="color: #d2ab39;">알려드립니다!</h3>
-    </div>
-    <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="{{ route('notice.index') }}"
-                                                class="text-light text-decoration-none">Notice</a>
-        </div>
-    </h1>
-@endsection
+@include('cs.notice.jumbotron')
 
 @section('content')
     <div class="container">

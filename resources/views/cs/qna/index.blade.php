@@ -1,15 +1,6 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-    <div class="text-center">
-        <h3 class="font-weight-bold mb-3 section-subtitle" style="color: #d2ab39;">무엇이 궁금하신가요?</h3>
-    </div>
-    <h1 class="text-center text-light">
-        <div class="display-1 section-title"><a href="{{ route('qna.index') }}"
-                                                class="text-light text-decoration-none">Qna</a>
-        </div>
-    </h1>
-@endsection
+@include('cs.qna.jumbotron')
 
 @section('content')
     <div class="container">

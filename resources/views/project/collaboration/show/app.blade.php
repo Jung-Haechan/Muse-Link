@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('jumbotron')
-
-@endsection
+@include('project.collaboration.jumbotron')
 
 @section('content')
     <div>
