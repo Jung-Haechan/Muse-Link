@@ -21,11 +21,14 @@
                         <a class="text-decoration-none" href="{{ route('project.show', ['collaboration', $project->id]) }}">
                             <div class="card card-music container">
                                 <div class="row text-dark bg-dark" style="height: 9rem;">
-
                                     <img class="card-img-top mb-3 mx-auto"
                                          src="{{ getFile($project->cover_img_file) }}"
                                          style="width:9rem; height:9rem; object-fit: cover;" alt="Card image cap">
-
+                                    <span class="text-light p-1 m-2
+                                        bg-{{ getAccessibilityColor($project->is_opened) }}"
+                                          style="position:absolute; right:0; font-size: 0.7rem;">
+                                        {{ config('translate.is_opened')[$project->is_opened] }}
+                                    </span>
                                 </div>
                                 <div class="card-body text-dark">
                                     <div class="" style="font-size: 0.7rem">{{ getTime($project->versions()->first()->created_at) }}</div>

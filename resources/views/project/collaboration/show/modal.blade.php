@@ -11,11 +11,17 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <div class="modal-body">
-                        <div class="font-weight-bold" style="white-space:pre-wrap">{{ $version->lyrics }}</div>
-                        <hr>
-                        <div> {{ $version->description }}</div>
+                        @if(canAccessVersion(Auth::user(), $version))
+                            <div class="font-weight-bold" style="white-space:pre-wrap">{{ $version->lyrics }}</div>
+                            <hr>
+                            <div> {{ $version->description }}</div>
+                        @else
+                            접근 권한이 없습니다
+                        @endif
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>

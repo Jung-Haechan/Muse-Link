@@ -49,7 +49,7 @@ class Project extends Model
 
     public function scopeListAll($query, $open_range, $board, $period = NULL) {
         if ($board === 'collaboration') {
-            return $query->whereNull('completed_at')->where('is_opened', $open_range)
+            return $query->whereNull('completed_at')
                 ->orderByDesc(
                     Version::select('created_at')
                         ->whereColumn('project_id', 'projects.id')
@@ -58,12 +58,11 @@ class Project extends Model
                 );
         }
         elseif ($board === 'completed') {
-            return $query->whereNotNull('completed_at')->where('is_opened', $open_range)
+            return $query->whereNotNull('completed_at')
                 ->orderByDesc('completed_at');
         }
         elseif ($board === 'chart') {
             $query->whereNotNull('completed_at')
-                ->where('is_opened', $open_range)
                 ->withCount(['likes as likes_'.$period => function($query) use($period) {
                     return $query->where('created_at', '>', getLastPeriod($period));
                 }])

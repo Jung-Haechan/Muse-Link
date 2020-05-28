@@ -12,9 +12,13 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="font-weight-bold" style="white-space:pre-wrap">{{ $exhibit->lyrics }}</div>
-                        <hr>
-                        <div> {{ $exhibit->description }}</div>
+                        @if(canAccessExhibit(Auth::user(), $exhibit))
+                            <div class="font-weight-bold" style="white-space:pre-wrap">{{ $exhibit->lyrics }}</div>
+                            <hr>
+                            <div> {{ $exhibit->description }}</div>
+                        @else
+                            접근 권한이 없습니다
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

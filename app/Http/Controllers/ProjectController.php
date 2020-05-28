@@ -32,6 +32,10 @@ class ProjectController extends Controller
 
     public function show($board, Project $project)
     {
+        if(!canAccessProject(Auth::user(), $project)) {
+            return redirect()->back()
+                ->with('alert', '접근 권한이 없습니다.');
+        }
         $project->update([
             'views' => $project->views + 1,
         ]);

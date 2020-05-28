@@ -39,13 +39,20 @@
                             data-target="#collapse{{ $exhibit->id }}"
                             aria-expanded="true" aria-controls="collapse{{$exhibit->id}}">
                             <div style="font-size: 1.1rem;">
-                                [{{ config('translate.role.'.$exhibit->role) }}
-                                ] {{ $exhibit->title }}</div>
+                                {{ $exhibit->title }}
+                            </div>
                         </div>
                         <div class="container pt-2" style="font-size: 0.8rem;">
                             <div class="row">
+                                <span class="text-secondary mr-3">
+                                    {{ getTime($exhibit->created_at) }}
+                                </span>
                                 <div>
-                                    {{ $exhibit->user->name }}
+                                    <span
+                                        class="text-{{ getAccessibilityColor($exhibit->is_opened) }} border border-{{ getAccessibilityColor($exhibit->is_opened) }}"
+                                        style="font-size: 0.7rem; padding: 2px;">
+                                        {{ config('translate.is_opened')[$exhibit->is_opened] }}
+                                    </span>
                                 </div>
                                 @if($user->id === Auth::id())
                                     <div class="ml-auto">
@@ -74,17 +81,21 @@
                  aria-labelledby="heading{{$exhibit->id}}"
                  data-parent="#projectTree">
                 <div class="card-body">
-                    {{ $exhibit->description }}
-                </div>
-
-                <div class="text-center mb-3">
-                    @if($exhibit->audio_file)
-                        <audio controls="controls">
-                            <source
-                                src="{{ getFile($exhibit->audio_file) }}">
-                        </audio>
-                    @elseif($exhibit->youtube_url)
-                        <a target="_blank" href="{{ $exhibit->youtube_url }}">{{ $exhibit->youtube_url }}</a>
+                    @if(canAccessExhibit(Auth::user(), $exhibit))
+                        {{ $exhibit->description }}
+                        <div class="text-center pt-3">
+                            @if($exhibit->audio_file)
+                                <audio controls="controls">
+                                    <source
+                                        src="{{ getFile($exhibit->audio_file) }}">
+                                </audio>
+                            @elseif($exhibit->youtube_url)
+                                <a target="_blank"
+                                   href="{{ $exhibit->youtube_url }}">{{ $exhibit->youtube_url }}</a>
+                            @endif
+                        </div>
+                    @else
+                        접근 권한이 없습니다.
                     @endif
                 </div>
             </div>

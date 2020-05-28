@@ -30,11 +30,20 @@
                         <div class="container pt-2" style="font-size: 0.8rem;">
                             <div class="row">
                                 <span class="mr-3">
-                                    {{ $version->user->name }}
+                                    <a class="text-dark" href="{{ route('user.show', [$version->role === 'singer' ? 'singer' : 'producer', $version->user->id]) }}">
+                                        {{ $version->user->name }}
+                                    </a>
                                 </span>
-                                <span class="text-secondary">
+                                <span class="text-secondary mr-3">
                                     {{ getTime($version->created_at) }}
                                 </span>
+                                <div>
+                                    <span
+                                        class="text-{{ getAccessibilityColor($version->is_opened) }} border border-{{ getAccessibilityColor($version->is_opened) }}"
+                                        style="font-size: 0.7rem; padding: 2px;">
+                                        {{ config('translate.is_opened')[$version->is_opened] }}
+                                    </span>
+                                </div>
                                 @if(isProjectAdmin(Auth::user(), $project))
                                     <div class="ml-auto">
                                         <input type="hidden" name="role"
@@ -65,28 +74,32 @@
                      aria-labelledby="heading{{$version->rownum}}"
                      data-parent="#projectTree">
                     <div class="card-body">
-                        {{ $version->description }}
-                        <table class="table table-hover table-sm mt-1 text-center"
-                               style="margin-bottom: 0rem;">
-                            <thead>
-                            <tr>
-                                <th scope="col" colspan="2">AudioFile</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                @if($version->project_audio_file)
-                                    <td>메인 파일: <a href="#">{{ $version->title }} 메인.mp3</a>
-                                    </td> @endif
-                                @if($version->mr_audio_file)
-                                    <td>MR 파일: <a href="#">{{ $version->title }} MR.mp3</a>
-                                    </td> @endif
-                                @if($version->voice_audio_file)
-                                    <td>목소리 파일: <a href="#">{{ $version->title }}.mp3</a>
-                                    </td> @endif
-                            </tr>
-                            </tbody>
-                        </table>
+                        @if (canAccessVersion(Auth::user(), $version))
+                            {{ $version->description }}
+                            <table class="table table-hover table-sm mt-1 text-center"
+                                   style="margin-bottom: 0rem;">
+                                <thead>
+                                <tr>
+                                    <th scope="col" colspan="2">AudioFile</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    @if($version->project_audio_file)
+                                        <td>메인 파일: <a href="#">{{ $version->title }} 메인.mp3</a>
+                                        </td> @endif
+                                    @if($version->mr_audio_file)
+                                        <td>MR 파일: <a href="#">{{ $version->title }} MR.mp3</a>
+                                        </td> @endif
+                                    @if($version->voice_audio_file)
+                                        <td>목소리 파일: <a href="#">{{ $version->title }}.mp3</a>
+                                        </td> @endif
+                                </tr>
+                                </tbody>
+                            </table>
+                        @else
+                            접근 권한이 없습니다.
+                        @endif
                     </div>
                 </div>
             @endif

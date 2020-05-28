@@ -21,6 +21,10 @@ class Collaborator extends Model
         return $this->belongsTo('App\Models\Project');
     }
 
+    public function getIsProducerAttribute() {
+        return in_array($this->role, ['composer', 'editor', 'lyricist', 'master']);
+    }
+
     public function scopeListJoined($query, $board) {
         if ($board === 'producer') {
             return $query->where('role', '!=', 'master')->where('role', '!=', 'singer');

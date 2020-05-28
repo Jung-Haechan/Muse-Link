@@ -20,11 +20,15 @@
                     <tbody>
                     @forelse($collaborators as $collaborator)
                         <tr>
-                            <td>{{ $collaborator->user->name }}</td>
+                            <td>
+                                <a href="{{ route('user.show', [$collaborator->is_producer ? 'producer' : 'singer', $collaborator->user->id]) }}">
+                                    {{ $collaborator->user->name }}
+                                </a>
+                            </td>
                             <td>{{ $collaborator->role }}</td>
                             <td>
-                                @if($collaborator->user_id === Auth::id())
-                                    프로젝트 개설
+                                @if(isProjectAdmin($collaborator->user, $project))
+                                    관리자
                                 @elseif($collaborator->is_approved === 0)
                                     미승인
                                 @elseif($collaborator->is_approved === 1)
@@ -32,50 +36,53 @@
                                 @elseif($collaborator->is_approved === 2)
                                     승인 거부
                                 @elseif($collaborator->is_approved === 3)
-                                    강제 탈퇴
+                                    권한 제거
                                 @endif
                             </td>
                             <td>
                                 <div class="container">
                                     <div class="row">
-                                        @if($collaborator->is_approved === 0)
-                                            <form class="form-inline"
-                                                  action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
-                                                  method="post">
-                                                @csrf
-                                                @method('put')
-                                                <input type="hidden" name="is_approved" value="1">
-                                                <button type="submit" class="btn btn btn-info btn-sm mr-2">승인</button>
-                                            </form>
-                                            <form class="form-inline"
-                                                  action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
-                                                  method="post">
-                                                @csrf
-                                                @method('put')
-                                                <input type="hidden" name="role" value="{{ $collaborator->role }}">
-                                                <button type="submit" class="btn btn btn-danger btn-sm">거절</button>
-                                            </form>
-                                        @elseif($collaborator->is_approved === 1)
-                                            @if($project->user_id !== Auth::id())
+                                        @if(!isProjectAdmin($collaborator->user, $project))
+                                            @if($collaborator->is_approved === 0)
                                                 <form class="form-inline"
                                                       action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
                                                       method="post">
                                                     @csrf
                                                     @method('put')
-                                                    <input type="hidden" name="is_approved" value="3">
-                                                    <button type="submit" class="btn btn btn-danger btn-sm">권한제거
+                                                    <input type="hidden" name="is_approved" value="1">
+                                                    <button type="submit" class="btn btn btn-info btn-sm mr-2">승인
+                                                    </button>
+                                                </form>
+                                                <form class="form-inline"
+                                                      action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('put')
+                                                    <input type="hidden" name="is_approved" value="2">
+                                                    <button type="submit" class="btn btn btn-danger btn-sm">거절</button>
+                                                </form>
+                                            @elseif($collaborator->is_approved === 1)
+                                                @if($project->user_id !== Auth::id())
+                                                    <form class="form-inline"
+                                                          action="{{ route('project.collaborator.update', [$project->id, $collaborator->id]) }}"
+                                                          method="post">
+                                                        @csrf
+                                                        @method('put')
+                                                        <input type="hidden" name="is_approved" value="3">
+                                                        <button type="submit" class="btn btn btn-danger btn-sm">권한제거
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @else
+                                                <form class="form-inline"
+                                                      action="{{ route('project.collaborator.delete', [$project->id, $collaborator->id]) }}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn btn-danger btn-sm">삭제
                                                     </button>
                                                 </form>
                                             @endif
-                                        @else
-                                            <form class="form-inline"
-                                                  action="{{ route('project.collaborator.delete', [$project->id, $collaborator->id]) }}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn btn btn-danger btn-sm">강제탈퇴
-                                                </button>
-                                            </form>
                                         @endif
                                     </div>
                                 </div>
