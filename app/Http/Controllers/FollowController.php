@@ -12,8 +12,17 @@ class FollowController extends Controller
 {
     use SoftDeletes;
 
-    public function index($board) {
-
+    public function index(User $user, $board) {
+        if ($board === 'follower') {
+            $fellows = $user->followers()->paginate(12);
+        } else {
+            $fellows = $user->follows()->paginate(12);
+        }
+        return view('user.follow.index', [
+            'user' => $user,
+            'fellows' => $fellows,
+            'board' => $board,
+        ]);
     }
 
     public function store(User $user) {

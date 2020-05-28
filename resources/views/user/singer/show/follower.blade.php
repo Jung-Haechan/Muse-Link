@@ -2,7 +2,9 @@
     <div>
         팔로워 {{ $followers_number }}명
         <span style="float:right">
-            +
+            <a class="text-light" href="{{ route('user.follow.index', [$user->id, 'follower']) }}">
+                +
+            </a>
         </span>
     </div>
     @forelse($followers as $follower)

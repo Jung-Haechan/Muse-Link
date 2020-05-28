@@ -111,7 +111,7 @@ class User extends Authenticatable
                         ->whereColumn('user_id', 'users.id')
                         ->orderByDesc('created_at')
                         ->limit(1)
-                );;
+                );
         }
     }
 }
