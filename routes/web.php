@@ -103,6 +103,42 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::delete('/{user}', 'PostController@delete')->name('delete');
 });
 
+Route::prefix('lecture_category')->name('lecture_category.')->group(function () {
+    Route::get('/', 'LectureCategoryController@index')->name('index');
+    Route::get('/create', 'LectureCategoryController@create')->name('create');
+    Route::get('/{lecture_category}', 'LectureCategoryController@show')->name('show');
+    Route::get('/{lecture_category}/edit', 'LectureCategoryController@edit')->name('edit');
+    Route::post('/', 'LectureCategoryController@store')->name('store');
+    Route::put('/{lecture_category}', 'LectureCategoryController@update')->name('update');
+    Route::delete('/{lecture_category}', 'LectureCategoryController@delete')->name('delete');
+
+    Route::prefix('/{lecture_category}')->group(function () {
+        Route::prefix('/reply')->name('reply.')->group(function () {
+            Route::post('/', 'ReplyController@store')->name('store');
+            Route::put('/{reply}', 'ReplyController@update')->name('update');
+            Route::delete('/{reply}', 'ReplyController@delete')->name('delete');
+        });
+    });
+});
+
+Route::prefix('notice')->name('notice.')->group(function () {
+    Route::get('/', 'NoticeController@index')->name('index');
+    Route::get('/create', 'NoticeController@create')->name('create');
+    Route::get('/{notice}', 'NoticeController@show')->name('show');
+    Route::get('/{notice}/edit', 'NoticeController@edit')->name('edit');
+    Route::post('/', 'NoticeController@store')->name('store');
+    Route::put('/{notice}', 'NoticeController@update')->name('update');
+    Route::delete('/{notice}', 'NoticeController@delete')->name('delete');
+});
+
+Route::prefix('qna')->name('qna.')->group(function () {
+    Route::get('/', 'QnaController@index')->name('index');
+    Route::get('/create', 'QnaController@create')->name('create');
+    Route::post('/', 'QnaController@store')->name('store');
+    Route::put('/{qna}/answer', 'QnaController@update_answer')->name('update_answer');
+    Route::delete('/{qna}', 'QnaController@delete')->name('delete');
+});
+
 
 
 

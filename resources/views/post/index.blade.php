@@ -58,9 +58,9 @@
 @endsection
 
 @section('content')
-    <div class="container py-2"
-         style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9;">
-        <div class="col-md-10 mx-auto">
+    <div class="container">
+        <div class="col-md-11 p-5 mx-auto"
+             style="background-color: #4e555b; margin-top: 50px; opacity: 0.9; color: #d6d8db">
             <table class="table table-light table-condensed table-striped mt-2" style="font-size:14px;">
                 <thead class="bg-dark text-light">
                 <tr>

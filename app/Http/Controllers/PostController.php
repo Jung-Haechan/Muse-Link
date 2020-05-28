@@ -29,6 +29,10 @@ class PostController extends Controller
     }
 
     public function create() {
+        if(!Auth::check()) {
+            return redirect()->back()
+                ->with('alert', '로그인 후 이용 가능합니다.');
+        }
         return view('post.create');
     }
 

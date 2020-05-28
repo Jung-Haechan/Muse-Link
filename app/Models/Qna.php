@@ -12,4 +12,8 @@ class Qna extends Model
     protected $fillable = [
         'user_id', 'question', 'answer', 'answered_at'
     ];
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }

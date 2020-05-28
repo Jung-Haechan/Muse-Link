@@ -65,6 +65,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Version');
     }
 
+    public function notices() {
+        return $this->hasMany('App\Models\Notice');
+    }
+
     public function collaborators() {
         return $this->hasMany('App\Models\Collaborator');
     }

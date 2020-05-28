@@ -39,14 +39,9 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle mr-2" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link mr-2" href="{{ route('lecture_category.index') }}" role="button" aria-haspopup="true" aria-expanded="false">
                     음악 강좌
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">프로듀싱 강좌</a>
-                    <a class="dropdown-item" href="#">보컬 강좌</a>
-                </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -54,8 +49,8 @@
                     기타
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">공지사항</a>
-                    <a class="dropdown-item" href="#">QnA</a>
+                    <a class="dropdown-item" href="{{ route('notice.index') }}">공지사항</a>
+                    <a class="dropdown-item" href="{{ route('qna.index') }}">QnA</a>
                     <a class="dropdown-item" href="#">후원문의</a>
                 </div>
             </li>
