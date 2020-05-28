@@ -26,7 +26,7 @@ class CreateProjectsTable extends Migration
             $table->boolean('has_editor')->default(false);
             $table->boolean('has_lyricist')->default(false);
             $table->boolean('has_singer')->default(false);
-            $table->boolean('is_completed')->default(false);
+            $table->dateTime('completed_at')->nullable();
             $table->string('genre')->nullable();
             $table->unsignedInteger('is_opened')->default(0); //0:전체 공개 1:회원공개 2:팔로워공개 3:협업자공개 4:비공개
             $table->unsignedInteger('views')->default(0);

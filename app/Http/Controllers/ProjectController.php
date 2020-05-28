@@ -26,6 +26,7 @@ class ProjectController extends Controller
         $projects = Project::listAll(0, $board, $period)->paginate(12);
         return view('project.' . $board . '.index', [
             'projects' => $projects,
+            'period' => $period,
         ]);
     }
 
@@ -38,8 +39,6 @@ class ProjectController extends Controller
         $replies = $project->replies()->latest()->get();
         $project['likes'] = $project->likes()->count();
         $project['already_like'] = $project->likes()->where('user_id', Auth::id())->first() != NULL;
-        $project['lyrics_version'] = Version::find($project->lyrics_version_id);
-        $project['audio_version'] = Version::find($project->audio_version_id);
         $collaboratorStatus = [];
         foreach (config('translate.role') as $role_eng => $role_kor) {
             $collaboratorStatus[$role_eng] = $this->isCollaborator(Auth::user(), $project, $role_eng);
@@ -134,7 +133,7 @@ class ProjectController extends Controller
     public function update_complete(Project $project) {
         if ($project->audio_version_id && $project->lyrics_version_id) {
             $project->update([
-                'is_completed' => true,
+                'completed_at' => now()->toDateTime(),
             ]);
             return redirect()->route('project.index', 'completed')
                 ->with('alert', '프로젝트가 완성작으로 등록되었습니다.');

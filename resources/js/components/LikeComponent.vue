@@ -2,7 +2,7 @@
     <button
         class="btn ml-auto"
         @click="like"
-        :class="{ 'btn-warning' : !alreadyLikeV, 'btn-success' : alreadyLikeV }"
+        :class="{ 'btn-outline-dark' : !alreadyLikeV, 'btn-warning' : alreadyLikeV }"
     >
         <img :src="iconDir" alt="" style="width: 1.5rem;">
         <span>{{ this.likeNumber }}</span>

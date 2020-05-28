@@ -37696,8 +37696,8 @@ var render = function() {
     {
       staticClass: "btn ml-auto",
       class: {
-        "btn-warning": !_vm.alreadyLikeV,
-        "btn-success": _vm.alreadyLikeV
+        "btn-outline-dark": !_vm.alreadyLikeV,
+        "btn-warning": _vm.alreadyLikeV
       },
       on: { click: _vm.like }
     },

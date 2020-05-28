@@ -77,8 +77,8 @@ function getLastPeriod($period) {
     $time = 0;
     if ($period === 'week') {
         $time = 604800;
-    } elseif ($period) {
-        $time = 18144000;
+    } elseif ($period === 'month') {
+        $time = 2600000;
     }
     return date('Y-m-d H:i:s', strtotime('Now') - $time);
 }

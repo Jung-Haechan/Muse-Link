@@ -2,48 +2,56 @@
 
 @section('jumbotron')
     <div class="text-center">
-        <h3 class="section-subtitle font-weight-bold mb-3" style="color: #d2ab39;">당신의 미완성 프로젝트를 공유하세요!</h3>
+        <h3 class="section-subtitle font-weight-bold mb-3" style="color: #d2ab39;">여러분의 작품이 차트에 올라갔나요?</h3>
     </div>
     <div class="section-title text-center text-light display-3">
         <a href="{{ route('project.index', 'completed') }}"
-           class="text-light text-decoration-none">Masterpiece</a>
+           class="text-light text-decoration-none">Chart</a>
     </div>
 @endsection
 
 @section('content')
     <div class="container">
-        <div class="col-md-11 p-5 mx-auto"
+        <div class="col-md-11 p-3 mx-auto"
              style="background-color: #4e555b; margin-top: 50px; min-height: 1000px; opacity: 0.9; color: #d6d8db">
-            <div class="row">
-                @forelse($projects as $project)
-
-                    <div class="col-lg-4 col-sm-6 mb-3">
-                        {{ $project->likes_month }}
-                        <a class="text-decoration-none"
-                           href="{{ route('project.show', ['completed', $project->id]) }}">
-                            <div class="card card-music container">
-                                <div class="row text-dark bg-dark" style="height: 9rem;">
-
-                                    <img class="card-img-top mb-3 mx-auto"
-                                         src="{{ $project->cover_img_file ? getFile($project->cover_img_file) : asset('storage/base/base_logo.jpg') }}"
-                                         style="width:9rem; height:9rem; object-fit: cover;" alt="Card image cap">
-
-                                </div>
-                                <div class="card-body text-dark">
-                                    <div class="" style="font-size: 0.7rem">{{ $project->created_at }}</div>
-                                    <h5 class="card-title text-left text-truncate">
-                                        @if($project->genre) [{{ $project->genre }}] @endif {{ $project->title }}
-                                    </h5>
-                                    <div class="card-text">
-                                        by {{ $project->user->name }}
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+            <h3 class="text-center">
+                {{ config('translate.period.'.$period) }} 차트
+            </h3>
+            @forelse($projects as $num => $project)
+                <a href="{{ route('project.show', ['completed', $project->id]) }}"
+                   class="text-dark text-decoration-none">
+                    <div class="row p-2 m-2 bg-light">
+                        <div class="col-1 px-2">
+                            {{ $num+1 }}위
+                        </div>
+                        <div class="col-1 px-2">
+                            <img src="{{ getFile($project->cover_img_file) }}" style="width: 4rem" alt="">
+                        </div>
+                        <div class="col-3">
+                            {{ $project->title }}
+                        </div>
+                        <div class="col-2">
+                            {{ $project->genre }}
+                        </div>
+                        <div class="col-4">
+                            <audio controls="controls" class="w-100">
+                                <source
+                                    src="{{ getFile($project->audio_version->project_audio_file) }}">
+                            </audio>
+                        </div>
+                        <div class="col-1">
+                            <like
+                                icon-dir="{{ asset('storage/icon/like.png') }}"
+                                project-id="{{ $project->id }}"
+                                is-logged-in="{{ json_encode(Auth::check()) }}"
+                                likes="{{ json_encode($project['likes_'.$period]) }}"
+                                already-like="{{ json_encode($project->already_like) }}"
+                            ></like>
+                        </div>
                     </div>
-                @empty
-                @endforelse
-            </div>
+                </a>
+            @empty
+            @endforelse
             <div class="mx-auto">
                 {{ $projects->links() }}
             </div>
