@@ -25,6 +25,7 @@ Route::prefix('project')->name('project.')->group(function () {
     Route::prefix('/{project}')->group(function () {
         Route::prefix('/version')->name('version.')->group(function () {
             Route::get('/create/{role}', 'VersionController@create')->name('create');
+            Route::get('/{version}/audio', 'VersionController@audio')->name('audio');
             Route::post('/{role}', 'VersionController@store')->name('store');
             Route::get('/{version}/edit', 'VersionController@edit')->name('edit');
             Route::put('/{version}', 'VersionController@update')->name('update');
@@ -52,6 +53,7 @@ Route::prefix('project')->name('project.')->group(function () {
     Route::get('/{board}', 'ProjectController@index')->name('index');
     Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
     Route::get('/{board}/{project}', 'ProjectController@show')->name('show');
+    Route::get('/{board}/{project}/audio', 'ProjectController@audio')->name('audio');
     Route::post('/', 'ProjectController@store')->name('store');
     Route::put('/{project}', 'ProjectController@update')->name('update');
     Route::put('/{project}/status', 'ProjectController@update_status')->name('update_status');
@@ -89,6 +91,7 @@ Route::prefix('user')->name('user.')->group(function () {
         });
         Route::prefix('/{board}/exhibit')->name('exhibit.')->group(function() {
             Route::get('/create', 'ExhibitController@create')->name('create');
+            Route::get('/{exhibit}/audio', 'ExhibitController@audio')->name('audio');
             Route::post('/', 'ExhibitController@store')->name('store');
             Route::get('/{exhibit}/edit', 'ExhibitController@edit')->name('edit');
             Route::put('/{exhibit}', 'ExhibitController@update')->name('update');

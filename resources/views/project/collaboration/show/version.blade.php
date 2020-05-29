@@ -86,13 +86,25 @@
                                 <tbody>
                                 <tr>
                                     @if($version->project_audio_file)
-                                        <td>메인 파일: <a href="#">{{ $version->title }} 메인.mp3</a>
+                                        <td>메인 파일:
+                                            <a href="{{ route('project.version.audio', [$project->id, $version->id]) }}?type=project"
+                                                      onclick="window.open(this.href, '_blank', 'width=400,height=100,toolbars=no,scrollbars=no'); return false;">
+                                                {{ $version->title }} 메인.mp3
+                                            </a>
                                         </td> @endif
                                     @if($version->mr_audio_file)
-                                        <td>MR 파일: <a href="#">{{ $version->title }} MR.mp3</a>
+                                        <td>MR 파일:
+                                            <a href="{{ route('project.version.audio', [$project->id, $version->id]) }}?type=mr"
+                                               onclick="window.open(this.href, '_blank', 'width=400,height=100,toolbars=no,scrollbars=no'); return false;">
+                                                {{ $version->title }} MR.mp3
+                                            </a>
                                         </td> @endif
                                     @if($version->voice_audio_file)
-                                        <td>목소리 파일: <a href="#">{{ $version->title }}.mp3</a>
+                                        <td>목소리 파일:
+                                            <a href="{{ route('project.version.audio', [$project->id, $version->id]) }}?type=voice"
+                                               onclick="window.open(this.href, '_blank', 'width=400,height=100,toolbars=no,scrollbars=no'); return false;">
+                                                {{ $version->title }} 목소리.mp3
+                                            </a>
                                         </td> @endif
                                 </tr>
                                 </tbody>

@@ -85,13 +85,11 @@
                         {{ $exhibit->description }}
                         <div class="text-center pt-3">
                             @if($exhibit->audio_file)
-                                <audio controls="controls">
-                                    <source
-                                        src="{{ getFile($exhibit->audio_file) }}">
-                                </audio>
+                                <a href="{{ route('user.exhibit.audio', [$user->id, 'producer', $exhibit->id]) }}"
+                                   onclick="window.open(this.href, '_blank', 'width=400,height=100,toolbars=no,scrollbars=no'); return false;">바로 듣기</a>
                             @elseif($exhibit->youtube_url)
                                 <a target="_blank"
-                                   href="{{ $exhibit->youtube_url }}">{{ $exhibit->youtube_url }}</a>
+                                   href="{{ $exhibit->youtube_url }}">유튜브로 듣기</a>
                             @endif
                         </div>
                     @else

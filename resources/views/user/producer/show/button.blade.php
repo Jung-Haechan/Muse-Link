@@ -6,5 +6,8 @@
             is-logged-in="{{ json_encode(Auth::check()) }}"
         ></follow>
     @endif
+        <a class="btn btn-primary float-right ml-2 text-light">
+            메시지
+        </a>
 </div>
 

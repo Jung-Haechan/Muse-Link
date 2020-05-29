@@ -29,7 +29,7 @@ class Collaborator extends Model
         if ($board === 'producer') {
             return $query->where('role', '!=', 'master')->where('role', '!=', 'singer');
         } else {
-            return $query->where('role', '!=', 'singer');
+            return $query->where('role', 'singer');
         }
     }
 }

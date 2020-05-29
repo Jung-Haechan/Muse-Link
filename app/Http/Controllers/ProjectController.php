@@ -32,7 +32,7 @@ class ProjectController extends Controller
 
     public function show($board, Project $project)
     {
-        if(!canAccessProject(Auth::user(), $project)) {
+        if (!canAccessProject(Auth::user(), $project)) {
             return redirect()->back()
                 ->with('alert', '접근 권한이 없습니다.');
         }
@@ -112,8 +112,9 @@ class ProjectController extends Controller
         return redirect()->route('project.show', ['collaboration', $project->id]);
     }
 
-    public function update_face(Request $request, Project $project) {
-        if(!isProjectAdmin(Auth::user(), $project)) {
+    public function update_face(Request $request, Project $project)
+    {
+        if (!isProjectAdmin(Auth::user(), $project)) {
             return redirect()->back()
                 ->with('alert', '권한이 없습니다.');
         }
@@ -125,16 +126,18 @@ class ProjectController extends Controller
             ->with('alert', '해당 버전이 대표로 설정되었습니다.');
     }
 
-    public function update_status(Request $request, Project $project) {
-        $action = $project['has_'.$request->role] ? '개방' : '마감';
+    public function update_status(Request $request, Project $project)
+    {
+        $action = $project['has_' . $request->role] ? '개방' : '마감';
         Project::where('id', $project->id)->update([
-            'has_'.$request->role => !$project['has_'.$request->role],
+            'has_' . $request->role => !$project['has_' . $request->role],
         ]);
         return redirect()->back()
-            ->with('alert', config('translate.role.'.$request->role).' 신청을 '.$action.'했습니다.');
+            ->with('alert', config('translate.role.' . $request->role) . ' 신청을 ' . $action . '했습니다.');
     }
 
-    public function update_complete(Project $project) {
+    public function update_complete(Project $project)
+    {
         if ($project->audio_version_id && $project->lyrics_version_id) {
             $project->update([
                 'completed_at' => now()->toDateTime(),
@@ -151,5 +154,12 @@ class ProjectController extends Controller
     {
         $project->delete();
         return redirect()->route('project.index', 'collaboration')->with('alert', '삭제가 완료되었습니다.');
+    }
+
+    public function audio($board, Project $project)
+    {
+        return view('project.audio',[
+            'project' => $project,
+        ]);
     }
 }

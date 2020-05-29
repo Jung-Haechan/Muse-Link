@@ -29,11 +29,12 @@
                         <div class="col-2">
                             {{ $project->genre }}
                         </div>
-                        <div class="col-4">
-                            <audio controls="controls" class="w-100">
-                                <source
-                                    src="{{ getFile($project->audio_version->project_audio_file) }}">
-                            </audio>
+                        <div class="col-2">
+                            {{ getTime($project->completed_at) }}
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ route('project.audio', ['chart', $project->id]) }}"
+                               onclick="window.open(this.href, '_blank', 'width=400,height=100,toolbars=no,scrollbars=no'); return false;">바로 듣기</a>
                         </div>
                         <div class="col-1">
                             <like

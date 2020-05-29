@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exhibit;
+use App\Models\Project;
+use App\Models\Version;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,5 +95,12 @@ class ExhibitController extends Controller
         $exhibit->delete();
         return redirect()->back()
             ->with('alert', '작품이 삭제되었습니다.');
+    }
+
+    public function audio(User $user, $board, Exhibit $exhibit)
+    {
+        return view('user.'.$board.'.exhibit.audio', [
+            'exhibit' => $exhibit,
+        ]);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@include('post.index')
+@include('post.jumbotron')
 
 @section('content')
     <div class="container">
@@ -16,5 +16,4 @@
             </div>
         </div>
     </div>
-
 @endsection

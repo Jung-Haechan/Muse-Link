@@ -50,15 +50,13 @@ class VersionController extends Controller
                     }
                 }
             }
-        }
-        elseif ($role === 'lyricist') {
+        } elseif ($role === 'lyricist') {
             $data = $request->validate([
                 'title' => 'required|max:255',
                 'description' => 'nullable',
                 'lyrics' => 'required',
             ]);
-        }
-        //Todo: 필요한 오디오 파일  재정립
+        } //Todo: 필요한 오디오 파일  재정립
         elseif ($role === 'singer') {
             $data = $request->validate([
                 'title' => 'required|max:255',
@@ -88,17 +86,26 @@ class VersionController extends Controller
 
     public function delete(Project $project, Version $version)
     {
-        if($project->audio_version_id === $version->id) {
+        if ($project->audio_version_id === $version->id) {
             $project->update([
                 'audio_version_id' => NULL,
             ]);
         }
-        if($project->lyrics_version_id === $version->id) {
+        if ($project->lyrics_version_id === $version->id) {
             $project->update([
                 'lyrics_version_id' => NULL,
             ]);
         }
         $version->delete();
         return redirect()->back()->with('alert', '버전이 삭제되었습니다.');
+    }
+
+    public function audio(Project $project, Version $version, Request $request)
+    {
+        $audio_type = $request->type;
+        return view('project.collaboration.version.audio', [
+            'version' => $version,
+            'audio_type' => $audio_type,
+        ]);
     }
 }
