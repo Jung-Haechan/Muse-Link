@@ -6,7 +6,9 @@
             is-logged-in="{{ json_encode(Auth::check()) }}"
         ></follow>
     @endif
-        <a class="btn btn-primary float-right ml-2 text-light">
+        <a href="{{ route('user.message.show', $user->id) }}"
+           class="btn btn-primary float-right ml-2 text-light"
+           onclick="window.open(this.href, '_blank', 'toolbars=no'); return false;">
             메시지
         </a>
 </div>

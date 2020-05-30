@@ -79,7 +79,7 @@ class Project extends Model
         }
     }
 
-    public function scopeListAll($query, $open_range, $board, $period = NULL) {
+    public function scopeListAll($query, $board, $period = NULL) {
         if ($board === 'collaboration') {
             return $query->whereNull('completed_at')
                 ->orderByDesc(

@@ -3,11 +3,13 @@
 namespace App;
 
 use App\Models\Exhibit;
+use App\Models\Message;
 use App\Models\Version;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -41,59 +43,96 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function exhibits() {
+    public function exhibits()
+    {
         return $this->hasMany('App\Models\Exhibit')->latest();
     }
 
-    public function producer_exhibit() {
+    public function producer_exhibit()
+    {
         return $this->hasOne('App\Models\Exhibit', 'id', 'producer_exhibit_id');
     }
 
-    public function singer_exhibit() {
+    public function singer_exhibit()
+    {
         return $this->hasOne('App\Models\Exhibit', 'id', 'singer_exhibit_id');
     }
 
-    public function projects() {
+    public function projects()
+    {
         return $this->hasMany('App\Models\Project');
     }
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany('App\Models\Project');
     }
 
-    public function versions() {
+    public function versions()
+    {
         return $this->hasMany('App\Models\Version');
     }
 
-    public function notices() {
+    public function notices()
+    {
         return $this->hasMany('App\Models\Notice');
     }
 
-    public function collaborators() {
+    public function collaborators()
+    {
         return $this->hasMany('App\Models\Collaborator');
     }
 
-    public function replies() {
+    public function replies()
+    {
         return $this->hasMany('App\Models\Reply');
     }
 
-    public function likes() {
+    public function likes()
+    {
         return $this->hasMany('App\Models\Like');
     }
 
-    public function follows() {
+    public function follows()
+    {
         return $this->hasMany('App\Models\Follow');
     }
 
-    public function followers() {
+    public function followers()
+    {
         return $this->hasMany('App\Models\Follow', 'followee_id', 'id');
     }
 
-    public function getIsProducerAttribute() {
+    public function received_messages()
+    {
+        return $this->hasMany('App\Models\Message', 'receiver_id', 'id');
+    }
+
+    public function sent_messages()
+    {
+        return $this->hasMany('App\Models\Message', 'sender_id', 'id');
+    }
+
+    public function messagesWith()
+    {
+        return Message::where([
+            'sender_id' => $this->id,
+            'receiver_id' => Auth::id(),
+        ])->orWhere(function ($query) {
+            $query->where([
+                'sender_id' => Auth::id(),
+                'receiver_id' => $this->id,
+            ]);
+        })->latest();
+    }
+
+    public function getIsProducerAttribute()
+    {
         return $this->is_composer || $this->is_editor || $this->is_lyricist;
     }
 
-    public function scopeListAll($query, $board) {
+    public function scopeListAll($query, $board)
+    {
         if ($board === 'producer') {
             return $query->where('is_composer', true)->orWhere('is_lyricist', true)->orWhere('is_editor', true)
                 ->orderByDesc(
@@ -114,4 +153,26 @@ class User extends Authenticatable
                 );
         }
     }
+
+    public function scopeListOpponents($query)
+    {
+        return $query->where(function ($query) {
+            $query->whereHas('received_messages', function ($query) {
+                $query->where('sender_id', Auth::id());
+            })
+                ->orWhereHas('sent_messages', function ($query) {
+                    $query->where('receiver_id', Auth::id());
+                });
+        })
+            ->orderByDesc(
+                Message::select('created_at')
+                    ->where(function ($query) {
+                        $query->whereColumn('sender_id', 'users.id')
+                            ->orWhereColumn('receiver_id', 'users.id');
+                    })
+                    ->orderByDesc('created_at')
+                    ->limit(1)
+            );
+    }
 }
+

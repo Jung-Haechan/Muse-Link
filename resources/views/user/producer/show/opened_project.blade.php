@@ -21,7 +21,7 @@
                                 <div class="card-body text-dark">
                                     <div class="" style="font-size: 0.7rem">{{ $opened_project->created_at }}</div>
                                     <h5 class="card-title text-left text-truncate">
-                                        @if($opened_project->genre) [{{ $opened_project->genre }}] @endif {{ $opened_project->title }}
+                                        [{{ $opened_project->genre }}] {{ $opened_project->title }}
                                     </h5>
                                 </div>
                             </div>

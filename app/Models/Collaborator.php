@@ -27,9 +27,9 @@ class Collaborator extends Model
 
     public function scopeListJoined($query, $board) {
         if ($board === 'producer') {
-            return $query->where('role', '!=', 'master')->where('role', '!=', 'singer');
+            return $query->where('role', '!=', 'master')->where('role', '!=', 'singer')->where('is_approved', 1);
         } else {
-            return $query->where('role', 'singer');
+            return $query->where('role', 'singer')->where('is_approved', 1);
         }
     }
 }

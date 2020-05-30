@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('like', require('./components/LikeComponent.vue').default);
 Vue.component('follow', require('./components/FollowComponent.vue').default);
+Vue.component('message', require('./components/MessageComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

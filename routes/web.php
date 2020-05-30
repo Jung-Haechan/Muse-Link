@@ -83,12 +83,20 @@ Route::prefix('post')->name('post.')->group(function () {
 
 Route::prefix('user')->name('user.')->group(function () {
 
+    Route::prefix('message')->name('message.')->group(function () {
+        Route::get('/', 'MessageController@index')->name('index');
+        Route::get('/{user}', 'MessageController@show')->name('show');
+        Route::post('/', 'MessageController@store')->name('store');
+        Route::delete('/{message}', 'MessageController@delete')->name('delete');
+    });
+
     Route::prefix('/{user}')->group(function() {
         Route::prefix('/follow')->name('follow.')->group(function() {
             Route::get('/{board}', 'FollowController@index')->name('index');
             Route::post('/', 'FollowController@store')->name('store');
             Route::delete('/', 'FollowController@delete')->name('delete');
         });
+
         Route::prefix('/{board}/exhibit')->name('exhibit.')->group(function() {
             Route::get('/create', 'ExhibitController@create')->name('create');
             Route::get('/{exhibit}/audio', 'ExhibitController@audio')->name('audio');
@@ -142,6 +150,8 @@ Route::prefix('qna')->name('qna.')->group(function () {
     Route::put('/{qna}/answer', 'QnaController@update_answer')->name('update_answer');
     Route::delete('/{qna}', 'QnaController@delete')->name('delete');
 });
+
+
 
 
 

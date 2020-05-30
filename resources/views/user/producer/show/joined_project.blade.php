@@ -22,8 +22,7 @@
                                     <div class=""
                                          style="font-size: 0.7rem">{{ $collaboration->project->created_at }}</div>
                                     <h5 class="card-title text-left text-truncate">
-                                        @if($collaboration->project->genre) [{{ $collaboration->project->genre }}
-                                        ] @endif {{ $collaboration->project->title }}
+                                        [{{ $collaboration->project->genre }}] {{ $collaboration->project->title }}
                                     </h5>
                                 </div>
                             </div>

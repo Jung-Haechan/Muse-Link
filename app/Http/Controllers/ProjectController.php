@@ -23,7 +23,7 @@ class ProjectController extends Controller
     public function index(Request $request, $board)
     {
         $period = $request->period;
-        $projects = Project::listAll(0, $board, $period)->paginate(12);
+        $projects = Project::listAll($board, $period)->paginate(12);
         return view('project.' . $board . '.index', [
             'projects' => $projects,
             'period' => $period,

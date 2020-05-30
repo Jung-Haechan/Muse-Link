@@ -2,6 +2,7 @@
 
 use App\Models\Exhibit;
 use App\Models\Follow;
+use App\Models\Message;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -35,5 +36,6 @@ class UserSeeder extends Seeder
             }
         }
         factory(Follow::class, 1500)->create();
+        factory(Message::class, 1500)->create();
     }
 }

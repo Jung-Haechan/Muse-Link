@@ -15,18 +15,18 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('opponent_id');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
             $table->string('content');
-            $table->boolean('is_read');
-            $table->boolean('is_deleted_by_user');
-            $table->boolean('is_deleted_by_opponent');
+            $table->boolean('is_read')->default(false);
+            $table->boolean('is_deleted_by_sender')->default(false);
+            $table->boolean('is_deleted_by_receiver')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')
+            $table->foreign('sender_id')
                 ->references('id')->on('users');
-            $table->foreign('opponent_id')
+            $table->foreign('receiver_id')
                 ->references('id')->on('users');
         });
     }
