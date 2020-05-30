@@ -27,8 +27,8 @@ class HomeController extends Controller
         return view('index');
     }
 
-    public function home()
+    public function support()
     {
-        return 'home';
+        return view('cs.support');
     }
 }

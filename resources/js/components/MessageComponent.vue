@@ -18,10 +18,10 @@
                     <div class="text"
                          :class="{ 'my-message': message.receiver_id==opponent.id, 'your-message': message.sender_id==opponent.id }"
                     >
-                        <div class="text-right">
+                        <div>
                             {{ message.content }}
                         </div>
-                        <div class="text-right" style="font-size: 0.8rem"
+                        <div style="font-size: 0.8rem"
                              :class="{ 'text-light': message.receiver_id==opponent.id, 'text-dark': message.sender_id==opponent.id }">
                             {{ message.created_at_for_js }}
                         </div>

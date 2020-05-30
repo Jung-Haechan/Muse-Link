@@ -9,16 +9,16 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    @include('project.completed.show.face')
+                    @include('project.collaboration.show.face')
                 </div>
                 <div class="col-md-6">
-                    @include('project.completed.show.info')
+                    @include('project.collaboration.show.info')
                     @include('project.completed.show.button')
                 </div>
             </div>
             @include('project.completed.show.collaborator')
             <hr>
-            @include('project.completed.show.reply')
+            @include('project.collaboration.show.reply')
         </div>
     </div>
 @endsection

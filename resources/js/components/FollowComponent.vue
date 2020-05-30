@@ -2,9 +2,9 @@
     <button
         class="btn ml-auto"
         @click="follow"
-        :class="{ 'btn-warning' : !alreadyFollowedV, 'btn-success' : alreadyFollowedV }"
+        :class="{ 'btn-outline-dark' : !alreadyFollowedV, 'btn-warning' : alreadyFollowedV }"
     >
-        팔로우
+        <img :src="iconDir" alt="" style="width: 1.2rem;">
     </button>
 </template>
 
@@ -17,6 +17,7 @@
             followeeId: String,
             isLoggedIn: String,
             alreadyFollowed: String,
+            iconDir: String,
         },
         created() {
 

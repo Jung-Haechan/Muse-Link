@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@include('user.singer.jumbotron')
-
 @section('content')
     <div>
         <div class="container col-md-10 mx-auto text-dark"

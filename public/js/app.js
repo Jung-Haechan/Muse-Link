@@ -1925,7 +1925,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     followeeId: String,
     isLoggedIn: String,
-    alreadyFollowed: String
+    alreadyFollowed: String,
+    iconDir: String
   },
   created: function created() {},
   data: function data() {
@@ -38412,12 +38413,17 @@ var render = function() {
     {
       staticClass: "btn ml-auto",
       class: {
-        "btn-warning": !_vm.alreadyFollowedV,
-        "btn-success": _vm.alreadyFollowedV
+        "btn-outline-dark": !_vm.alreadyFollowedV,
+        "btn-warning": _vm.alreadyFollowedV
       },
       on: { click: _vm.follow }
     },
-    [_vm._v("\n    팔로우\n")]
+    [
+      _c("img", {
+        staticStyle: { width: "1.2rem" },
+        attrs: { src: _vm.iconDir, alt: "" }
+      })
+    ]
   )
 }
 var staticRenderFns = []
@@ -38540,7 +38546,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("div", { staticClass: "text-right" }, [
+                    _c("div", [
                       _vm._v(
                         "\n                        " +
                           _vm._s(message.content) +
@@ -38551,7 +38557,6 @@ var render = function() {
                     _c(
                       "div",
                       {
-                        staticClass: "text-right",
                         class: {
                           "text-light": message.receiver_id == _vm.opponent.id,
                           "text-dark": message.sender_id == _vm.opponent.id

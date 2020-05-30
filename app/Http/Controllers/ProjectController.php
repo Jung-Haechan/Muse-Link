@@ -49,6 +49,7 @@ class ProjectController extends Controller
         }
         return view('project.' . $board . '.show.app', [
             'project' => $project,
+            'board' => $board,
             'versions' => $versions,
             'replies' => $replies,
             'collaboratorStatus' => $collaboratorStatus,

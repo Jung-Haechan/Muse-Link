@@ -1,6 +1,7 @@
 <div class="bg-light pb-2 p-3">
     <form action="{{ route('project.reply.store', $project) }}" method="post">
         @csrf
+        <input type="hidden" name="board" value="project">
         <div class="form-group" style="margin-bottom: 0.3rem;">
             <label for="reply" style="display: none"></label>
             <textarea type="text" class="form-control" id="content" name="content"
@@ -22,7 +23,11 @@
                     <div class="row">
                         <img src="{{ $reply->user->profile_img }}" style="width: 1.5rem"
                              class="my-auto mr-1">
-                        <div class="reply font-weight-bold">{{ $reply->user->name }}</div>
+                        <div class="reply font-weight-bold">
+                            <a class="text-dark" href="{{ route('user.show', [$reply->user->is_producer ? 'producer' : 'singer', $reply->user->id]) }}">
+                                {{ $reply->user->name }}
+                            </a>
+                        </div>
                     </div>
                     <div class="container">
                         <div class="row text-left mt-2">

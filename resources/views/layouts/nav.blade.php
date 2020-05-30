@@ -51,7 +51,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('notice.index') }}">공지사항</a>
                     <a class="dropdown-item" href="{{ route('qna.index') }}">QnA</a>
-                    <a class="dropdown-item" href="#">후원문의</a>
+                    <a class="dropdown-item" href="{{ route('support') }}">후원문의</a>
                 </div>
             </li>
         </ul>

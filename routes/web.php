@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('/home', 'HomeController@index');
+Route::get('/support', 'HomeController@support')->name('support');
 
 Auth::routes();
 Route::get('/login/{driver}', 'Auth\LoginController@social_login')->name('login.social');

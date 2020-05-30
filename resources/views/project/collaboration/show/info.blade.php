@@ -1,5 +1,5 @@
 <h2>
-    <a class="text-dark" href="{{ route('project.show', ['collaboration', $project->id]) }}">
+    <a class="text-dark" href="{{ route('project.show', [$board, $project->id]) }}">
         {{ $project->title }}
     </a>
 </h2>

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-{{--@include('user.producer.jumbotron')--}}
+@section('jumbotron.comment', '메신저로 당신의 의견을 전달하세요!')
+@section('jumbotron.url', route('user.index', 'producer'))
+@section('jumbotron.page', 'Messenger')
 
 @section('content')
     <div class="container">
