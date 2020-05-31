@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('jumbotron.comment', '메신저로 당신의 의견을 전달하세요!')
-@section('jumbotron.url', route('user.index', 'producer'))
+@section('jumbotron.url', route('user.message.index'))
 @section('jumbotron.page', 'Messenger')
 
 @section('content')
@@ -51,6 +51,7 @@
                 </div>
                 </a>
             @empty
+                <div class="text-center text-light">대화 상대가 없습니다.</div>
             @endforelse
             <div class="m-3">
                 {{ $opponents->links() }}

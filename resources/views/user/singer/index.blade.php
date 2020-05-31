@@ -33,6 +33,7 @@
                     </div>
                 </a>
             @empty
+                <div class="text-center text-light">가수가 없습니다.</div>
             @endforelse
             <div class="m-3">
                 {{ $users->links() }}

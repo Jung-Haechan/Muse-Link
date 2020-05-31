@@ -99,5 +99,6 @@
             </div>
         </div>
     @empty
+        <div class="text-center text-light">작품이 없습니다.</div>
     @endforelse
 </div>

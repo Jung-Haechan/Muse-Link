@@ -68,7 +68,7 @@
                                         <a class="text-decoration-none text-light dropdown-toggle" href="#" data-toggle="dropdown">{{Auth::user()->name}}님</a>
                                         <div class="dropdown-menu">
                                             <a href="{{ route('register') }}" class="dropdown-item">내정보 수정</a>
-                                            <a href="{{ route('user.show', ['producer', Auth::id()]) }}" class="dropdown-item">내 채널</a>
+                                            <a href="{{ route('user.show', [Auth::user()->is_producer ? 'producer' : 'singer', Auth::id()]) }}" class="dropdown-item">내 채널</a>
                                             <a href="{{ route('user.follow.index', [Auth::id(), 'follower']) }}" class="dropdown-item">팔로우 관리</a>
                                             <a href="{{ route('user.message.index', Auth::id()) }}" class="dropdown-item">메신저</a>
                                         </div>

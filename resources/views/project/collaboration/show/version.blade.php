@@ -117,5 +117,6 @@
             @endif
         </div>
     @empty
+        <div class="text-center text-light">버전이 없습니다.</div>
     @endforelse
 </div>

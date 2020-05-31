@@ -50,6 +50,7 @@
                     </div>
                 </a>
             @empty
+                <div class="text-center text-light">프로듀서가 없습니다.</div>
             @endforelse
             <div class="m-3">
                 {{ $users->links() }}

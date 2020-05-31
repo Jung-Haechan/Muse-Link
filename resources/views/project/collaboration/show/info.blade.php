@@ -8,7 +8,7 @@
         조회수: {{ $project->views }}
     </div>
     <div class="col-6 text-right">
-        by <a class="text-dark" href="{{ route('user.show', ['producer', $project->user->id]) }}">
+        by <a class="text-dark" href="{{ route('user.show', [$project->user->is_producer ? 'producer' : 'singer', $project->user->id]) }}">
             {{ $project->user->name }}
         </a>
     </div>

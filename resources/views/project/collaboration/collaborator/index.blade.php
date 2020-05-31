@@ -87,6 +87,7 @@
                             </td>
                         </tr>
                     @empty
+                        <div class="text-center text-light">참여자가 없습니다.</div>
                     @endforelse
                 </table>
 

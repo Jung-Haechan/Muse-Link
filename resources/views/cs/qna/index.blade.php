@@ -97,6 +97,9 @@
                         </div>
                     </div>
                 @empty
+                    <div class="text-center text-light">
+                        질문이 없습니다.
+                    </div>
                 @endforelse
             </div>
             <div class="row pt-3">

@@ -29,9 +29,7 @@
                     </div>
                 </div>
             @empty
-                <div>
-                    프로젝트 없음
-                </div>
+                <div class="text-center text-light">개설한 프로젝트가 없습니다.</div>
             @endforelse
         </div>
         @if ($opened_projects->count() > 1)

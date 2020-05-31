@@ -30,7 +30,7 @@
                 <div style="display: none">
                     {{ $fellow = $board === 'follower' ? $fellow->user : $fellow->followee }}
                 </div>
-                <a href="{{ route('user.show', ['producer', $fellow->id]) }}" class="text-dark text-decoration-none">
+                <a href="{{ route('user.show', [$fellow->is_producer ? 'producer' : 'singer', $fellow->id]) }}" class="text-dark text-decoration-none">
                     <div class="row p-2 m-2 bg-light" style="font-size: 0.9rem">
                         <div class="col-1 px-2">
                             <img src="{{ asset($fellow->profile_img) }}" style="width: 4rem" alt="">
@@ -62,6 +62,7 @@
                     </div>
                 </a>
             @empty
+                <div class="text-center text-light">팔로워가 없습니다.</div>
             @endforelse
             <div class="m-3">
                 {{ $fellows->links() }}

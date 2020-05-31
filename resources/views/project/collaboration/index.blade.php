@@ -55,6 +55,7 @@
                         </a>
                     </div>
                 @empty
+                    <div class="text-center text-light">프로젝트가 없습니다.</div>
                 @endforelse
             </div>
             <div class="row pt-3">

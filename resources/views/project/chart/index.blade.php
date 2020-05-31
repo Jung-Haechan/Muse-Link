@@ -47,6 +47,7 @@
                         </div>
                     </div>
             @empty
+                <div class="text-center text-light">완성작이 없습니다.</div>
             @endforelse
         </div>
     </div>

@@ -8,7 +8,7 @@
         </span>
     </div>
     @forelse($followers as $follower)
-        <a href="{{ route('user.show', ['producer', $follower->user_id]) }}" class="text-decoration-none">
+        <a href="{{ route('user.show', [$follower->user->is_producer ? 'producer' : 'user', $follower->user_id]) }}" class="text-decoration-none">
             <div class="bg-light p-1 my-1 text-dark">
                 <span>
                     <img src="{{ getFile($follower->user->profile_img) }}" alt="" style="width: 3rem;">
@@ -19,8 +19,6 @@
             </div>
         </a>
     @empty
-        <div>
-            팔로워 없음
-        </div>
+        <div class="text-center text-light">팔로워가 없습니다.</div>
     @endforelse
 </div>

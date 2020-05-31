@@ -30,9 +30,7 @@
                     </div>
                 </div>
             @empty
-                <div>
-                    프로젝트 없음
-                </div>
+                <div class="text-center text-light">참여한 프로젝트가 없습니다.</div>
             @endforelse
         </div>
         @if ($collaborations->count() > 1)
