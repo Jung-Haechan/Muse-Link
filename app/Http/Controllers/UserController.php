@@ -61,6 +61,10 @@ class UserController extends Controller
      */
     public function show($board, User $user)
     {
+        if(!$user['is_'.$board]) {
+            return redirect()->back()
+                ->with('alert', '채널이 존재하지 않습니다.');
+        }
         $already_followed = Auth::check() ?
             Auth::user()->follows()->where('followee_id', $user->id)->first() :
             NULL;
