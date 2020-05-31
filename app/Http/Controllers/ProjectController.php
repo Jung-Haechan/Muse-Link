@@ -17,7 +17,7 @@ class ProjectController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('auth')->except(['index', 'show', 'audio', 'search']);
     }
 
     public function index(Request $request, $board)
@@ -89,6 +89,10 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
+        if (!isProjectAdmin(Auth::user(), $project)) {
+            return redirect()->back()
+                ->with('alert', '권한이 없습니다.');
+        }
         return view('project.edit', [
             'project' => $project,
         ]);

@@ -24,7 +24,8 @@
                         <img src="{{ $reply->user->profile_img }}" style="width: 1.5rem"
                              class="my-auto mr-1">
                         <div class="reply font-weight-bold">
-                            <a class="text-dark" href="{{ route('user.show', [$reply->user->is_producer ? 'producer' : 'singer', $reply->user->id]) }}">
+                            <a class="text-dark"
+                               href="{{ route('user.show', [$reply->user->is_producer ? 'producer' : 'singer', $reply->user->id]) }}">
                                 {{ $reply->user->name }}
                             </a>
                         </div>
@@ -34,6 +35,15 @@
                             {{ $reply->content }}
                         </div>
                     </div>
+                    @if(isProjectReplyAdmin(Auth::user(), $reply))
+                        <form action="{{ route('project.reply.delete', [$project->id, $reply->id]) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <div>
+                                <button class="btn btn-dark btn-sm float-right">삭제</button>
+                            </div>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

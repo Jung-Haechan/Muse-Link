@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show', 'search']);
+    }
+
     public function index()
     {
         $posts = Post::listAll()->paginate(20);

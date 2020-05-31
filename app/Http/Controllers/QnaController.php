@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class QnaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     public function index() {
         return view('cs.qna.index', [
             'qnas' => Qna::latest()->paginate(10),

@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ExhibitController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('audio');
+    }
+
     public function create(User $user, $board) {
         return view('user.'.$board.'.exhibit.create', [
             'user' => $user,

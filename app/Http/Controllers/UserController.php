@@ -11,6 +11,10 @@ use PhpParser\Node\Expr\Array_;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show', 'search']);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -10,7 +10,7 @@
             <div class="" style="min-height: 70%">
                 {{ $user->introduce }}
             </div>
-            @if($user->id === Auth::id())
+            @if(isUserAdmin(Auth::user(), $user))
                 <div>
                     <a class="btn btn-outline-light text-light float-right my-2" href="{{ route('register') }}">내정보 수정</a>
                 </div>

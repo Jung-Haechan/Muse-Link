@@ -40,7 +40,8 @@
 <div id="app">
     @include('layouts.nav')
 
-    <div class="content pb-5" style="min-height:500px; background-image: url({{asset('storage/background/night.jpg')}}); background-size: cover;">
+    <div class="content pb-5"
+         style="min-height:500px; background-image: url({{asset('storage/background/night.jpg')}}); background-size: cover;">
         <div class="jumbotron text-center"
              style="background-image: url({{asset('storage/skin/edm2.jpg')}}); background-size: cover; padding-top: 9.5rem;">
             @include('layouts.jumbotron')
@@ -59,14 +60,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-
-                                <a class="btn btn-danger" href="{{ route('login.social', 'google') }}">
-                                    구글 아이디로 로그인
-                                </a>
-                            </form>
+                        <div class="card-body text-center">
+                            <a class="btn" href="{{ route('login.social', 'google') }}">
+                                <img src="{{ getFile('storage/icon/google-login.png') }}" style="width: 15rem;" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="modal-footer">

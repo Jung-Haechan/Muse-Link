@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class NoticeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     public function index() {
         $notices = Notice::latest()->paginate(15);
         return view('cs.notice.index', [

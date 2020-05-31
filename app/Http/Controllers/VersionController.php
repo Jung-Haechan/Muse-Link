@@ -11,7 +11,7 @@ class VersionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('audio');
     }
 
     public function create(Project $project, $role)
