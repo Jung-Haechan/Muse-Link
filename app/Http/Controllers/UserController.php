@@ -110,6 +110,17 @@ class UserController extends Controller
             ->with('alert', '해당 작품이 대표로 설정되었습니다.');
     }
 
+    public function search(Request $request, $board) {
+        $users = User::listAll($board)
+            ->where(function ($query) use($request) {
+                $query->where('name', 'like', '%'.$request->word.'%');
+            })->paginate(12);
+        return view('user.' . $board . '.index', [
+            'users' => $users,
+            'board' => $board,
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

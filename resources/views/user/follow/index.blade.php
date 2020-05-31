@@ -50,7 +50,7 @@
                                 최근 활동
                             </div>
                             <span
-                                class="bg-dark text-light p-1">{{ getTime($fellow->exhibits()->first()->created_at) }}</span>
+                                class="bg-dark text-light p-1">{{ $fellow->exhibits()->first() ? getTime($fellow->exhibits()->first()->created_at) : '활동 없음' }}</span>
                         </div>
                         <div class="col-6">
                             {{ $fellow->introduce }}

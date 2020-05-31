@@ -163,4 +163,15 @@ class ProjectController extends Controller
             'project' => $project,
         ]);
     }
+
+    public function search(Request $request, $board) {
+        $projects = Project::listAll($board)
+            ->where(function ($query) use($request) {
+                $query->where('title', 'like', '%'.$request->word.'%')
+                    ->orWhere('genre', 'like', '%'.$request->word.'%')->paginate(12);
+            })->paginate(12);
+        return view('project.' . $board . '.index', [
+            'projects' => $projects,
+        ]);
+    }
 }

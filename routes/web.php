@@ -52,6 +52,7 @@ Route::prefix('project')->name('project.')->group(function () {
     Route::get('/create', 'ProjectController@create')->name('create');
     Route::get('/{board}', 'ProjectController@index')->name('index');
     Route::get('/{project}/edit', 'ProjectController@edit')->name('edit');
+    Route::get('/{board}/search', 'ProjectController@search')->name('search');
     Route::get('/{board}/{project}', 'ProjectController@show')->name('show');
     Route::get('/{board}/{project}/audio', 'ProjectController@audio')->name('audio');
     Route::post('/', 'ProjectController@store')->name('store');
@@ -66,11 +67,13 @@ Route::prefix('project')->name('project.')->group(function () {
 Route::prefix('post')->name('post.')->group(function () {
     Route::get('/', 'PostController@index')->name('index');
     Route::get('/create', 'PostController@create')->name('create');
+    Route::get('/search', 'PostController@search')->name('search');
     Route::get('/{post}', 'PostController@show')->name('show');
     Route::get('/{post}/edit', 'PostController@edit')->name('edit');
     Route::post('/', 'PostController@store')->name('store');
     Route::put('/{post}', 'PostController@update')->name('update');
     Route::delete('/{post}', 'PostController@delete')->name('delete');
+
 
     Route::prefix('/{post}')->group(function () {
         Route::prefix('/reply')->name('reply.')->group(function () {
@@ -107,6 +110,7 @@ Route::prefix('user')->name('user.')->group(function () {
         });
     });
 
+    Route::get('/{board}/search', 'UserController@search')->name('search');
     Route::get('/{board}', 'UserController@index')->name('index');
     Route::get('/{user}/edit', 'UserController@edit')->name('edit');
     Route::get('/{board}/{user}', 'UserController@show')->name('show');

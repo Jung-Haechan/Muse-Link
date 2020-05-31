@@ -4,6 +4,9 @@
     </h3>
 </div>
 <h1 class="text-center text-light">
-    <div class="display-1 section-title"><a href="@yield('jumbotron.url')" class="text-light text-decoration-none">@yield('jumbotron.page')</a>
+    <div class="display-1 section-title">
+        <a href="@yield('jumbotron.url')" class="text-light text-decoration-none">@yield('jumbotron.page')</a>
     </div>
+    @yield('search')
+
 </h1>

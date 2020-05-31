@@ -2,9 +2,10 @@
 
 @include('project.collaboration.jumbotron')
 
+
 @section('content')
     <div class="container">
-        <div class="col-md-11 p-5 mx-auto"
+        <div class="col-md-11 p-3 mx-auto"
              style="background-color: #4e555b; margin-top: 50px; opacity: 0.9; color: #d6d8db">
             <div class="row">
                 @forelse($projects as $project)
@@ -56,8 +57,13 @@
                 @empty
                 @endforelse
             </div>
-            <div class="pt-3">
-                {{ $projects->links() }}
+            <div class="row pt-3">
+                <div class="col-8">
+                    {{ $projects->links() }}
+                </div>
+                <div class="col-4 text-right">
+                    <a href="{{ route('project.create') }}" class="btn btn-light">프로젝트 생성</a>
+                </div>
             </div>
         </div>
     </div>

@@ -29,7 +29,7 @@
                             <div class="mb-2">
                                 최근 활동
                             </div>
-                            <span class="bg-dark text-light p-1">{{ $user->exhibits()->where('role', '!=', 'singer')->first() ? getTime($user->exhibits()->where('role', '!=', 'singer')->first()->created_at) : getTime($user->created_at) }}</span>
+                            <span class="bg-dark text-light p-1">{{ getTime($user->exhibits()->where('role', '!=', 'singer')->first()->created_at) }}</span>
                         </div>
                         <div class="col-5">
                             {{ $user->introduce }}

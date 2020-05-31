@@ -4,8 +4,6 @@ namespace App;
 
 use App\Models\Exhibit;
 use App\Models\Message;
-use App\Models\Version;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -118,6 +116,7 @@ class User extends Authenticatable
         return Message::where([
             'sender_id' => $this->id,
             'receiver_id' => Auth::id(),
+            'is_deleted_by_receiver' => false,
         ])->orWhere(function ($query) {
             $query->where([
                 'sender_id' => Auth::id(),
@@ -134,7 +133,12 @@ class User extends Authenticatable
     public function scopeListAll($query, $board)
     {
         if ($board === 'producer') {
-            return $query->where('is_composer', true)->orWhere('is_lyricist', true)->orWhere('is_editor', true)
+            return $query->where(function($query) {
+                $query->where('is_composer', true)->orWhere('is_lyricist', true)->orWhere('is_editor', true);
+            })
+            ->whereHas('exhibits', function($query) {
+                $query->whereIn('role', ['composer', 'editor', 'lyricist']);
+            })
                 ->orderByDesc(
                     Exhibit::select('created_at')
                         ->where('role', '!=', 'singer')
@@ -144,6 +148,9 @@ class User extends Authenticatable
                 );
         } else {
             return $query->where('is_singer', true)
+                ->whereHas('exhibits', function($query) {
+                    $query->where('role', 'singer');
+                })
                 ->orderByDesc(
                     Exhibit::select('created_at')
                         ->where('role', 'singer')

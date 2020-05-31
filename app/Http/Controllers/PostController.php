@@ -68,4 +68,14 @@ class PostController extends Controller
         return redirect()->route('post.index')
             ->with('alert', '게시글이 삭제되었습니다.');
     }
+
+    public function search(Request $request) {
+        $posts = Post::listAll()
+            ->where(function ($query) use($request) {
+                $query->where('title', 'like', '%'.$request->word.'%');
+            })->paginate(12);
+        return view('post.index', [
+            'posts' => $posts,
+        ]);
+    }
 }
