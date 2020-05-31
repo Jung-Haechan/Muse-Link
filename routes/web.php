@@ -90,6 +90,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', 'MessageController@index')->name('index');
         Route::get('/{user}', 'MessageController@show')->name('show');
         Route::post('/', 'MessageController@store')->name('store');
+        Route::put('/{user}', 'MessageController@delete_opponent')->name('delete_opponent');
         Route::delete('/{message}', 'MessageController@delete')->name('delete');
     });
 

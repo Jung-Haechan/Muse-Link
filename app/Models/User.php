@@ -121,6 +121,7 @@ class User extends Authenticatable
             $query->where([
                 'sender_id' => Auth::id(),
                 'receiver_id' => $this->id,
+                'is_deleted_by_sender' => false,
             ]);
         })->latest();
     }
@@ -165,10 +166,10 @@ class User extends Authenticatable
     {
         return $query->where(function ($query) {
             $query->whereHas('received_messages', function ($query) {
-                $query->where('sender_id', Auth::id());
+                $query->where('sender_id', Auth::id())->where('is_deleted_by_sender', false);
             })
                 ->orWhereHas('sent_messages', function ($query) {
-                    $query->where('receiver_id', Auth::id());
+                    $query->where('receiver_id', Auth::id())->where('is_deleted_by_receiver', false);;
                 });
         })
             ->orderByDesc(

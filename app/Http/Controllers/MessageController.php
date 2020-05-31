@@ -41,4 +41,21 @@ class MessageController extends Controller
             'message' => $message,
         ]);
     }
+
+    public function delete_opponent(User $user) {
+        Message::where([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $user->id,
+        ])->update([
+            'is_deleted_by_sender' => 1,
+        ]);
+        Message::where([
+            'receiver_id' => Auth::id(),
+            'sender_id' => $user->id,
+        ])->update([
+            'is_deleted_by_receiver' => 1,
+        ]);
+        return redirect()->route('user.message.index')
+            ->with('alert', '대화 상대가 삭제되었습니다.');
+    }
 }

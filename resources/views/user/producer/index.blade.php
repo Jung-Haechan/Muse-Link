@@ -12,7 +12,7 @@
                         <div class="col-1 px-2">
                             <img src="{{ asset($user->profile_img) }}" style="width: 4rem" alt="">
                         </div>
-                        <div class="col-2 px-2">
+                        <div class="col-2 px-2 text-center">
                             @foreach(config('translate.role') as $role_eng => $role_kor)
                                 @if($role_eng === 'singer')
                                     @continue
