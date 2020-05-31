@@ -55,9 +55,16 @@ class LoginController extends Controller
             auth()->login($registered_user, true);
             return redirect()->route('index');
         } else {
+            $name = $user->getName();
+            $has_same_name = User::where('name', $name)->first();
+            $i = 1;
+            while($has_same_name) {
+                $name = $name.$i;
+                $i++;
+            }
             User::create([
                 'email' => $user->getEmail(),
-                'name' => $user->getName(),
+                'name' => $name,
                 'resource_server' => $driver,
                 'profile_img' => $user->getAvatar(),
             ]);
