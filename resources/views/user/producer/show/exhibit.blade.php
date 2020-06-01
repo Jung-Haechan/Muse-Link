@@ -12,7 +12,7 @@
     </div>
     @forelse($exhibits as $exhibit)
         <div class="card">
-            @if($user->id === Auth::id())
+            @if(isUserAdmin(Auth::user(), $user))
                 <div class="text-right bg-light pr-1">
                     <form action="{{ route('user.exhibit.delete', [$user->id, 'producer', $exhibit->id]) }}"
                           method="post">

@@ -20,7 +20,7 @@
                         <option value="0">전체공개</option>
                         <option value="1">회원공개</option>
                         <option value="2">팔로워공개</option>
-                        <option value="3">비공개</option>
+                        <option value="4">비공개</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-6">

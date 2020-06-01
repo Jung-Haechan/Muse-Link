@@ -28,6 +28,7 @@ class VersionController extends Controller
             $data = $request->validate([
                 'title' => 'required|max:255',
                 'description' => 'nullable',
+                'is_opened' => 'nullable',
             ]);
             if (!$request->hasFile('project_audio_file') && !$request->hasFile('mr_audio_file')) {
                 return redirect()->back()

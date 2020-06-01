@@ -21,7 +21,7 @@ class CreateExhibitsTable extends Migration
             $table->string('audio_file')->nullable();
             $table->string('youtube_url')->nullable();
             $table->string('cover_img_file')->nullable();
-            $table->string('lyrics')->nullable();
+            $table->text('lyrics')->nullable();
             $table->enum('role', ['composer', 'editor', 'lyricist', 'singer']);
             $table->unsignedInteger('is_opened')->default(0); // 0:전체공개 1:회원공개 2:팔로워공개 4:비공개
             $table->timestamps();

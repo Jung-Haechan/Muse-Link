@@ -79,7 +79,7 @@ class UserController extends Controller
             'exhibits' => $user->exhibits()->listAll($board)->get(),
             'face_exhibit' => $user[$board.'_exhibit'],
             'already_followed' => $already_followed != NULL,
-            'opened_projects' => $user->projects,
+            'opened_projects' => $user->projects()->latest()->get(),
             'collaborations' => $user->collaborators()->listJoined($board)->get(),
             'followers' => $user->followers()->latest()->paginate(5),
             'followers_number' => $user->followers()->count(),

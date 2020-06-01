@@ -67,6 +67,7 @@ class ProjectController extends Controller
             'title' => 'required|max:255',
             'genre' => 'nullable|max:20',
             'description' => 'required',
+            'is_opened' => 'required',
         ]);
         if ($request->hasFile('cover_img_file')) {
             if (getFileType($request->file('cover_img_file')) === 'image') {
@@ -77,14 +78,14 @@ class ProjectController extends Controller
             }
         }
         $data['user_id'] = Auth::id();
-        Project::create($data);
+        $project = Project::create($data);
         Collaborator::create([
             'user_id' => Auth::id(),
             'project_id' => Project::where('user_id', Auth::id())->first()->id,
             'role' => 'master',
             'is_approved' => 1,
         ]);
-        return redirect()->route('project.index', 'collaboration');
+        return redirect()->route('project.show', ['collaboration', $project->id]);
     }
 
     public function edit(Project $project)
@@ -104,6 +105,7 @@ class ProjectController extends Controller
             'title' => 'required|max:255',
             'genre' => 'nullable|max:20',
             'description' => 'required',
+            'is_opened' => 'required',
         ]);
         if ($request->hasFile('cover_img_file')) {
             if (getFileType($request->file('cover_img_file')) === 'image') {

@@ -1,8 +1,8 @@
 <div class="row mt-2 mx-auto">
     @foreach(config('translate.role') as $role_eng => $role_kor)
-        @if(!$project['has_'.$role_eng])
-            <div style="display: inline">
-                @if($collaboratorStatus[$role_eng] === NULL)
+        <div style="display: inline">
+            @if($collaboratorStatus[$role_eng] === NULL)
+                @if(!$project['has_'.$role_eng])
                     <form class="form-inline"
                           action="{{ route('project.collaborator.store', $project->id) }}"
                           method="post">
@@ -14,25 +14,28 @@
                             {{ $role_kor }} 신청
                         </button>
                     </form>
-                @elseif($collaboratorStatus[$role_eng] === 0)
-                    <a href="#"
-                       class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
-                        {{ $role_kor }} 신청 취소
-                    </a>
-                @elseif($collaboratorStatus[$role_eng] === 1)
-                    <a href="{{ route('project.version.create', [$project->id, $role_eng]) }}"
-                       class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
-                        {{ $role_kor }} 등록
-                    </a>
-                @else
+                @endif
+            @elseif($collaboratorStatus[$role_eng] === 0)
+                <a href="#"
+                   class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
+                    {{ $role_kor }} 신청 취소
+                </a>
+            @elseif($collaboratorStatus[$role_eng] === 1)
+                <a href="{{ route('project.version.create', [$project->id, $role_eng]) }}"
+                   class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light">
+                    {{ $role_kor }} 등록
+                </a>
+            @else
+                @if(!$project['has_'.$role_eng])
                     <a href="#"
                        class="mr-2 btn btn-outline-{{ getRoleColor($role_eng) }} font-weight-bold bg-light disabled"
                        disabled="true">
                         {{ $role_kor }} 신청 거부당함
                     </a>
                 @endif
-            </div>
-        @endif
+            @endif
+        </div>
+
         @if($role_eng === 'singer')
             @break
         @endif

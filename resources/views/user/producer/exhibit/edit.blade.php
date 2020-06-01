@@ -21,7 +21,7 @@
                         <option value="0" {{ $exhibit->is_opened === 0 ? 'selected' : NULL }}>전체공개</option>
                         <option value="1" {{ $exhibit->is_opened === 1 ? 'selected' : NULL }}>회원공개</option>
                         <option value="2" {{ $exhibit->is_opened === 2 ? 'selected' : NULL }}>팔로워공개</option>
-                        <option value="3" {{ $exhibit->is_opened === 3 ? 'selected' : NULL }}>비공개</option>
+                        <option value="4" {{ $exhibit->is_opened === 4 ? 'selected' : NULL }}>비공개</option>
                     </select>
                 </div>
                 <div class="form-group col-sm-6">

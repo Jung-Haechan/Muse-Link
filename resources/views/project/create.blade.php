@@ -11,17 +11,27 @@
 
         <form action="{{ route('project.store') }}" method="post" enctype="multipart/form-data" style="">
             @csrf
+            <div class="form-group">
+                <label for="title">프로젝트 제목</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="제목">
+                @error('title')
+                <div class="text-light" style="background: #721c2499">제목을 입력해 주세요.</div>
+                @enderror
+            </div>
             <div class="form-row">
-                <div class="form-group col-sm-8">
-                    <label for="title">프로젝트 제목</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="제목">
-                    @error('title')
-                    <div class="text-light" style="background: #721c2499">제목을 입력해 주세요.</div>
-                    @enderror
-                </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-6">
                     <label for="genre">장르</label>
                     <input type="text" class="form-control" id="genre" name="genre" placeholder="장르">
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="is_opened">공개 범위</label>
+                    <select class="form-control" name="is_opened" id="is_opened">
+                        <option value="0">전체공개</option>
+                        <option value="1">회원공개</option>
+                        <option value="2">팔로워공개</option>
+                        <option value="3">협업자공개</option>
+                        <option value="4">비공개</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
