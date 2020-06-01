@@ -40,6 +40,9 @@
                 <label for="audio_file">오디오 파일</label>
                 <input type="file" name="audio_file" id="audio_file"
                        class="form-control-file btn btn-outline-light btn-sm">
+                @error('audio_file')
+                <div class="text-light" style="background: #721c2499">오디오 파일 형식이 맞지 않습니다.</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="youtube_url">유튜브 URL</label>

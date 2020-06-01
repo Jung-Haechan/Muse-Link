@@ -24,59 +24,46 @@ class VersionController extends Controller
 
     public function store(Project $project, $role, Request $request)
     {
-        if ($role === 'composer' || $role === 'editor') {
+
             $data = $request->validate([
                 'title' => 'required|max:255',
                 'description' => 'nullable',
                 'is_opened' => 'nullable',
+                'project_audio_file' => 'required|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+                'mr_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+                'voice_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+                'lyrics' => 'nullable',
             ]);
+        if ($role === 'composer' || $role === 'editor') {
             if (!$request->hasFile('project_audio_file') && !$request->hasFile('mr_audio_file')) {
                 return redirect()->back()
                     ->with('alert', '오디오 파일이 한 개 이상 필요합니다.');
-            } else {
-                if ($request->hasFile('project_audio_file')) {
-                    if (getFileType($request->file('project_audio_file')) === 'audio') {
-                        $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
-                    } else {
-                        return redirect()->back()
-                            ->with('alert', '프로젝트 오디오 파일 형식이 잘못되었습니다.');
-                    }
-                }
-                if ($request->hasFile('mr_audio_file')) {
-                    if (getFileType($request->file('mr_audio_file')) === 'audio') {
-                        $data['mr_audio_file'] = $request->file('mr_audio_file')->store('public/audio/mr');
-                    } else {
-                        return redirect()->back()
-                            ->with('alert', 'MR 오디오 파일 형식이 잘못되었습니다.');
-                    }
-                }
             }
         } elseif ($role === 'lyricist') {
-            $data = $request->validate([
-                'title' => 'required|max:255',
-                'description' => 'nullable',
-                'lyrics' => 'required',
-            ]);
-        } //Todo: 필요한 오디오 파일  재정립
-        elseif ($role === 'singer') {
-            $data = $request->validate([
-                'title' => 'required|max:255',
-                'description' => 'nullable',
-                'project_audio_file' => 'required',
-            ]);
-            if (getFileType($request->file('project_audio_file')) === 'audio'
-                && getFileType($request->file('voice_audio_file')) === 'audio') {
-                $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
-                $data['voice_audio_file'] = $request->file('voice_audio_file')->store('public/audio/voice');
-            } else {
+            if ($request->lyrics) {
                 return redirect()->back()
-                    ->with('alert', '오디오 파일 형식이 잘못되었습니다.');
+                    ->with('alert', '가사를 작성해주세요.');
             }
-
+        } elseif ($role === 'singer') {
+            if (!$request->hasFile('project_audio_file') && !$request->hasFile('voice_audio_file')) {
+                return redirect()->back()
+                    ->with('alert', '오디오 파일이 한 개 이상 필요합니다.');
+            }
         } else {
             return redirect()->back()
                 ->with('alert', '잘못된 경로입니다.');
         }
+
+        if ($request->hasFile('project_audio_file')) {
+            $data['project_audio_file'] = $request->file('project_audio_file')->store('public/audio/project');
+        }
+        if ($request->hasFile('mr_audio_file')) {
+            $data['mr_audio_file'] = $request->file('mr_audio_file')->store('public/audio/mr');
+        }
+        if ($request->hasFile('voice_audio_file')) {
+            $data['voice_audio_file'] = $request->file('voice_audio_file')->store('public/audio/voice');
+        }
+
         $data['role'] = $role;
         $data['user_id'] = Auth::id();
         $data['project_id'] = $project->id;

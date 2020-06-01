@@ -48,6 +48,9 @@
                         <label for="mr_audio_file">MR 파일</label>
                         <input type="file" name="mr_audio_file" id="mr_audio_file"
                                class="form-control-file btn btn-outline-light btn-sm">
+                        @error('mr_audio_file')
+                        <div class="text-light" style="background: #721c2499">오디오 파일 형식이 맞지 않습니다.</div>
+                        @enderror
                     </div>
                 @endif
                 @if ($role === 'singer')
@@ -55,6 +58,9 @@
                         <label for="voice_audio_file">목소리 파일</label>
                         <input type="file" name="voice_audio_file" id="voice_audio_file"
                                class="form-control-file btn btn-outline-light btn-sm">
+                        @error('voice_audio_file')
+                        <div class="text-light" style="background: #721c2499">오디오 파일 형식이 맞지 않습니다.</div>
+                        @enderror
                     </div>
                 @endif
             @endif
@@ -63,9 +69,6 @@
                     <label for="lyrics">가사</label>
                     <textarea type="text" class="form-control" id="lyrics" name="lyrics"
                               placeholder="노래 설명" cols="30" rows="15"></textarea>
-                    @error('lyrics')
-                    <div class="text-light" style="background: #721c2499">가사를 입력해 주세요.</div>
-                    @enderror
                 </div>
             @endif
             <div class="form-group">

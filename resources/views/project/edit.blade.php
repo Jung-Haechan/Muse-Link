@@ -39,6 +39,9 @@
                 <label for="cover_img_file">커버 이미지</label>
                 <input type="file" name="cover_img_file" id="cover_img_file"
                        class="form-control-file btn btn-outline-light btn-sm">
+                @error('cover_img_file')
+                <div class="text-light" style="background: #721c2499">이미지 파일 형식이 맞지 않습니다.</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="description">프로젝트 설명</label>

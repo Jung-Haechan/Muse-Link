@@ -68,14 +68,10 @@ class ProjectController extends Controller
             'genre' => 'nullable|max:20',
             'description' => 'required',
             'is_opened' => 'required',
+            'cover_img_file' => 'nullable|file|mimes:image/jpg,jpeg,png,gif',
         ]);
         if ($request->hasFile('cover_img_file')) {
-            if (getFileType($request->file('cover_img_file')) === 'image') {
-                $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
-            } else {
-                return redirect()->back()
-                    ->with('alert', '이미지 파일 형식이 잘못되었습니다.');
-            }
+            $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
         }
         $data['user_id'] = Auth::id();
         $project = Project::create($data);
@@ -106,14 +102,10 @@ class ProjectController extends Controller
             'genre' => 'nullable|max:20',
             'description' => 'required',
             'is_opened' => 'required',
+            'cover_img_file' => 'nullable|file|mimes:image/jpg,jpeg,png,gif',
         ]);
         if ($request->hasFile('cover_img_file')) {
-            if (getFileType($request->file('cover_img_file')) === 'image') {
-                $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
-            } else {
-                return redirect()->back()
-                    ->with('alert', '이미지 파일 형식이 잘못되었습니다.');
-            }
+            $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
         }
         $project->update($data);
         return redirect()->route('project.show', ['collaboration', $project->id]);
@@ -165,16 +157,17 @@ class ProjectController extends Controller
 
     public function audio($board, Project $project)
     {
-        return view('project.audio',[
+        return view('project.audio', [
             'project' => $project,
         ]);
     }
 
-    public function search(Request $request, $board) {
+    public function search(Request $request, $board)
+    {
         $projects = Project::listAll($board)
-            ->where(function ($query) use($request) {
-                $query->where('title', 'like', '%'.$request->word.'%')
-                    ->orWhere('genre', 'like', '%'.$request->word.'%')->paginate(12);
+            ->where(function ($query) use ($request) {
+                $query->where('title', 'like', '%' . $request->word . '%')
+                    ->orWhere('genre', 'like', '%' . $request->word . '%')->paginate(12);
             })->paginate(12);
         return view('project.' . $board . '.index', [
             'projects' => $projects,
