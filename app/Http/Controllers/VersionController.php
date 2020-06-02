@@ -24,23 +24,22 @@ class VersionController extends Controller
 
     public function store(Project $project, $role, Request $request)
     {
-
-            $data = $request->validate([
-                'title' => 'required|max:255',
-                'description' => 'nullable',
-                'is_opened' => 'nullable',
-                'project_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
-                'mr_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
-                'voice_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
-                'lyrics' => 'nullable',
-            ]);
+        $data = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'nullable',
+            'is_opened' => 'nullable',
+            'project_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+            'mr_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+            'voice_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+            'lyrics' => 'nullable',
+        ]);
         if ($role === 'composer' || $role === 'editor') {
             if (!$request->hasFile('project_audio_file') && !$request->hasFile('mr_audio_file')) {
                 return redirect()->back()
                     ->with('alert', '오디오 파일이 한 개 이상 필요합니다.');
             }
         } elseif ($role === 'lyricist') {
-            if ($request->lyrics) {
+            if (!$request->lyrics) {
                 return redirect()->back()
                     ->with('alert', '가사를 작성해주세요.');
             }

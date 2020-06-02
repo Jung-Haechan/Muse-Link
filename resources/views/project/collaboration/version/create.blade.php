@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label for="lyrics">가사</label>
                     <textarea type="text" class="form-control" id="lyrics" name="lyrics"
-                              placeholder="노래 설명" cols="30" rows="15"></textarea>
+                              placeholder="가사" cols="30" rows="15"></textarea>
                 </div>
             @endif
             <div class="form-group">
