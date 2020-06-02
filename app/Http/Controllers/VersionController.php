@@ -27,7 +27,7 @@ class VersionController extends Controller
         $data = $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable',
-            'is_opened' => 'nullable',
+            'is_opened' => 'required',
             'project_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
             'mr_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
             'voice_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
