@@ -29,7 +29,7 @@ class VersionController extends Controller
                 'title' => 'required|max:255',
                 'description' => 'nullable',
                 'is_opened' => 'nullable',
-                'project_audio_file' => 'required|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+                'project_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
                 'mr_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
                 'voice_audio_file' => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
                 'lyrics' => 'nullable',
