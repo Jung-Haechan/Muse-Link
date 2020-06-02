@@ -10,7 +10,7 @@ $factory->define(Exhibit::class, function (Faker $faker) {
     $user = User::all()->random();
     $is_file = $faker->boolean;
     if ($is_file) {
-        $audio_file = 'public/audio/project/UWa3bxDxQ7pGwtKA8iEFggN3McOUxYTy44DU5nBt.mpga';
+        $audio_file = 'public/base/base_audio.wav';
         $youtube_url = NULL;
     } else {
         $audio_file = NULL;

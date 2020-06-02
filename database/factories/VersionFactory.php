@@ -17,7 +17,7 @@ $factory->define(Version::class, function (Faker $faker) {
         $project_audio_file = NULL;
         $lyrics = $faker->realText();
     } else {
-        $project_audio_file = 'public/audio/project/UWa3bxDxQ7pGwtKA8iEFggN3McOUxYTy44DU5nBt.mpga';
+        $project_audio_file = 'public/base/base_audio.wav';
         $lyrics = NULL;
     }
 
