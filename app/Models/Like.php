@@ -9,9 +9,7 @@ class Like extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'user_id', 'project_id', 'post_id', 'lecture_id'
-    ];
+    protected $guarded = [];
 
     public function user() {
         return $this->belongsTo('App\User');

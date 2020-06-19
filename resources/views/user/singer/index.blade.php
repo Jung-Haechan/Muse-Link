@@ -17,7 +17,7 @@
                                 {{ $user->name }}
                             </div>
                             <div class="mt-2">
-                                <span class="bg-dark text-light p-1">{{ $user->exhibits()->where('role', 'singer')->first() ? getTime($user->exhibits()->where('role', 'singer')->first()->created_at) : getTime($user->created_at) }}</span>
+                                <span class="bg-dark text-light p-1">{{ getTime($user->singer_updated_at) }}</span>
                             </div>
                         </div>
                         <div class="col-5">

@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->boolean('is_editor')->default(false);
             $table->boolean('is_lyricist')->default(false);
             $table->boolean('is_singer')->default(false);
+            $table->timestamp('producer_updated_at')->nullable();
+            $table->timestamp('singer_updated_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

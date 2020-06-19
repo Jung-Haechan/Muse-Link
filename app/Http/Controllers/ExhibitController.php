@@ -36,6 +36,7 @@ class ExhibitController extends Controller
             'lyrics' => 'nullable',
         ]);
         $data['user_id'] = Auth::id();
+        $data[$board.'_updated_at'] = now();
         if ($request->hasFile('cover_img_file')) {
             $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
         }

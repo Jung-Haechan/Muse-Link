@@ -9,9 +9,7 @@ class Collaborator extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'user_id', 'project_id', 'role', 'is_approved'
-    ];
+    protected $guarded = [];
 
     public function user() {
         return $this->belongsTo('App\User');

@@ -11,9 +11,7 @@ class Project extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'user_id', 'title', 'genre', 'youtube_url', 'description', 'cover_img_file', 'views', 'completed_at', 'is_opened',
-    ];
+    protected $guarded = [];
 
     public function user() {
         return $this->belongsTo('App\User');
@@ -82,12 +80,7 @@ class Project extends Model
     public function scopeListAll($query, $board, $period = NULL) {
         if ($board === 'collaboration') {
             return $query->whereNull('completed_at')
-                ->orderByDesc(
-                    Version::select('created_at')
-                        ->whereColumn('project_id', 'projects.id')
-                        ->orderByDesc('created_at')
-                        ->limit(1)
-                );
+                ->orderByDesc('last_updated_at');
         }
         elseif ($board === 'completed') {
             return $query->whereNotNull('completed_at')

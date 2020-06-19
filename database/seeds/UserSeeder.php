@@ -23,14 +23,16 @@ class UserSeeder extends Seeder
             if($user->is_singer) {
                 if ($user->exhibits()->listAll('singer')->first()) {
                     $user->update([
-                        'singer_exhibit_id' => $user->exhibits()->listAll('singer')->get()->random()->id
+                        'singer_exhibit_id' => $user->exhibits()->listAll('singer')->get()->random()->id,
+                        'singer_updated_at' => $user->exhibits()->listAll('singer')->first()->created_at,
                     ]);
                 }
             }
             if($user->is_producer) {
                 if ($user->exhibits()->listAll('producer')->first()) {
                     $user->update([
-                        'producer_exhibit_id' => $user->exhibits()->listAll('producer')->get()->random()->id
+                        'producer_exhibit_id' => $user->exhibits()->listAll('producer')->get()->random()->id,
+                        'producer_updated_at' => $user->exhibits()->listAll('producer')->first()->created_at,
                     ]);
                 }
             }

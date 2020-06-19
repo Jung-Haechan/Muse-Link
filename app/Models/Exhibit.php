@@ -10,9 +10,7 @@ class Exhibit extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'user_id', 'title', 'description', 'audio_file', 'youtube_url', 'cover_img_file', 'lyrics', 'role', 'is_opened'
-    ];
+    protected $guarded = [];
 
     public function user() {
         return $this->belongsTo('App\User');

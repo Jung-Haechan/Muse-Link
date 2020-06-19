@@ -9,7 +9,5 @@ class Notice extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'title', 'content', 'views'
-    ];
+    protected $guarded = [];
 }

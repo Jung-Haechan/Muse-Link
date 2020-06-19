@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
@@ -21,9 +22,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'resource_server', 'profile_img', 'introduce', 'is_composer', 'is_editor', 'is_lyricist', 'is_singer', 'producer_exhibit_id', 'singer_exhibit_id', 'gender'
-    ];
+    protected $guarded = [];
 
     protected $attributes = [
         'is_composer' => false,
@@ -137,28 +136,10 @@ class User extends Authenticatable
             return $query->where(function($query) {
                 $query->where('is_composer', true)->orWhere('is_lyricist', true)->orWhere('is_editor', true);
             })
-            ->whereHas('exhibits', function($query) {
-                $query->whereIn('role', ['composer', 'editor', 'lyricist']);
-            })
-                ->orderByDesc(
-                    Exhibit::select('created_at')
-                        ->where('role', '!=', 'singer')
-                        ->whereColumn('user_id', 'users.id')
-                        ->orderByDesc('created_at')
-                        ->limit(1)
-                );
+            ->orderByDesc('producer_updated_at');
         } else {
             return $query->where('is_singer', true)
-                ->whereHas('exhibits', function($query) {
-                    $query->where('role', 'singer');
-                })
-                ->orderByDesc(
-                    Exhibit::select('created_at')
-                        ->where('role', 'singer')
-                        ->whereColumn('user_id', 'users.id')
-                        ->orderByDesc('created_at')
-                        ->limit(1)
-                );
+                ->orderByDesc('singer_updated_at');
         }
     }
 

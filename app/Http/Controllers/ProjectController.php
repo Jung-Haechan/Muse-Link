@@ -74,6 +74,7 @@ class ProjectController extends Controller
             $data['cover_img_file'] = $request->file('cover_img_file')->store('public/cover');
         }
         $data['user_id'] = Auth::id();
+        $data['last_updated_at'] = now();
         $project = Project::create($data);
         Collaborator::create([
             'user_id' => Auth::id(),

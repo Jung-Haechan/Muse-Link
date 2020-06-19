@@ -30,6 +30,7 @@ class CreateProjectsTable extends Migration
             $table->string('genre')->nullable();
             $table->unsignedInteger('is_opened')->default(0); //0:전체 공개 1:회원공개 2:팔로워공개 4:비공개
             $table->unsignedInteger('views')->default(0);
+            $table->timestamp('last_updated_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

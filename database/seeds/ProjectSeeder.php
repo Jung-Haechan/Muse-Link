@@ -47,6 +47,11 @@ class ProjectSeeder extends Seeder
                     'lyrics_version_id' => $lyrics_versions->get()->random()->id
                 ]);
             }
+            if($project->versions()->first()) {
+                $project->update([
+                    'last_updated_at' => $project->versions()->first()->created_at,
+                ]);
+            }
         }
     }
 }

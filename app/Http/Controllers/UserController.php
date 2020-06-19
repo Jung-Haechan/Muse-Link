@@ -24,6 +24,7 @@ class UserController extends Controller
     public function index($board)
     {
         $users = User::listAll($board)->paginate(20);
+//        dd($users);
         foreach($users as $user) {
             foreach(config('translate.role') as $role_eng => $role_korean) {
                 $user[$role_eng.'_num'] = Collaborator::where('user_id', $user->id)->where('role', $role_eng)->count();

@@ -16,13 +16,15 @@ use Illuminate\Support\Str;
 | model instances for testing / seeding your application's database.
 |
 */
-
 $factory->define(User::class, function (Faker $faker) {
+
+    $created_at = $faker->dateTimeBetween('-10 months', 'now', 'asia/Seoul');
+
     return [
         'email' => $faker->unique()->safeEmail,
         'resource_server' => 'google',
         'name' => $faker->name,
-        'profile_img' => 'https://i.picsum.photos/id/'.rand(0, 1000).'/300/300.jpg',
+        'profile_img' => 'https://via.placeholder.com/150',
         'gender' => $faker->randomElement(['male', 'female']),
         'remember_token' => Str::random(10),
         'introduce' => $faker->realText(100),
@@ -30,7 +32,9 @@ $factory->define(User::class, function (Faker $faker) {
         'is_editor' => $faker->boolean,
         'is_lyricist' => $faker->boolean,
         'is_singer' => $faker->boolean,
-        'created_at' => $faker->dateTimeBetween('-10 months', 'now', 'asia/Seoul'),
+        'producer_updated_at' => $created_at,
+        'singer_updated_at' => $created_at,
+        'created_at' => $created_at,
         'updated_at' => now('asia/Seoul'),
     ];
 });

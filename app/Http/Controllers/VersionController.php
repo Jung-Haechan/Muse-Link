@@ -68,6 +68,9 @@ class VersionController extends Controller
         $data['project_id'] = $project->id;
 
         Version::create($data);
+        $project->update([
+            'last_updated_at' => now(),
+        ]);
         return redirect()->route('project.show', ['collaboration', $project->id]);
     }
 

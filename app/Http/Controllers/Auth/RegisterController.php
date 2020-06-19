@@ -70,6 +70,8 @@ class RegisterController extends Controller
         $data['is_editor'] = $request->has('is_editor');
         $data['is_lyricist'] = $request->has('is_lyricist');
         $data['is_singer'] = $request->has('is_singer');
+        $data['producer_updated_at'] = now();
+        $data['singer_updated_at'] = now();
         $user->update($data);
         return redirect()->route('user.show', [$user->is_producer ? 'producer' : 'singer', $user->id]);
     }

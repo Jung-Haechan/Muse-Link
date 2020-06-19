@@ -9,9 +9,7 @@ class LectureCategory extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'title', 'description', 'thumbnail_img', 'price'
-    ];
+    protected $guarded = [];
 
     public function likes() {
         return $this->hasMany('App\Models\Like');
